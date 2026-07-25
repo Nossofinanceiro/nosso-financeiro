@@ -81,8 +81,8 @@ export function DashboardGreeting({
   };
 
   return (
-    <div className={`flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border/80 ${hideMonthSelectorOnMobile ? 'pb-2 md:pb-4' : 'pb-4'}`}>
-      <div className="space-y-1">
+    <div className={`flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-4 ${hideMonthSelectorOnMobile ? 'pb-0 border-none md:border-solid md:border-b md:border-border/80 md:pb-4' : 'pb-4 border-b border-border/80'}`}>
+      <div className="space-y-0.5 sm:space-y-1">
         <h1 className="text-2xl font-bold text-foreground tracking-tight sm:text-3xl">
           {getGreeting()}, {userName}! 👋
         </h1>

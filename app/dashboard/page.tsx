@@ -47,7 +47,7 @@ export default function DashboardPage() {
           </div>
         </div>
       ) : data ? (
-        <div className="flex flex-col gap-6 md:block md:space-y-6 animate-in fade-in duration-200">
+        <div className="flex flex-col gap-3 md:gap-6 md:block md:space-y-6 animate-in fade-in duration-200">
           {/* Primeira Dobra: Saudação */}
           <div className="order-1 md:order-none">
             <DashboardGreeting
