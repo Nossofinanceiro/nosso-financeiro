@@ -117,6 +117,14 @@ CREATE POLICY "Usuários podem deletar itens de planejamentos da sua família"
     );
 
 -- Triggers para atualização da data de modificado
+CREATE OR REPLACE FUNCTION update_modified_column()
+RETURNS TRIGGER AS $$
+BEGIN
+    NEW.atualizado_em = timezone('utc'::text, now());
+    RETURN NEW;
+END;
+$$ language 'plpgsql';
+
 CREATE TRIGGER update_planejamentos_modtime
     BEFORE UPDATE ON planejamentos
     FOR EACH ROW
