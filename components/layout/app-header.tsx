@@ -27,9 +27,12 @@ export function AppHeader({
             <Menu className="w-5 h-5" />
           </button>
         )}
-        <h1 className="text-base font-semibold text-white tracking-tight sm:text-lg truncate">
-          {title}
-        </h1>
+        <div className="flex items-center gap-2 overflow-hidden">
+          <img src="/logo.png" alt="Logo" className="h-8 object-contain shrink-0" />
+          <h1 className="text-base font-semibold text-white tracking-tight sm:text-lg truncate">
+            {title}
+          </h1>
+        </div>
       </div>
 
       <div className="flex items-center gap-2 sm:gap-3 shrink-0">
