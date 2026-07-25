@@ -18,13 +18,11 @@ export class PeriodForecastService {
     let dataInicial = hoje;
     let dataFinal = hoje;
     
-    let proximoPagamento = null;
+    const proximoPagamento = await this.repo.getProximoPagamento(familia.id, hoje);
 
     if (request.modo === "proximo_pagamento") {
-      const proximo = await this.repo.getProximoPagamento(familia.id, hoje);
-      if (proximo) {
-        proximoPagamento = proximo;
-        dataFinal = format(subDays(new Date(proximo.data), 1), "yyyy-MM-dd");
+      if (proximoPagamento) {
+        dataFinal = format(subDays(new Date(proximoPagamento.data), 1), "yyyy-MM-dd");
         // Se a próxima receita for hoje, o dataFinal ficará "ontem". 
         // Nesse caso, o período não tem dias úteis para analisar despesas futuras antes do pagamento, 
         // mas as despesas atrasadas ainda contarão.
