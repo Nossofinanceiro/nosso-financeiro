@@ -186,7 +186,7 @@ export default function DesignSystemPage() {
       />
 
       {/* Status da Arquitetura Multiplataforma */}
-      <Card className="border-primary/30 bg-emerald-950/20">
+      <Card className="border-primary/30 bg-primary/10">
         <CardContent className="p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <div className="p-2.5 rounded-xl bg-primary/20 text-primary border border-primary/30 shrink-0">
