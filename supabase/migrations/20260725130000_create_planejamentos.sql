@@ -28,6 +28,8 @@ CREATE TABLE planejamento_itens (
 
 -- Políticas de Segurança (RLS) para planejamentos
 ALTER TABLE planejamentos ENABLE ROW LEVEL SECURITY;
+GRANT ALL ON planejamentos TO authenticated;
+GRANT ALL ON planejamentos TO service_role;
 
 CREATE POLICY "Usuários podem ver planejamentos da sua família"
     ON planejamentos FOR SELECT
@@ -68,6 +70,8 @@ CREATE POLICY "Usuários podem deletar planejamentos da sua família"
 
 -- Políticas de Segurança (RLS) para planejamento_itens
 ALTER TABLE planejamento_itens ENABLE ROW LEVEL SECURITY;
+GRANT ALL ON planejamento_itens TO authenticated;
+GRANT ALL ON planejamento_itens TO service_role;
 
 CREATE POLICY "Usuários podem ver itens de planejamentos da sua família"
     ON planejamento_itens FOR SELECT
