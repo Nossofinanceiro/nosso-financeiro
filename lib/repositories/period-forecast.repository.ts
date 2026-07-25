@@ -5,7 +5,7 @@ import { Despesa, Receita, despesaSchema, receitaSchema } from "@/lib/schemas";
 
 export class PeriodForecastRepository {
 
-  async getProximoPagamento(familiaId: string, aPartirDe: string): Promise<{ data: string; valor: number; descricao: string; pessoas: string[] } | null> {
+  async getProximoPagamento(familiaId: string, aPartirDe: string): Promise<{ data: string; valor: number; descricao: string; pessoas: string[]; itens?: any[] } | null> {
     try {
       const supabase = createClient();
       
@@ -50,11 +50,18 @@ export class PeriodForecastRepository {
         .map((r: any) => r.pessoa || "Geral")
         .filter((v: any, i: number, a: any[]) => a.indexOf(v) === i); // distinct
 
+      const itens = receitasNoDia.map((r: any) => ({
+        pessoa: r.pessoa || "Geral",
+        valor: Number(r.valor_previsto),
+        descricao: r.descricao,
+      }));
+
       return {
         data: proximaData,
         valor: valorTotal,
         descricao,
         pessoas,
+        itens,
       };
     } catch (err) {
       throw parseSupabaseError(err);

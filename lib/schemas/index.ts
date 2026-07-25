@@ -266,6 +266,11 @@ export const periodForecastResponseSchema = z.object({
     valor: monetarySchema,
     descricao: z.string(),
     pessoas: z.array(z.string()).optional(),
+    itens: z.array(z.object({
+      pessoa: z.string().optional(),
+      valor: monetarySchema,
+      descricao: z.string(),
+    })).optional(),
   }).nullable(),
   lancamentos_despesas: z.array(despesaSchema),
   lancamentos_receitas: z.array(receitaSchema),

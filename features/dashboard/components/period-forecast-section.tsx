@@ -229,60 +229,85 @@ export function PeriodForecastSection() {
 
           {/* Right Column: Next Payment & Top 3 */}
           <div className="xl:col-span-1 flex flex-col gap-6">
-            {data.proximo_pagamento && mode === "proximo_pagamento" ? (
+            {data.proximo_pagamento ? (
               <div className="bg-surface border border-border rounded-[2rem] p-8 shadow-sm flex flex-col justify-center relative overflow-hidden flex-1 transition-all duration-500">
                 <div className="absolute -top-4 -right-4 opacity-[0.03]">
                   <Wallet className="w-32 h-32 text-foreground" />
                 </div>
                 <p className="text-xs font-bold text-muted uppercase tracking-wider mb-8 flex items-center gap-2 relative z-10">
                   <CalendarCheck className="w-4 h-4 text-primary" />
-                  Próximo Pagamento
+                  {data.proximo_pagamento.itens && data.proximo_pagamento.itens.length > 1 ? "Próximos Pagamentos" : "Próximo Pagamento"}
                 </p>
                 <div className="space-y-6 relative z-10">
-                  <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
-                      <User className="w-5 h-5" />
+                  {data.proximo_pagamento.itens && data.proximo_pagamento.itens.length > 1 ? (
+                    <div className="space-y-4">
+                      {data.proximo_pagamento.itens.map((item: any, idx: number) => (
+                        <div key={idx} className="flex justify-between items-center pb-4 border-b border-border-subtle last:border-0 last:pb-0">
+                          <div>
+                            <p className="text-lg font-bold text-foreground">{item.pessoa || "Geral"}</p>
+                            <p className="text-sm font-medium text-muted">{item.descricao}</p>
+                          </div>
+                          <p className="text-xl font-bold text-primary">+{formatCurrency(item.valor)}</p>
+                        </div>
+                      ))}
+                      <div className="pt-2 border-t border-border flex justify-between items-center">
+                        <div>
+                          <p className="text-sm font-medium text-muted mb-0.5">Total em {format(new Date(data.proximo_pagamento.data!), "dd 'de' MMMM", { locale: ptBR })}</p>
+                          <p className="text-xs text-muted">Faltam {Math.max(0, Math.ceil((new Date(data.proximo_pagamento.data!).getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24)))} dias</p>
+                        </div>
+                        <p className="text-2xl font-black text-primary">+{formatCurrency(data.proximo_pagamento.valor)}</p>
+                      </div>
                     </div>
-                    <p className="text-xl font-bold text-foreground leading-tight">
-                      {data.proximo_pagamento.pessoas?.join(", ") || "Geral"}
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
-                      <CalendarClock className="w-5 h-5" />
-                    </div>
-                    <p className="text-xl font-bold text-foreground">
-                      {format(new Date(data.proximo_pagamento.data!), "dd 'de' MMMM", { locale: ptBR })}
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
-                      <CircleDollarSign className="w-5 h-5" />
-                    </div>
-                    <p className="text-2xl font-black text-primary">
-                      +{formatCurrency(data.proximo_pagamento.valor)}
-                    </p>
-                  </div>
+                  ) : (
+                    <>
+                      <div className="flex items-center gap-4">
+                        <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                          <User className="w-5 h-5" />
+                        </div>
+                        <div>
+                          <p className="text-xl font-bold text-foreground leading-tight">
+                            {data.proximo_pagamento.descricao}
+                          </p>
+                          <p className="text-sm text-muted font-medium mt-0.5">
+                            {data.proximo_pagamento.pessoas?.join(", ") || "Geral"}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-4">
+                        <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                          <CalendarClock className="w-5 h-5" />
+                        </div>
+                        <div>
+                          <p className="text-xl font-bold text-foreground">
+                            {format(new Date(data.proximo_pagamento.data!), "dd 'de' MMMM", { locale: ptBR })}
+                          </p>
+                          <p className="text-sm text-muted font-medium mt-0.5">
+                            Faltam {Math.max(0, Math.ceil((new Date(data.proximo_pagamento.data!).getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24)))} dias
+                          </p>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-4">
+                        <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                          <CircleDollarSign className="w-5 h-5" />
+                        </div>
+                        <p className="text-3xl font-black text-primary">
+                          +{formatCurrency(data.proximo_pagamento.valor)}
+                        </p>
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
             ) : (
-              <div className="bg-surface-secondary border border-border rounded-[2rem] p-8 shadow-sm flex flex-col justify-center relative overflow-hidden flex-1 transition-all duration-500">
-                <p className="text-xs font-bold text-muted uppercase tracking-wider mb-6 flex items-center gap-2 relative z-10">
-                  <Calendar className="w-4 h-4 text-foreground" />
-                  Final do Período
-                </p>
-                <div className="space-y-5 relative z-10">
-                  <div>
-                    <p className="text-sm text-muted">Data limite analisada</p>
-                    <p className="text-xl font-bold text-foreground">
-                      {format(new Date(data.data_final), "dd 'de' MMMM", { locale: ptBR })}
-                    </p>
-                  </div>
-                  <div className="pt-5 border-t border-border-subtle">
-                    <p className="text-sm text-muted mb-1">Receitas previstas</p>
-                    <p className="text-3xl font-black text-primary">+{formatCurrency(data.receitas_previstas_no_periodo)}</p>
-                  </div>
+              <div className="bg-surface border border-border rounded-[2rem] p-8 shadow-sm flex flex-col justify-center items-center text-center relative overflow-hidden flex-1 transition-all duration-500">
+                <div className="w-16 h-16 rounded-full bg-surface-secondary flex items-center justify-center text-muted mb-4">
+                  <Calendar className="w-8 h-8" />
                 </div>
+                <p className="text-lg font-bold text-foreground mb-2">Nenhum próximo pagamento cadastrado.</p>
+                <p className="text-sm text-muted mb-6">Mantenha suas receitas atualizadas para prever seu saldo.</p>
+                <Button variant="secondary" className="border-border text-foreground hover:bg-surface-secondary" onClick={() => window.location.href = "/receitas"}>
+                  Cadastrar pagamento
+                </Button>
               </div>
             )}
 
