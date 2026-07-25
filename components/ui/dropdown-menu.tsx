@@ -64,7 +64,7 @@ export function DropdownMenu({
           role="menu"
           tabIndex={-1}
           className={cn(
-            "absolute z-50 mt-2 w-56 rounded-xl bg-gray-900 border border-gray-800 shadow-2xl py-1.5 text-sm animate-in fade-in zoom-in-95 duration-100 focus:outline-none",
+            "absolute z-50 mt-2 w-56 rounded-xl bg-surface border border-border shadow-2xl py-1.5 text-sm animate-in fade-in zoom-in-95 duration-100 focus:outline-none",
             align === "right" ? "right-0" : "left-0",
             className
           )}
@@ -82,11 +82,11 @@ export function DropdownMenu({
                 className={cn(
                   "w-full flex items-center gap-2.5 px-3.5 py-2 text-left text-sm transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed",
                   item.danger
-                    ? "text-red-400 hover:bg-red-500/10 hover:text-red-300"
-                    : "text-gray-200 hover:bg-gray-800 hover:text-white"
+                    ? "text-danger hover:bg-danger/10 hover:text-red-300"
+                    : "text-foreground hover:bg-surface-secondary hover:text-foreground"
                 )}
               >
-                {item.icon && <span className="w-4 h-4 text-gray-400 shrink-0">{item.icon}</span>}
+                {item.icon && <span className="w-4 h-4 text-muted shrink-0">{item.icon}</span>}
                 <span className="flex-1 truncate">{item.label}</span>
               </button>
 

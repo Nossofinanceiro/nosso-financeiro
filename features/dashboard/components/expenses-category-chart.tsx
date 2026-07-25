@@ -53,18 +53,18 @@ export function ExpensesCategoryChart({ categories }: ExpensesCategoryChartProps
                     className="w-2.5 h-2.5 rounded-full shrink-0"
                     style={{ backgroundColor: barColor }}
                   />
-                  <span className="font-medium text-white">{cat.nome}</span>
+                  <span className="font-medium text-foreground">{cat.nome}</span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <span className="text-gray-400 font-mono text-xs">{percentage}%</span>
-                  <span className="font-mono font-bold text-red-400">
+                  <span className="text-muted font-mono text-xs">{percentage}%</span>
+                  <span className="font-mono font-bold text-danger">
                     {formatCurrency(cat.total)}
                   </span>
                 </div>
               </div>
 
               {/* Progress bar */}
-              <div className="w-full h-2 rounded-full bg-gray-950/80 overflow-hidden">
+              <div className="w-full h-2 rounded-full bg-background/80 overflow-hidden">
                 <div
                   className="h-full rounded-full transition-all duration-300"
                   style={{

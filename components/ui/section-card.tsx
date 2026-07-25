@@ -20,19 +20,19 @@ export function SectionCard({
   return (
     <div
       className={cn(
-        "rounded-2xl border border-gray-800/80 bg-[#111827] shadow-xl overflow-hidden flex flex-col",
+        "rounded-2xl border border-border/80 bg-[#111827] shadow-xl overflow-hidden flex flex-col",
         className
       )}
       {...props}
     >
       {/* Header */}
-      <div className="p-6 border-b border-gray-800/60 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="p-6 border-b border-border/60 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div className="space-y-1">
-          <h3 className="text-lg font-semibold text-white tracking-tight">
+          <h3 className="text-lg font-semibold text-foreground tracking-tight">
             {title}
           </h3>
           {description && (
-            <p className="text-sm text-gray-400">{description}</p>
+            <p className="text-sm text-muted">{description}</p>
           )}
         </div>
         {actions && <div className="shrink-0">{actions}</div>}
@@ -43,7 +43,7 @@ export function SectionCard({
 
       {/* Footer */}
       {footer && (
-        <div className="px-6 py-4 bg-gray-950/40 border-t border-gray-800/60 flex items-center justify-end">
+        <div className="px-6 py-4 bg-background/40 border-t border-border/60 flex items-center justify-end">
           {footer}
         </div>
       )}

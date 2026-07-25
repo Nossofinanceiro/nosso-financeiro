@@ -22,7 +22,7 @@ export function AppShell({ children, title, onQuickAction }: AppShellProps) {
   const isCollapsed = collapsed || isTablet;
 
   return (
-    <div className="flex h-screen overflow-hidden bg-[#090d16] text-gray-100 antialiased">
+    <div className="flex h-screen overflow-hidden bg-background text-foreground antialiased transition-colors duration-300">
       {/* Desktop & Tablet Sidebar */}
       <div className="hidden md:block shrink-0">
         <AppSidebar

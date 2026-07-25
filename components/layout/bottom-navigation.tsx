@@ -25,16 +25,16 @@ export function BottomNavigation() {
           />
 
           {/* Sheet menu */}
-          <div className="relative w-full bg-gray-900 border-t border-gray-800 rounded-t-3xl shadow-2xl z-10 overflow-hidden max-h-[85vh] flex flex-col animate-in slide-in-from-bottom duration-200 pb-safe">
-            <div className="p-4 border-b border-gray-800/80 flex items-center justify-between">
+          <div className="relative w-full bg-surface border-t border-border rounded-t-3xl shadow-2xl z-10 overflow-hidden max-h-[85vh] flex flex-col animate-in slide-in-from-bottom duration-200 pb-safe">
+            <div className="p-4 border-b border-border flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <ShieldCheck className="w-5 h-5 text-emerald-400" />
-                <span className="font-bold text-base text-white">Outros Módulos</span>
+                <ShieldCheck className="w-5 h-5 text-primary" />
+                <span className="font-bold text-base text-foreground">Outros Módulos</span>
               </div>
               <button
                 onClick={() => setMoreOpen(false)}
                 aria-label="Fechar menu"
-                className="p-1.5 rounded-lg text-gray-400 hover:text-white hover:bg-gray-800 transition-colors"
+                className="p-1.5 rounded-lg text-muted hover:text-foreground hover:bg-surface-secondary transition-colors"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -52,11 +52,11 @@ export function BottomNavigation() {
                     className={cn(
                       "flex items-center gap-3 p-3 rounded-xl border text-sm font-medium transition-all",
                       isActive
-                        ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/30"
-                        : "bg-gray-950/40 border-gray-800/60 text-gray-300 hover:bg-gray-800/60 hover:text-white"
+                        ? "bg-primary/10 text-primary border-primary/30"
+                        : "bg-background border-border text-muted hover:bg-surface-secondary hover:text-foreground"
                     )}
                   >
-                    <Icon className="w-5 h-5 shrink-0 text-emerald-400" />
+                    <Icon className="w-5 h-5 shrink-0 text-primary" />
                     <span className="truncate">{item.title}</span>
                   </Link>
                 );
@@ -69,7 +69,7 @@ export function BottomNavigation() {
       {/* Barra de Navegação Inferior (Mobile Fixa) */}
       <nav
         aria-label="Navegação inferior mobile"
-        className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-gray-900/95 border-t border-gray-800/80 backdrop-blur-lg px-2 pb-safe pt-1 flex items-center justify-around shadow-2xl select-none"
+        className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-surface/95 border-t border-border backdrop-blur-lg px-2 pb-safe pt-1 flex items-center justify-around shadow-2xl select-none"
       >
         {MAIN_NAV_ITEMS.map((item) => {
           const Icon = item.icon;
@@ -81,14 +81,14 @@ export function BottomNavigation() {
               className={cn(
                 "flex flex-col items-center justify-center py-1.5 px-3 min-w-[60px] touch-target rounded-xl transition-all relative",
                 isActive
-                  ? "text-emerald-400 font-semibold"
-                  : "text-gray-400 hover:text-gray-200"
+                  ? "text-primary font-semibold"
+                  : "text-muted hover:text-foreground"
               )}
             >
               <Icon className={cn("w-5 h-5 transition-transform", isActive && "scale-110")} />
               <span className="text-[10px] tracking-tight mt-1">{item.title}</span>
               {isActive && (
-                <span className="absolute bottom-1 w-1 h-1 rounded-full bg-emerald-500" />
+                <span className="absolute bottom-1 w-1 h-1 rounded-full bg-primary" />
               )}
             </Link>
           );
@@ -100,14 +100,14 @@ export function BottomNavigation() {
           className={cn(
             "flex flex-col items-center justify-center py-1.5 px-3 min-w-[60px] touch-target rounded-xl transition-all relative cursor-pointer",
             isMoreActive
-              ? "text-emerald-400 font-semibold"
-              : "text-gray-400 hover:text-gray-200"
+              ? "text-primary font-semibold"
+              : "text-muted hover:text-foreground"
           )}
         >
           <MoreHorizontal className={cn("w-5 h-5 transition-transform", isMoreActive && "scale-110")} />
           <span className="text-[10px] tracking-tight mt-1">Mais</span>
           {isMoreActive && (
-            <span className="absolute bottom-1 w-1 h-1 rounded-full bg-emerald-500" />
+            <span className="absolute bottom-1 w-1 h-1 rounded-full bg-primary" />
           )}
         </button>
       </nav>

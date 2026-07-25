@@ -28,7 +28,7 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
           />
           <div
             className={cn(
-              "w-4 h-4 rounded border border-gray-700 bg-gray-950/80 flex items-center justify-center transition-all peer-focus-visible:ring-2 peer-focus-visible:ring-emerald-500 peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-gray-900 peer-checked:bg-emerald-600 peer-checked:border-emerald-600 peer-disabled:opacity-50 cursor-pointer peer-disabled:cursor-not-allowed",
+              "w-4 h-4 rounded border border-border-subtle bg-background/80 flex items-center justify-center transition-all peer-focus-visible:ring-2 peer-focus-visible:ring-primary peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-gray-900 peer-checked:bg-primary peer-checked:border-emerald-600 peer-disabled:opacity-50 cursor-pointer peer-disabled:cursor-not-allowed",
               className
             )}
             onClick={(e) => {
@@ -37,7 +37,7 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
               if (inputEl) inputEl.click();
             }}
           >
-            <Check className="w-3 h-3 text-white opacity-0 peer-checked:opacity-100 transition-opacity stroke-[3]" />
+            <Check className="w-3 h-3 text-foreground opacity-0 peer-checked:opacity-100 transition-opacity stroke-[3]" />
           </div>
         </div>
 
@@ -47,7 +47,7 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
               <label
                 htmlFor={checkboxId}
                 className={cn(
-                  "font-medium text-gray-200 cursor-pointer select-none",
+                  "font-medium text-foreground cursor-pointer select-none",
                   disabled && "opacity-50 cursor-not-allowed"
                 )}
               >
@@ -55,7 +55,7 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
               </label>
             )}
             {description && (
-              <p className="text-xs text-gray-400 mt-0.5">{description}</p>
+              <p className="text-xs text-muted mt-0.5">{description}</p>
             )}
           </div>
         )}

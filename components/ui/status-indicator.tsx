@@ -12,8 +12,8 @@ export interface StatusIndicatorProps {
 export function StatusIndicator({ status, label, className }: StatusIndicatorProps) {
   const statusConfig = {
     success: {
-      color: "bg-emerald-500",
-      text: "text-emerald-400",
+      color: "bg-primary",
+      text: "text-primary",
       defaultLabel: "Concluído",
     },
     pending: {
@@ -28,7 +28,7 @@ export function StatusIndicator({ status, label, className }: StatusIndicatorPro
     },
     cancelled: {
       color: "bg-gray-500",
-      text: "text-gray-400",
+      text: "text-muted",
       defaultLabel: "Cancelado",
     },
     neutral: {

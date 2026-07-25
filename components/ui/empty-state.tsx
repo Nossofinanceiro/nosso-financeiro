@@ -20,18 +20,18 @@ export function EmptyState({
   return (
     <div
       className={cn(
-        "flex flex-col items-center justify-center p-8 text-center rounded-xl border border-dashed border-gray-800 bg-gray-900/40 space-y-3",
+        "flex flex-col items-center justify-center p-8 text-center rounded-xl border border-dashed border-border bg-surface/40 space-y-3",
         className
       )}
     >
-      <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-gray-800/80 text-gray-400 border border-gray-700/50">
+      <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-surface-secondary/80 text-muted border border-border-subtle/50">
         {icon || <FolderOpen className="w-6 h-6" />}
       </div>
 
       <div className="space-y-1 max-w-sm">
-        <h4 className="text-base font-semibold text-gray-200">{title}</h4>
+        <h4 className="text-base font-semibold text-foreground">{title}</h4>
         {description && (
-          <p className="text-sm text-gray-400">{description}</p>
+          <p className="text-sm text-muted">{description}</p>
         )}
       </div>
 

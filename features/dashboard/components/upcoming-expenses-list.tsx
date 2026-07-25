@@ -38,14 +38,14 @@ export function UpcomingExpensesList({ expenses }: UpcomingExpensesListProps) {
           return (
             <div
               key={expense.id}
-              className="flex items-center justify-between p-3.5 rounded-xl bg-gray-950/40 border border-gray-800/60 hover:bg-gray-800/30 transition-colors"
+              className="flex items-center justify-between p-3.5 rounded-xl bg-background/40 border border-border/60 hover:bg-surface-secondary/30 transition-colors"
             >
               <div className="space-y-1 min-w-0 pr-2">
-                <p className="text-sm font-semibold text-white truncate">
+                <p className="text-sm font-semibold text-foreground truncate">
                   {expense.descricao}
                 </p>
-                <div className="flex items-center gap-2 text-xs text-gray-400">
-                  <Calendar className="w-3.5 h-3.5 text-gray-500 shrink-0" />
+                <div className="flex items-center gap-2 text-xs text-muted">
+                  <Calendar className="w-3.5 h-3.5 text-muted shrink-0" />
                   <span>Vence em {expense.data_vencimento || `Dia ${expense.dia_vencimento}`}</span>
                   {isLate && (
                     <Badge variant="danger" className="text-[10px] py-0 px-1.5">
@@ -56,7 +56,7 @@ export function UpcomingExpensesList({ expenses }: UpcomingExpensesListProps) {
               </div>
 
               <div className="text-right shrink-0">
-                <span className="text-sm font-mono font-bold text-red-400">
+                <span className="text-sm font-mono font-bold text-danger">
                   {formatCurrency(expense.valor_previsto)}
                 </span>
                 <p className="text-[11px] text-amber-400 font-medium">Pendente</p>

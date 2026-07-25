@@ -61,26 +61,26 @@ export default function ReceitasPage() {
         {/* Header & Month Selector */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-bold text-white">Receitas</h1>
+            <h1 className="text-2xl font-bold text-foreground">Receitas</h1>
             <p className="text-sm text-slate-400">Acompanhe entradas previstas e recebidas</p>
           </div>
 
           <div className="flex items-center justify-between md:justify-end gap-4 w-full md:w-auto">
             <div className="flex items-center gap-2 bg-slate-900 border border-slate-800 rounded-lg p-1">
-              <Button variant="ghost" size="sm" onClick={handlePreviousMonth} className="h-8 w-8 p-0 text-slate-400 hover:text-white">
+              <Button variant="ghost" size="sm" onClick={handlePreviousMonth} className="h-8 w-8 p-0 text-slate-400 hover:text-foreground">
                 <ChevronLeft className="w-4 h-4" />
               </Button>
               <span className="text-sm font-medium w-32 text-center capitalize text-slate-200">
                 {monthDisplay}
               </span>
-              <Button variant="ghost" size="sm" onClick={handleNextMonth} className="h-8 w-8 p-0 text-slate-400 hover:text-white">
+              <Button variant="ghost" size="sm" onClick={handleNextMonth} className="h-8 w-8 p-0 text-slate-400 hover:text-foreground">
                 <ChevronRight className="w-4 h-4" />
               </Button>
             </div>
 
             <Button 
               onClick={handleCreateNew}
-              className="bg-emerald-600 hover:bg-emerald-700 text-white whitespace-nowrap"
+              className="bg-primary hover:bg-emerald-700 text-foreground whitespace-nowrap"
             >
               <Plus className="w-4 h-4 mr-2" />
               Nova Receita

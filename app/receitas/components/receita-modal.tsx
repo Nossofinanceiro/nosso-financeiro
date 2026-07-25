@@ -145,7 +145,7 @@ export function ReceitaModal({ isOpen, onClose, receitaToEdit, selectedMonth }: 
             placeholder="Ex: Salário, Freelance, Rendimentos..."
             className="bg-slate-900 border-slate-700"
           />
-          {errors.descricao && <p className="text-xs text-red-400">{errors.descricao}</p>}
+          {errors.descricao && <p className="text-xs text-danger">{errors.descricao}</p>}
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -159,7 +159,7 @@ export function ReceitaModal({ isOpen, onClose, receitaToEdit, selectedMonth }: 
               placeholder="0,00"
               className="bg-slate-900 border-slate-700"
             />
-            {errors.valor_previsto && <p className="text-xs text-red-400">{errors.valor_previsto}</p>}
+            {errors.valor_previsto && <p className="text-xs text-danger">{errors.valor_previsto}</p>}
           </div>
 
           <div className="space-y-2">
@@ -170,7 +170,7 @@ export function ReceitaModal({ isOpen, onClose, receitaToEdit, selectedMonth }: 
               onChange={(e) => setDataPrevista(e.target.value)}
               className="bg-slate-900 border-slate-700"
             />
-            {errors.data_prevista && <p className="text-xs text-red-400">{errors.data_prevista}</p>}
+            {errors.data_prevista && <p className="text-xs text-danger">{errors.data_prevista}</p>}
           </div>
         </div>
 
@@ -183,7 +183,7 @@ export function ReceitaModal({ isOpen, onClose, receitaToEdit, selectedMonth }: 
               options={[{ value: "", label: "Selecione..." }, ...categoriasReceita.map(c => ({ value: c.id, label: c.nome }))]}
               className="bg-slate-900 border-slate-700"
             />
-            {errors.categoria_id && <p className="text-xs text-red-400">{errors.categoria_id}</p>}
+            {errors.categoria_id && <p className="text-xs text-danger">{errors.categoria_id}</p>}
           </div>
 
           <div className="space-y-2">
@@ -194,7 +194,7 @@ export function ReceitaModal({ isOpen, onClose, receitaToEdit, selectedMonth }: 
               options={[{ value: "", label: "Selecione..." }, ...contas.map(c => ({ value: c.id, label: c.nome }))]}
               className="bg-slate-900 border-slate-700"
             />
-            {errors.conta_id && <p className="text-xs text-red-400">{errors.conta_id}</p>}
+            {errors.conta_id && <p className="text-xs text-danger">{errors.conta_id}</p>}
           </div>
         </div>
 
@@ -221,7 +221,7 @@ export function ReceitaModal({ isOpen, onClose, receitaToEdit, selectedMonth }: 
           <Button type="button" variant="ghost" onClick={onClose} disabled={isPending}>
             Cancelar
           </Button>
-          <Button type="submit" disabled={isPending} className="bg-emerald-600 hover:bg-emerald-700 text-white">
+          <Button type="submit" disabled={isPending} className="bg-primary hover:bg-emerald-700 text-foreground">
             {isPending ? "Salvando..." : "Salvar"}
           </Button>
         </div>

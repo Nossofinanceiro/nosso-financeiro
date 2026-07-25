@@ -110,7 +110,7 @@ export function ContaModal({ isOpen, onClose, contaToEdit }: ContaModalProps) {
             placeholder="Ex: Nubank, Carteira..."
             className="bg-slate-900 border-slate-700"
           />
-          {errors.nome && <p className="text-xs text-red-400">{errors.nome}</p>}
+          {errors.nome && <p className="text-xs text-danger">{errors.nome}</p>}
         </div>
 
         <div className="space-y-2">
@@ -126,7 +126,7 @@ export function ContaModal({ isOpen, onClose, contaToEdit }: ContaModalProps) {
             ]}
             className="bg-slate-900 border-slate-700"
           />
-          {errors.tipo && <p className="text-xs text-red-400">{errors.tipo}</p>}
+          {errors.tipo && <p className="text-xs text-danger">{errors.tipo}</p>}
         </div>
 
         <div className="space-y-2">
@@ -137,7 +137,7 @@ export function ContaModal({ isOpen, onClose, contaToEdit }: ContaModalProps) {
             className="bg-slate-900 border-slate-700"
             disabled={!!contaToEdit} // Let's disable for edits if we want to restrict
           />
-          {errors.saldo_inicial && <p className="text-xs text-red-400">{errors.saldo_inicial}</p>}
+          {errors.saldo_inicial && <p className="text-xs text-danger">{errors.saldo_inicial}</p>}
         </div>
 
         <div className="flex items-center pt-2">

@@ -76,8 +76,8 @@ export function PeriodForecastSection() {
     <div className="space-y-6 mt-12 mb-8 animate-in fade-in duration-200">
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div>
-          <h2 className="text-xl font-bold text-white flex items-center gap-2">
-            <CalendarDays className="w-5 h-5 text-emerald-400" />
+          <h2 className="text-xl font-bold text-foreground flex items-center gap-2">
+            <CalendarDays className="w-5 h-5 text-primary" />
             Previsão do Período
           </h2>
           <p className="text-sm text-slate-400">Analise seu dinheiro disponível até uma data</p>
@@ -88,7 +88,7 @@ export function PeriodForecastSection() {
             variant={mode === "proximo_pagamento" ? "primary" : "ghost"}
             size="sm"
             onClick={() => setMode("proximo_pagamento")}
-            className={mode === "proximo_pagamento" ? "bg-emerald-600 text-white hover:bg-emerald-700" : "text-slate-400 hover:text-white hover:bg-slate-800"}
+            className={mode === "proximo_pagamento" ? "bg-primary text-foreground hover:bg-emerald-700" : "text-slate-400 hover:text-foreground hover:bg-slate-800"}
           >
             Próximo Pagamento
           </Button>
@@ -96,7 +96,7 @@ export function PeriodForecastSection() {
             variant={mode === "fim_mes" ? "primary" : "ghost"}
             size="sm"
             onClick={() => setMode("fim_mes")}
-            className={mode === "fim_mes" ? "bg-emerald-600 text-white hover:bg-emerald-700" : "text-slate-400 hover:text-white hover:bg-slate-800"}
+            className={mode === "fim_mes" ? "bg-primary text-foreground hover:bg-emerald-700" : "text-slate-400 hover:text-foreground hover:bg-slate-800"}
           >
             Fim do Mês
           </Button>
@@ -104,7 +104,7 @@ export function PeriodForecastSection() {
             variant={mode === "personalizado" ? "primary" : "ghost"}
             size="sm"
             onClick={() => setMode("personalizado")}
-            className={mode === "personalizado" ? "bg-emerald-600 text-white hover:bg-emerald-700" : "text-slate-400 hover:text-white hover:bg-slate-800"}
+            className={mode === "personalizado" ? "bg-primary text-foreground hover:bg-emerald-700" : "text-slate-400 hover:text-foreground hover:bg-slate-800"}
           >
             Personalizado
           </Button>
@@ -119,7 +119,7 @@ export function PeriodForecastSection() {
               type="date" 
               value={dataInicial} 
               onChange={(e) => setDataInicial(e.target.value)}
-              className="bg-slate-800 border border-slate-700 rounded-lg px-3 py-1.5 text-sm text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              className="bg-slate-800 border border-slate-700 rounded-lg px-3 py-1.5 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
             />
           </div>
           <div className="flex items-center gap-2">
@@ -133,7 +133,7 @@ export function PeriodForecastSection() {
                 }
               }}
               min={dataInicial}
-              className="bg-slate-800 border border-slate-700 rounded-lg px-3 py-1.5 text-sm text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              className="bg-slate-800 border border-slate-700 rounded-lg px-3 py-1.5 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
             />
           </div>
         </div>
@@ -147,7 +147,7 @@ export function PeriodForecastSection() {
           <Skeleton className="h-28 rounded-xl bg-slate-900 border border-slate-800" />
         </div>
       ) : isError ? (
-        <div className="p-4 bg-red-500/10 border border-red-500/20 text-red-500 rounded-xl text-center">
+        <div className="p-4 bg-danger/10 border border-danger/20 text-danger rounded-xl text-center">
           Ocorreu um erro ao carregar a previsão.
         </div>
       ) : data ? (
@@ -162,14 +162,14 @@ export function PeriodForecastSection() {
           <div className="bg-slate-900/50 border border-slate-800/50 p-4 rounded-xl flex flex-wrap gap-x-8 gap-y-2">
             <div className="text-sm">
               <span className="text-slate-400">Período: </span>
-              <span className="text-white font-medium">
+              <span className="text-foreground font-medium">
                 {format(new Date(data.data_inicial), "dd MMM", { locale: ptBR })} a {format(new Date(data.data_final), "dd MMM yyyy", { locale: ptBR })}
               </span>
             </div>
             {data.proximo_pagamento && mode === "proximo_pagamento" && (
               <div className="text-sm">
                 <span className="text-slate-400">Data do Pagamento: </span>
-                <span className="text-emerald-400 font-medium">
+                <span className="text-primary font-medium">
                   {format(new Date(data.proximo_pagamento.data), "dd MMM yyyy", { locale: ptBR })}
                 </span>
               </div>
@@ -179,26 +179,26 @@ export function PeriodForecastSection() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             <Card className="p-5 flex flex-col justify-between bg-slate-900 border-slate-800">
               <div className="flex items-center gap-2 mb-2">
-                <Wallet className="w-4 h-4 text-emerald-400" />
+                <Wallet className="w-4 h-4 text-primary" />
                 <h3 className="text-sm font-medium text-slate-300">Saldo Atual</h3>
               </div>
-              <p className="text-xl font-bold text-white">{formatCurrency(data.saldo_atual_familiar)}</p>
+              <p className="text-xl font-bold text-foreground">{formatCurrency(data.saldo_atual_familiar)}</p>
             </Card>
 
             <Card className="p-5 flex flex-col justify-between bg-slate-900 border-slate-800">
               <div className="flex items-center gap-2 mb-2">
-                <TrendingDown className="w-4 h-4 text-red-400" />
+                <TrendingDown className="w-4 h-4 text-danger" />
                 <h3 className="text-sm font-medium text-slate-300">Despesas no Período</h3>
               </div>
-              <p className="text-xl font-bold text-red-400">-{formatCurrency(data.despesas_pendentes_no_periodo)}</p>
+              <p className="text-xl font-bold text-danger">-{formatCurrency(data.despesas_pendentes_no_periodo)}</p>
             </Card>
 
-            <Card className="p-5 flex flex-col justify-between bg-slate-900 border-emerald-500/30">
+            <Card className="p-5 flex flex-col justify-between bg-slate-900 border-primary/30">
               <div className="flex items-center gap-2 mb-2">
-                <CalendarCheck className="w-4 h-4 text-emerald-400" />
-                <h3 className="text-sm font-medium text-emerald-400">Disponível (Dinheiro Atual)</h3>
+                <CalendarCheck className="w-4 h-4 text-primary" />
+                <h3 className="text-sm font-medium text-primary">Disponível (Dinheiro Atual)</h3>
               </div>
-              <p className="text-xl font-bold text-emerald-400">{formatCurrency(data.disponivel_com_dinheiro_atual)}</p>
+              <p className="text-xl font-bold text-primary">{formatCurrency(data.disponivel_com_dinheiro_atual)}</p>
               <p className="text-xs text-slate-500 mt-1">Quanto sobra pagando apenas com o que já tem</p>
             </Card>
 
@@ -211,7 +211,7 @@ export function PeriodForecastSection() {
                   <TrendingUp className="w-4 h-4 text-amber-400" />
                   <h3 className="text-sm font-medium text-slate-300">Pós Pagamento</h3>
                 </div>
-                <p className="text-xl font-bold text-white">
+                <p className="text-xl font-bold text-foreground">
                   {formatCurrency(data.disponivel_com_dinheiro_atual + data.proximo_pagamento.valor)}
                 </p>
                 <p className="text-xs text-slate-500 mt-1">Saldo após entrar {formatCurrency(data.proximo_pagamento.valor)}</p>
@@ -222,7 +222,7 @@ export function PeriodForecastSection() {
                   <Calendar className="w-4 h-4 text-amber-400" />
                   <h3 className="text-sm font-medium text-slate-300">Previsto em {format(new Date(data.data_final), "dd/MM")}</h3>
                 </div>
-                <p className="text-xl font-bold text-white">{formatCurrency(data.saldo_previsto_na_data_final)}</p>
+                <p className="text-xl font-bold text-foreground">{formatCurrency(data.saldo_previsto_na_data_final)}</p>
                 <p className="text-xs text-slate-500 mt-1">
                   Inclui {formatCurrency(data.receitas_previstas_no_periodo)} de receitas no período
                 </p>
@@ -233,7 +233,7 @@ export function PeriodForecastSection() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
             <div className="space-y-3">
               <h4 className="text-sm font-medium text-slate-300 flex items-center gap-2">
-                <TrendingDown className="w-4 h-4 text-red-400" />
+                <TrendingDown className="w-4 h-4 text-danger" />
                 Despesas consideradas no cálculo
               </h4>
               <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden divide-y divide-slate-800/50">
@@ -251,7 +251,7 @@ export function PeriodForecastSection() {
                             <Icon className="w-4 h-4" />
                           </div>
                           <div>
-                            <p className="text-sm text-white font-medium">{d.descricao}</p>
+                            <p className="text-sm text-foreground font-medium">{d.descricao}</p>
                             <p className="text-xs text-slate-400 flex items-center gap-2">
                               <span>{conta?.nome || "Sem conta"}</span>
                               <span>•</span>
@@ -260,9 +260,9 @@ export function PeriodForecastSection() {
                           </div>
                         </div>
                         <div className="text-right">
-                          <p className="text-sm font-medium text-white">{formatCurrency(d.valor_pago || d.valor_previsto)}</p>
+                          <p className="text-sm font-medium text-foreground">{formatCurrency(d.valor_pago || d.valor_previsto)}</p>
                           {d.status === "atrasada" && (
-                            <Badge variant="neutral" className="bg-red-500/10 text-red-500 py-0 text-[9px]">Atrasada</Badge>
+                            <Badge variant="neutral" className="bg-danger/10 text-danger py-0 text-[9px]">Atrasada</Badge>
                           )}
                         </div>
                       </div>
@@ -278,7 +278,7 @@ export function PeriodForecastSection() {
 
             <div className="space-y-3">
               <h4 className="text-sm font-medium text-slate-300 flex items-center gap-2">
-                <TrendingUp className="w-4 h-4 text-emerald-400" />
+                <TrendingUp className="w-4 h-4 text-primary" />
                 Receitas previstas no período
               </h4>
               <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden divide-y divide-slate-800/50">
@@ -296,7 +296,7 @@ export function PeriodForecastSection() {
                             <Icon className="w-4 h-4" />
                           </div>
                           <div>
-                            <p className="text-sm text-white font-medium">{r.descricao}</p>
+                            <p className="text-sm text-foreground font-medium">{r.descricao}</p>
                             <p className="text-xs text-slate-400 flex items-center gap-2">
                               <span>{conta?.nome || "Sem conta"}</span>
                               <span>•</span>
@@ -305,7 +305,7 @@ export function PeriodForecastSection() {
                           </div>
                         </div>
                         <div className="text-right">
-                          <p className="text-sm font-medium text-white">{formatCurrency(r.valor_previsto)}</p>
+                          <p className="text-sm font-medium text-foreground">{formatCurrency(r.valor_previsto)}</p>
                         </div>
                       </div>
                     )

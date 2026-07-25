@@ -80,10 +80,10 @@ export function DataTable<T>({
   }
 
   return (
-    <div className="w-full overflow-hidden rounded-xl border border-gray-800 bg-gray-900/60 shadow-xl">
+    <div className="w-full overflow-hidden rounded-xl border border-border bg-surface/60 shadow-xl">
       <div className="overflow-x-auto">
-        <table className="w-full text-left text-sm text-gray-300">
-          <thead className="bg-gray-950/80 text-xs uppercase font-semibold text-gray-400 border-b border-gray-800/80">
+        <table className="w-full text-left text-sm text-foreground">
+          <thead className="bg-background/80 text-xs uppercase font-semibold text-muted border-b border-border/80">
             <tr>
               {columns.map((col) => (
                 <th
@@ -93,7 +93,7 @@ export function DataTable<T>({
                     "px-4 py-3.5 select-none",
                     col.align === "right" && "text-right",
                     col.align === "center" && "text-center",
-                    col.sortable && "cursor-pointer hover:text-white transition-colors",
+                    col.sortable && "cursor-pointer hover:text-foreground transition-colors",
                     col.className
                   )}
                   onClick={() => col.sortable && handleSort(col.key)}
@@ -107,12 +107,12 @@ export function DataTable<T>({
                   >
                     <span>{col.header}</span>
                     {col.sortable && (
-                      <span className="text-gray-500">
+                      <span className="text-muted">
                         {sortKey === col.key ? (
                           sortOrder === "asc" ? (
-                            <ArrowUp className="w-3.5 h-3.5 text-emerald-400" />
+                            <ArrowUp className="w-3.5 h-3.5 text-primary" />
                           ) : (
-                            <ArrowDown className="w-3.5 h-3.5 text-emerald-400" />
+                            <ArrowDown className="w-3.5 h-3.5 text-primary" />
                           )
                         ) : (
                           <ArrowUpDown className="w-3.5 h-3.5" />
@@ -131,7 +131,7 @@ export function DataTable<T>({
                 key={keyExtractor(item)}
                 onClick={() => onRowClick?.(item)}
                 className={cn(
-                  "hover:bg-gray-800/40 transition-colors",
+                  "hover:bg-surface-secondary/40 transition-colors",
                   onRowClick && "cursor-pointer"
                 )}
               >

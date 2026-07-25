@@ -48,9 +48,9 @@ export function Pagination({
       aria-label="Navegação por páginas"
       className={cn("flex items-center justify-between gap-2 py-3", className)}
     >
-      <div className="text-xs text-gray-400">
-        Página <span className="font-semibold text-white">{currentPage}</span> de{" "}
-        <span className="font-semibold text-white">{totalPages}</span>
+      <div className="text-xs text-muted">
+        Página <span className="font-semibold text-foreground">{currentPage}</span> de{" "}
+        <span className="font-semibold text-foreground">{totalPages}</span>
       </div>
 
       <div className="flex items-center gap-1">
@@ -58,7 +58,7 @@ export function Pagination({
           onClick={() => onPageChange(currentPage - 1)}
           disabled={disabled || currentPage <= 1}
           aria-label="Página anterior"
-          className="p-1.5 rounded-lg border border-gray-800 bg-gray-900 text-gray-300 hover:bg-gray-800 hover:text-white disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+          className="p-1.5 rounded-lg border border-border bg-surface text-foreground hover:bg-surface-secondary hover:text-foreground disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
         >
           <ChevronLeft className="w-4 h-4" />
         </button>
@@ -72,14 +72,14 @@ export function Pagination({
                 className={cn(
                   "min-w-[32px] h-8 px-2 rounded-lg text-xs font-medium transition-colors cursor-pointer",
                   currentPage === num
-                    ? "bg-emerald-600 text-white font-semibold shadow-md"
-                    : "bg-gray-900 border border-gray-800 text-gray-300 hover:bg-gray-800 hover:text-white"
+                    ? "bg-primary text-foreground font-semibold shadow-md"
+                    : "bg-surface border border-border text-foreground hover:bg-surface-secondary hover:text-foreground"
                 )}
               >
                 {num}
               </button>
             ) : (
-              <span className="px-1 text-gray-500 text-xs select-none">...</span>
+              <span className="px-1 text-muted text-xs select-none">...</span>
             )}
           </React.Fragment>
         ))}
@@ -88,7 +88,7 @@ export function Pagination({
           onClick={() => onPageChange(currentPage + 1)}
           disabled={disabled || currentPage >= totalPages}
           aria-label="Próxima página"
-          className="p-1.5 rounded-lg border border-gray-800 bg-gray-900 text-gray-300 hover:bg-gray-800 hover:text-white disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+          className="p-1.5 rounded-lg border border-border bg-surface text-foreground hover:bg-surface-secondary hover:text-foreground disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
         >
           <ChevronRight className="w-4 h-4" />
         </button>

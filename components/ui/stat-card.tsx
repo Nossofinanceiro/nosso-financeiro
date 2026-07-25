@@ -8,10 +8,10 @@ const statCardVariants = cva(
   {
     variants: {
       variant: {
-        positive: "bg-[#111827] border-emerald-500/30 text-emerald-400",
-        negative: "bg-[#111827] border-red-500/30 text-red-400",
-        neutral: "bg-[#111827] border-gray-800/80 text-gray-100",
-        highlight: "bg-emerald-950/40 border-emerald-500/40 text-emerald-300 shadow-emerald-950/20",
+        positive: "bg-[#111827] border-primary/30 text-primary",
+        negative: "bg-[#111827] border-danger/30 text-danger",
+        neutral: "bg-[#111827] border-border/80 text-foreground",
+        highlight: "bg-emerald-950/40 border-primary/40 text-emerald-300 shadow-emerald-950/20",
       },
     },
     defaultVariants: {
@@ -48,24 +48,24 @@ export function StatCard({
   const isNegativeVal = value < 0;
 
   const valueColor = {
-    positive: "text-emerald-400",
-    negative: "text-red-400",
+    positive: "text-primary",
+    negative: "text-danger",
     neutral: isPositiveVal
-      ? "text-emerald-400"
+      ? "text-primary"
       : isNegativeVal
-      ? "text-red-400"
-      : "text-white",
-    highlight: "text-emerald-400",
+      ? "text-danger"
+      : "text-foreground",
+    highlight: "text-primary",
   }[variant || "neutral"];
 
   return (
     <div className={cn(statCardVariants({ variant }), className)} {...props}>
       <div className="flex items-start justify-between gap-3">
-        <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">
+        <span className="text-xs font-semibold text-muted uppercase tracking-wider">
           {title}
         </span>
         {icon && (
-          <div className="p-2 rounded-xl bg-gray-800/60 border border-gray-700/40 text-gray-300">
+          <div className="p-2 rounded-xl bg-surface-secondary/60 border border-border-subtle/40 text-foreground">
             {icon}
           </div>
         )}
@@ -82,9 +82,9 @@ export function StatCard({
               <span
                 className={cn(
                   "inline-flex items-center gap-0.5 font-semibold px-1.5 py-0.5 rounded",
-                  trend.isPositive && "bg-emerald-500/10 text-emerald-400",
-                  trend.isNegative && "bg-red-500/10 text-red-400",
-                  !trend.isPositive && !trend.isNegative && "bg-gray-800 text-gray-400"
+                  trend.isPositive && "bg-primary/10 text-primary",
+                  trend.isNegative && "bg-danger/10 text-danger",
+                  !trend.isPositive && !trend.isNegative && "bg-surface-secondary text-muted"
                 )}
               >
                 {trend.isPositive && <TrendingUp className="w-3 h-3" />}
@@ -94,7 +94,7 @@ export function StatCard({
               </span>
             )}
             {description && (
-              <span className="text-gray-400 truncate">{description}</span>
+              <span className="text-muted truncate">{description}</span>
             )}
           </div>
         )}

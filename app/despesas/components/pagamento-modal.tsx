@@ -100,9 +100,9 @@ export function PagamentoModal({ isOpen, onClose, despesa }: PagamentoModalProps
               step="0.01"
               value={valorPago}
               onChange={(e) => setValorPago(e.target.value)}
-              className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:ring-2 focus:ring-primary"
             />
-            {errors.valorPago && <p className="text-xs text-red-400 mt-1">{errors.valorPago}</p>}
+            {errors.valorPago && <p className="text-xs text-danger mt-1">{errors.valorPago}</p>}
           </div>
 
           <div>
@@ -113,9 +113,9 @@ export function PagamentoModal({ isOpen, onClose, despesa }: PagamentoModalProps
               type="date"
               value={dataPagamento}
               onChange={(e) => setDataPagamento(e.target.value)}
-              className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:ring-2 focus:ring-primary"
             />
-            {errors.dataPagamento && <p className="text-xs text-red-400 mt-1">{errors.dataPagamento}</p>}
+            {errors.dataPagamento && <p className="text-xs text-danger mt-1">{errors.dataPagamento}</p>}
           </div>
         </div>
 
@@ -126,14 +126,14 @@ export function PagamentoModal({ isOpen, onClose, despesa }: PagamentoModalProps
           <select
             value={contaId}
             onChange={(e) => setContaId(e.target.value)}
-            className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+            className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:ring-2 focus:ring-primary"
           >
             <option value="">Selecione...</option>
             {contas.map(c => (
               <option key={c.id} value={c.id}>{c.nome}</option>
             ))}
           </select>
-          {errors.contaId && <p className="text-xs text-red-400 mt-1">{errors.contaId}</p>}
+          {errors.contaId && <p className="text-xs text-danger mt-1">{errors.contaId}</p>}
         </div>
 
         <div className="flex justify-end gap-3 mt-6">
@@ -144,7 +144,7 @@ export function PagamentoModal({ isOpen, onClose, despesa }: PagamentoModalProps
             variant="primary" 
             type="submit" 
             disabled={isPending}
-            className="bg-emerald-600 hover:bg-emerald-700"
+            className="bg-primary hover:bg-emerald-700"
           >
             {isPending ? "Confirmando..." : "Confirmar Pagamento"}
           </Button>

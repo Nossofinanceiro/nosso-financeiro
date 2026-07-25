@@ -68,8 +68,8 @@ export function ConfirmDialog({
       }
     >
       {destructive && (
-        <div className="p-3.5 rounded-lg bg-red-500/10 border border-red-500/20 text-red-300 text-xs flex items-center gap-2 mb-2">
-          <AlertTriangle className="w-4 h-4 shrink-0 text-red-400" />
+        <div className="p-3.5 rounded-lg bg-danger/10 border border-danger/20 text-red-300 text-xs flex items-center gap-2 mb-2">
+          <AlertTriangle className="w-4 h-4 shrink-0 text-danger" />
           <span>Atenção: Esta ação é irreversível e não poderá ser desfeita.</span>
         </div>
       )}

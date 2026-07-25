@@ -38,6 +38,7 @@ export function TransferModal({ isOpen, onClose }: TransferModalProps) {
 
   React.useEffect(() => {
     if (isOpen) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setContaOrigemId("");
       setContaDestinoId("");
       setValor(0);
@@ -75,8 +76,7 @@ export function TransferModal({ isOpen, onClose }: TransferModalProps) {
     } catch (error) {
       if (error instanceof z.ZodError) {
         const newErrors: Record<string, string> = {};
-        const zodError = error as any;
-        zodError.errors.forEach((err: any) => {
+        error.issues.forEach((err) => {
           if (err.path[0]) {
             newErrors[err.path[0].toString()] = err.message;
           }
@@ -101,7 +101,7 @@ export function TransferModal({ isOpen, onClose }: TransferModalProps) {
     >
       <form onSubmit={handleSubmit} className="space-y-4 mt-4">
         {errors.form && (
-          <div className="p-3 text-sm text-red-500 bg-red-500/10 rounded-md border border-red-500/20">
+          <div className="p-3 text-sm text-danger bg-danger/10 rounded-md border border-danger/20">
             {errors.form}
           </div>
         )}

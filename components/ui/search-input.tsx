@@ -48,14 +48,14 @@ export function SearchInput({
 
   return (
     <div className={cn("relative flex items-center w-full", className)}>
-      <Search className="absolute left-3 w-4 h-4 text-gray-400 pointer-events-none" />
+      <Search className="absolute left-3 w-4 h-4 text-muted pointer-events-none" />
       <input
         type="text"
         value={currentValue}
         onChange={handleChange}
         placeholder={placeholder}
         aria-label={placeholder}
-        className="w-full bg-gray-950/60 border border-gray-800 text-gray-100 placeholder-gray-500 rounded-lg text-sm pl-9 pr-9 py-2 transition-all focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+        className="w-full bg-background/60 border border-border text-foreground placeholder-gray-500 rounded-lg text-sm pl-9 pr-9 py-2 transition-all focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
         {...props}
       />
       {currentValue && (
@@ -63,7 +63,7 @@ export function SearchInput({
           type="button"
           onClick={handleClear}
           aria-label="Limpar busca"
-          className="absolute right-3 p-0.5 rounded text-gray-400 hover:text-white transition-colors cursor-pointer"
+          className="absolute right-3 p-0.5 rounded text-muted hover:text-foreground transition-colors cursor-pointer"
         >
           <X className="w-3.5 h-3.5" />
         </button>

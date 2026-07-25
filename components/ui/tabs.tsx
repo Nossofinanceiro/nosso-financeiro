@@ -23,7 +23,7 @@ export function Tabs({ tabs, activeTab, onTabChange, className }: TabsProps) {
       role="tablist"
       aria-orientation="horizontal"
       className={cn(
-        "flex items-center gap-1 border-b border-gray-800/80 overflow-x-auto no-scrollbar",
+        "flex items-center gap-1 border-b border-border/80 overflow-x-auto no-scrollbar",
         className
       )}
     >
@@ -37,10 +37,10 @@ export function Tabs({ tabs, activeTab, onTabChange, className }: TabsProps) {
             tabIndex={isActive ? 0 : -1}
             onClick={() => onTabChange(tab.id)}
             className={cn(
-              "flex items-center gap-2 px-4 py-2.5 text-sm font-medium border-b-2 transition-all whitespace-nowrap cursor-pointer select-none outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 rounded-t-lg",
+              "flex items-center gap-2 px-4 py-2.5 text-sm font-medium border-b-2 transition-all whitespace-nowrap cursor-pointer select-none outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-t-lg",
               isActive
-                ? "border-emerald-500 text-emerald-400 font-semibold bg-emerald-500/5"
-                : "border-transparent text-gray-400 hover:text-gray-200 hover:bg-gray-800/40"
+                ? "border-primary text-primary font-semibold bg-primary/5"
+                : "border-transparent text-muted hover:text-foreground hover:bg-surface-secondary/40"
             )}
           >
             {tab.icon && <span className="w-4 h-4">{tab.icon}</span>}
@@ -50,8 +50,8 @@ export function Tabs({ tabs, activeTab, onTabChange, className }: TabsProps) {
                 className={cn(
                   "px-1.5 py-0.5 rounded-full text-[10px] font-bold",
                   isActive
-                    ? "bg-emerald-500/20 text-emerald-300"
-                    : "bg-gray-800 text-gray-400"
+                    ? "bg-primary/20 text-emerald-300"
+                    : "bg-surface-secondary text-muted"
                 )}
               >
                 {tab.badge}

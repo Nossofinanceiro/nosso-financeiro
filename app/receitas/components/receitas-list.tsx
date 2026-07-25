@@ -48,12 +48,12 @@ export function ReceitasList({
 
   if (isError) {
     return (
-      <div className="flex flex-col items-center justify-center p-8 bg-slate-900/50 border border-red-500/20 rounded-2xl text-center space-y-4">
-        <div className="w-12 h-12 bg-red-500/10 rounded-full flex items-center justify-center text-red-500 mb-2">
+      <div className="flex flex-col items-center justify-center p-8 bg-slate-900/50 border border-danger/20 rounded-2xl text-center space-y-4">
+        <div className="w-12 h-12 bg-danger/10 rounded-full flex items-center justify-center text-danger mb-2">
           <RefreshCw className="w-6 h-6" />
         </div>
         <div className="max-w-md">
-          <h3 className="text-lg font-medium text-white">Erro ao carregar receitas</h3>
+          <h3 className="text-lg font-medium text-foreground">Erro ao carregar receitas</h3>
           <p className="text-sm text-slate-400 mt-1 mb-6">
             {error?.message || "Ocorreu um erro inesperado ao buscar os dados. Tente novamente."}
           </p>
@@ -82,7 +82,7 @@ export function ReceitasList({
               onClick={() => setStatusFilter(status)}
               className={`px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-colors ${
                 statusFilter === status
-                  ? "bg-emerald-500 text-white"
+                  ? "bg-primary text-foreground"
                   : "bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-slate-300"
               }`}
             >
@@ -109,14 +109,14 @@ export function ReceitasList({
             <PlusCircle className="w-8 h-8" />
           </div>
           <div>
-            <h3 className="text-lg font-medium text-white">Nenhuma receita encontrada.</h3>
+            <h3 className="text-lg font-medium text-foreground">Nenhuma receita encontrada.</h3>
             <p className="text-sm text-slate-400 mt-1 mb-6 max-w-sm">
               {receitas.length === 0 
                 ? "Nenhuma receita cadastrada neste mês." 
                 : "Nenhuma receita corresponde aos filtros atuais."}
             </p>
             {receitas.length === 0 && (
-              <Button onClick={onCreateNew} className="bg-emerald-600 hover:bg-emerald-700 text-white">
+              <Button onClick={onCreateNew} className="bg-primary hover:bg-emerald-700 text-foreground">
                 <PlusCircle className="w-4 h-4 mr-2" />
                 Criar primeira receita
               </Button>

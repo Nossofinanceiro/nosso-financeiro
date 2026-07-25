@@ -50,8 +50,8 @@ export function DespesaModal({ isOpen, onClose, despesaToEdit, selectedMonth }: 
 
   React.useEffect(() => {
     if (isOpen) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       if (despesaToEdit) {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setDescricao(despesaToEdit.descricao);
         setCategoriaId(despesaToEdit.categoria_id || "");
         setContaId(despesaToEdit.conta_id || "");
@@ -144,10 +144,10 @@ export function DespesaModal({ isOpen, onClose, despesaToEdit, selectedMonth }: 
             type="text"
             value={descricao}
             onChange={(e) => setDescricao(e.target.value)}
-            className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+            className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-primary"
             placeholder="Ex: Conta de Luz"
           />
-          {errors.descricao && <p className="text-xs text-red-400 mt-1">{errors.descricao}</p>}
+          {errors.descricao && <p className="text-xs text-danger mt-1">{errors.descricao}</p>}
         </div>
 
         <div className="grid grid-cols-2 gap-4">
@@ -161,10 +161,10 @@ export function DespesaModal({ isOpen, onClose, despesaToEdit, selectedMonth }: 
               step="0.01"
               value={valorPrevisto}
               onChange={(e) => setValorPrevisto(e.target.value)}
-              className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:ring-2 focus:ring-primary"
               placeholder="0.00"
             />
-            {errors.valor_previsto && <p className="text-xs text-red-400 mt-1">{errors.valor_previsto}</p>}
+            {errors.valor_previsto && <p className="text-xs text-danger mt-1">{errors.valor_previsto}</p>}
           </div>
 
           {/* Data */}
@@ -176,9 +176,9 @@ export function DespesaModal({ isOpen, onClose, despesaToEdit, selectedMonth }: 
               type="date"
               value={dataVencimento}
               onChange={(e) => setDataVencimento(e.target.value)}
-              className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:ring-2 focus:ring-primary"
             />
-            {errors.data_vencimento && <p className="text-xs text-red-400 mt-1">{errors.data_vencimento}</p>}
+            {errors.data_vencimento && <p className="text-xs text-danger mt-1">{errors.data_vencimento}</p>}
           </div>
         </div>
 
@@ -191,14 +191,14 @@ export function DespesaModal({ isOpen, onClose, despesaToEdit, selectedMonth }: 
             <select
               value={categoriaId}
               onChange={(e) => setCategoriaId(e.target.value)}
-              className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:ring-2 focus:ring-primary"
             >
               <option value="">Selecione...</option>
               {categoriasDespesa.map(c => (
                 <option key={c.id} value={c.id}>{c.nome}</option>
               ))}
             </select>
-            {errors.categoria_id && <p className="text-xs text-red-400 mt-1">{errors.categoria_id}</p>}
+            {errors.categoria_id && <p className="text-xs text-danger mt-1">{errors.categoria_id}</p>}
           </div>
 
           {/* Conta */}
@@ -209,14 +209,14 @@ export function DespesaModal({ isOpen, onClose, despesaToEdit, selectedMonth }: 
             <select
               value={contaId}
               onChange={(e) => setContaId(e.target.value)}
-              className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:ring-2 focus:ring-primary"
             >
               <option value="">Selecione...</option>
               {contas.map(c => (
                 <option key={c.id} value={c.id}>{c.nome}</option>
               ))}
             </select>
-            {errors.conta_id && <p className="text-xs text-red-400 mt-1">{errors.conta_id}</p>}
+            {errors.conta_id && <p className="text-xs text-danger mt-1">{errors.conta_id}</p>}
           </div>
         </div>
 
@@ -228,7 +228,7 @@ export function DespesaModal({ isOpen, onClose, despesaToEdit, selectedMonth }: 
           <textarea
             value={observacoes}
             onChange={(e) => setObservacoes(e.target.value)}
-            className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+            className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-primary"
             placeholder="Detalhes adicionais..."
             rows={2}
           />
@@ -241,7 +241,7 @@ export function DespesaModal({ isOpen, onClose, despesaToEdit, selectedMonth }: 
             id="recorrente"
             checked={recorrente}
             onChange={(e) => setRecorrente(e.target.checked)}
-            className="rounded border-slate-700 bg-slate-900 text-emerald-500 focus:ring-emerald-500 focus:ring-offset-slate-950"
+            className="rounded border-slate-700 bg-slate-900 text-primary focus:ring-primary focus:ring-offset-slate-950"
           />
           <label htmlFor="recorrente" className="text-sm font-medium text-slate-300 cursor-pointer">
             Despesa recorrente
@@ -256,7 +256,7 @@ export function DespesaModal({ isOpen, onClose, despesaToEdit, selectedMonth }: 
             variant="primary" 
             type="submit" 
             disabled={isPending}
-            className="bg-emerald-600 hover:bg-emerald-700"
+            className="bg-primary hover:bg-emerald-700"
           >
             {isPending ? "Salvando..." : "Salvar"}
           </Button>

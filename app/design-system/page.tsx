@@ -117,7 +117,7 @@ export default function DesignSystemPage() {
       header: "Descrição",
       sortable: true,
       accessor: (item) => (
-        <span className="font-medium text-white">{item.descricao}</span>
+        <span className="font-medium text-foreground">{item.descricao}</span>
       ),
     },
     {
@@ -132,7 +132,7 @@ export default function DesignSystemPage() {
       key: "data",
       header: "Data",
       sortable: true,
-      accessor: (item) => <span className="text-gray-400">{item.data}</span>,
+      accessor: (item) => <span className="text-muted">{item.data}</span>,
     },
     {
       key: "status",
@@ -149,7 +149,7 @@ export default function DesignSystemPage() {
       accessor: (item) => (
         <span
           className={`font-mono font-bold ${
-            item.valor > 0 ? "text-emerald-400" : "text-red-400"
+            item.valor > 0 ? "text-primary" : "text-danger"
           }`}
         >
           {formatCurrency(item.valor)}
@@ -178,7 +178,7 @@ export default function DesignSystemPage() {
               </Button>
             )}
             <Button variant="secondary" onClick={() => setCmdOpen(true)}>
-              <Command className="w-4 h-4 text-emerald-400" />
+              <Command className="w-4 h-4 text-primary" />
               <span>Abrir Ctrl+K</span>
             </Button>
           </div>
@@ -186,17 +186,17 @@ export default function DesignSystemPage() {
       />
 
       {/* Status da Arquitetura Multiplataforma */}
-      <Card className="border-emerald-500/30 bg-emerald-950/20">
+      <Card className="border-primary/30 bg-emerald-950/20">
         <CardContent className="p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <div className="p-2.5 rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 shrink-0">
+            <div className="p-2.5 rounded-xl bg-primary/20 text-primary border border-primary/30 shrink-0">
               <ShieldCheck className="w-6 h-6" />
             </div>
             <div>
-              <h4 className="text-base font-bold text-white tracking-tight">
+              <h4 className="text-base font-bold text-foreground tracking-tight">
                 Status do Layout Ativo
               </h4>
-              <p className="text-xs text-gray-300 mt-0.5">
+              <p className="text-xs text-foreground mt-0.5">
                 Layout detectado dinamicamente para a tela atual:
               </p>
             </div>
@@ -246,7 +246,7 @@ export default function DesignSystemPage() {
                 id: "3",
                 label: "Disparar Notificação Sucesso",
                 description: "Testar mensagem de Toast",
-                icon: <CheckCircle2 className="w-4 h-4 text-emerald-400" />,
+                icon: <CheckCircle2 className="w-4 h-4 text-primary" />,
                 onSelect: () =>
                   toast({
                     title: "Sucesso!",
@@ -261,12 +261,12 @@ export default function DesignSystemPage() {
 
       {/* 1. Stat Cards e Valores Padronizados em USD */}
       <section className="space-y-4">
-        <h2 className="text-xl font-bold text-white tracking-tight">1. Stat Cards (Valores Padronizados em USD)</h2>
+        <h2 className="text-xl font-bold text-foreground tracking-tight">1. Stat Cards (Valores Padronizados em USD)</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <StatCard
             title="Receitas Mensais"
             value={12450.80}
-            icon={<TrendingUp className="w-5 h-5 text-emerald-400" />}
+            icon={<TrendingUp className="w-5 h-5 text-primary" />}
             trend={{ value: "+14.2%", isPositive: true }}
             description="vs. mês anterior"
             variant="positive"
@@ -274,7 +274,7 @@ export default function DesignSystemPage() {
           <StatCard
             title="Despesas Mensais"
             value={-3820.50}
-            icon={<TrendingDown className="w-5 h-5 text-red-400" />}
+            icon={<TrendingDown className="w-5 h-5 text-danger" />}
             trend={{ value: "-5.1%", isNegative: true }}
             description="vs. mês anterior"
             variant="negative"
@@ -282,7 +282,7 @@ export default function DesignSystemPage() {
           <StatCard
             title="Saldo Disponível"
             value={8630.30}
-            icon={<DollarSign className="w-5 h-5 text-emerald-400" />}
+            icon={<DollarSign className="w-5 h-5 text-primary" />}
             trend={{ value: "Saldo Positivo", isPositive: true }}
             description="Total acumulado"
             variant="highlight"
@@ -290,7 +290,7 @@ export default function DesignSystemPage() {
           <StatCard
             title="Reserva Neutra"
             value={0}
-            icon={<DollarSign className="w-5 h-5 text-gray-400" />}
+            icon={<DollarSign className="w-5 h-5 text-muted" />}
             description="Sem variações"
             variant="neutral"
           />
@@ -301,7 +301,7 @@ export default function DesignSystemPage() {
 
       {/* 2. Formulários & Controles de Entrada */}
       <section className="space-y-4">
-        <h2 className="text-xl font-bold text-white tracking-tight">2. Formulários e Entradas de Dados (Input, Select, Textarea, Checkbox)</h2>
+        <h2 className="text-xl font-bold text-foreground tracking-tight">2. Formulários e Entradas de Dados (Input, Select, Textarea, Checkbox)</h2>
         <Card>
           <CardHeader>
             <CardTitle>Controles de Formulário Acessíveis</CardTitle>
@@ -352,10 +352,10 @@ export default function DesignSystemPage() {
 
       {/* 3. Notificações (Toast), Alerts, Skeletons, EmptyState & Dropdown */}
       <section className="space-y-4">
-        <h2 className="text-xl font-bold text-white tracking-tight">3. Notificações (Toast), ConfirmDialog, Alerts & Dropdown</h2>
+        <h2 className="text-xl font-bold text-foreground tracking-tight">3. Notificações (Toast), ConfirmDialog, Alerts & Dropdown</h2>
         <Card>
           <CardContent className="p-6 space-y-4">
-            <p className="text-sm text-gray-400">Dispare notificações com fechamento manual ou temporizador de 4 segundos:</p>
+            <p className="text-sm text-muted">Dispare notificações com fechamento manual ou temporizador de 4 segundos:</p>
             <div className="flex flex-wrap items-center gap-3">
               <Button
                 variant="primary"
@@ -506,7 +506,7 @@ export default function DesignSystemPage() {
 
       {/* 4. Tabela de Dados Genérica & Barra de Filtros */}
       <section className="space-y-4">
-        <h2 className="text-xl font-bold text-white tracking-tight">4. Tabela de Dados (DataTable), Filtros & Ações</h2>
+        <h2 className="text-xl font-bold text-foreground tracking-tight">4. Tabela de Dados (DataTable), Filtros & Ações</h2>
         
         <FilterBar
           searchValue={searchVal}
@@ -550,7 +550,7 @@ export default function DesignSystemPage() {
 
       {/* 5. Navegação por Abas (Tabs) & Accordion */}
       <section className="space-y-4">
-        <h2 className="text-xl font-bold text-white tracking-tight">5. Abas (Tabs) & Sanfona (Accordion)</h2>
+        <h2 className="text-xl font-bold text-foreground tracking-tight">5. Abas (Tabs) & Sanfona (Accordion)</h2>
         <div className="grid md:grid-cols-2 gap-6">
           <SectionCard title="Componente de Abas (Tabs)">
             <div className="space-y-4">
@@ -563,7 +563,7 @@ export default function DesignSystemPage() {
                   { id: "relatorios", label: "Relatórios" },
                 ]}
               />
-              <div className="p-4 rounded-xl bg-gray-950/60 border border-gray-800 text-sm text-gray-300">
+              <div className="p-4 rounded-xl bg-background/60 border border-border text-sm text-foreground">
                 {activeTab === "visao-geral" && "Conteúdo da aba Visão Geral selecionada."}
                 {activeTab === "transacoes" && "Exibindo lista de transações recentes do sistema."}
                 {activeTab === "relatorios" && "Gráficos e consolidados de despesas por categoria."}
@@ -598,7 +598,7 @@ export default function DesignSystemPage() {
 
       {/* 6. Inputs Especiais (Date Picker & Currency Input) & Popover / Tooltip */}
       <section className="space-y-4">
-        <h2 className="text-xl font-bold text-white tracking-tight">6. Date Picker, Currency Input, Tooltip & Popover</h2>
+        <h2 className="text-xl font-bold text-foreground tracking-tight">6. Date Picker, Currency Input, Tooltip & Popover</h2>
         <Card>
           <CardContent className="p-6 grid sm:grid-cols-2 lg:grid-cols-4 gap-6 items-end">
             <DatePicker
@@ -616,27 +616,27 @@ export default function DesignSystemPage() {
             />
 
             <div className="space-y-1.5">
-              <span className="block text-sm font-medium text-gray-300">Tooltip Exemplo</span>
+              <span className="block text-sm font-medium text-foreground">Tooltip Exemplo</span>
               <Tooltip content="Informações adicionais do balanço" position="top">
                 <Button variant="secondary" className="w-full">
-                  <HelpCircle className="w-4 h-4 text-emerald-400" />
+                  <HelpCircle className="w-4 h-4 text-primary" />
                   <span>Passe o Mouse</span>
                 </Button>
               </Tooltip>
             </div>
 
             <div className="space-y-1.5">
-              <span className="block text-sm font-medium text-gray-300">Popover Exemplo</span>
+              <span className="block text-sm font-medium text-foreground">Popover Exemplo</span>
               <Popover
                 trigger={
-                  <Button variant="ghost" className="w-full border border-gray-800">
+                  <Button variant="ghost" className="w-full border border-border">
                     <span>Abrir Popover</span>
                   </Button>
                 }
                 content={
                   <div className="space-y-2 text-xs">
-                    <p className="font-semibold text-white">Configurações Rápidas</p>
-                    <p className="text-gray-400">Ative ou desative notificações diretamente por este popover.</p>
+                    <p className="font-semibold text-foreground">Configurações Rápidas</p>
+                    <p className="text-muted">Ative ou desative notificações diretamente por este popover.</p>
                   </div>
                 }
               />
@@ -662,7 +662,7 @@ export default function DesignSystemPage() {
           </>
         }
       >
-        <p className="text-sm text-gray-300">
+        <p className="text-sm text-foreground">
           Componente de modal limpo e fluido, ideal para formulários de cadastro de contas, receitas e despesas.
         </p>
       </Modal>

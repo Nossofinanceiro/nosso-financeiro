@@ -53,7 +53,7 @@ export default function ContasPage() {
     <AppShell title="Contas">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
         <div>
-          <h2 className="text-xl font-semibold text-white">Contas</h2>
+          <h2 className="text-xl font-semibold text-foreground">Contas</h2>
           <p className="text-sm text-slate-400">Gerencie suas contas bancárias e carteiras</p>
         </div>
         <div className="hidden sm:flex gap-3">

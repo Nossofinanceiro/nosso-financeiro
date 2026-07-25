@@ -45,18 +45,18 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
-      <div className="w-full max-w-md bg-gray-900/80 border border-gray-800 backdrop-blur-xl p-8 rounded-2xl shadow-2xl space-y-6">
+      <div className="w-full max-w-md bg-surface/80 border border-border backdrop-blur-xl p-8 rounded-2xl shadow-2xl space-y-6">
         <div className="text-center space-y-2">
           <div className="mb-6 flex flex-col items-center justify-center">
             <img src="/logo.png" alt="Nosso Financeiro" className="h-20 object-contain" />
           </div>
-          <p className="text-sm text-gray-400">
+          <p className="text-sm text-muted">
             Entre com suas credenciais para acessar a plataforma
           </p>
         </div>
 
         {error && (
-          <div className="p-3.5 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm flex items-center gap-2">
+          <div className="p-3.5 rounded-lg bg-danger/10 border border-danger/20 text-danger text-sm flex items-center gap-2">
             <svg
               className="w-5 h-5 flex-shrink-0"
               fill="none"
@@ -78,7 +78,7 @@ export default function LoginPage() {
           <div className="space-y-1.5">
             <label
               htmlFor="email"
-              className="block text-sm font-medium text-gray-300"
+              className="block text-sm font-medium text-foreground"
             >
               E-mail
             </label>
@@ -89,14 +89,14 @@ export default function LoginPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="seu@email.com"
-              className="w-full px-4 py-2.5 bg-gray-950/60 border border-gray-800 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+              className="w-full px-4 py-2.5 bg-background/60 border border-border rounded-lg text-foreground placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
             />
           </div>
 
           <div className="space-y-1.5">
             <label
               htmlFor="password"
-              className="block text-sm font-medium text-gray-300"
+              className="block text-sm font-medium text-foreground"
             >
               Senha
             </label>
@@ -107,19 +107,19 @@ export default function LoginPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••"
-              className="w-full px-4 py-2.5 bg-gray-950/60 border border-gray-800 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+              className="w-full px-4 py-2.5 bg-background/60 border border-border rounded-lg text-foreground placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
             />
           </div>
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 px-4 bg-blue-600 hover:bg-blue-500 disabled:bg-blue-600/50 text-white font-medium rounded-lg shadow-lg shadow-blue-600/20 transition-all flex items-center justify-center gap-2 cursor-pointer disabled:cursor-not-allowed mt-2"
+            className="w-full py-3 px-4 bg-blue-600 hover:bg-blue-500 disabled:bg-blue-600/50 text-foreground font-medium rounded-lg shadow-lg shadow-blue-600/20 transition-all flex items-center justify-center gap-2 cursor-pointer disabled:cursor-not-allowed mt-2"
           >
             {loading ? (
               <>
                 <svg
-                  className="animate-spin h-5 w-5 text-white"
+                  className="animate-spin h-5 w-5 text-foreground"
                   fill="none"
                   viewBox="0 0 24 24"
                 >
@@ -145,7 +145,7 @@ export default function LoginPage() {
           </button>
         </form>
 
-        <div className="text-center text-sm text-gray-400 pt-2 border-t border-gray-800/80">
+        <div className="text-center text-sm text-muted pt-2 border-t border-border/80">
           Ainda não tem conta?{" "}
           <Link
             href="/cadastro"

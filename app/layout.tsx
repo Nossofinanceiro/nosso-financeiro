@@ -44,14 +44,14 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased dark`}
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <head>
         <link rel="apple-touch-icon" href="/icons/icon-192.png" />
       </head>
       <body
-        className="min-h-full flex flex-col bg-[#090d16] text-gray-100 selection:bg-emerald-500/30 selection:text-emerald-300"
+        className="min-h-full flex flex-col bg-background text-foreground selection:bg-primary/30 selection:text-emerald-300"
         suppressHydrationWarning
       >
         <AppProviders>{children}</AppProviders>

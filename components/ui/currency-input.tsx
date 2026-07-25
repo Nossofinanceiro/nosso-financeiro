@@ -46,15 +46,15 @@ export function CurrencyInput({
       {label && (
         <label
           htmlFor={inputId}
-          className="block text-sm font-medium text-gray-300"
+          className="block text-sm font-medium text-foreground"
         >
           {label}
         </label>
       )}
 
       <div className="relative flex items-center">
-        <div className="absolute left-3 flex items-center gap-1 text-gray-400 font-medium text-xs pointer-events-none select-none">
-          <DollarSign className="w-3.5 h-3.5 text-emerald-400" />
+        <div className="absolute left-3 flex items-center gap-1 text-muted font-medium text-xs pointer-events-none select-none">
+          <DollarSign className="w-3.5 h-3.5 text-primary" />
           <span>US$</span>
         </div>
 
@@ -67,8 +67,8 @@ export function CurrencyInput({
           disabled={disabled}
           placeholder="0.00"
           className={cn(
-            "w-full bg-gray-950/60 border border-gray-800 text-gray-100 placeholder-gray-500 rounded-lg text-sm pl-14 pr-3.5 py-2.5 transition-all focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed font-mono",
-            error && "border-red-500/60 focus:ring-red-500",
+            "w-full bg-background/60 border border-border text-foreground placeholder-gray-500 rounded-lg text-sm pl-14 pr-3.5 py-2.5 transition-all focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed font-mono",
+            error && "border-danger/60 focus:ring-red-500",
             className
           )}
           {...props}
@@ -76,9 +76,9 @@ export function CurrencyInput({
       </div>
 
       {error ? (
-        <p className="text-xs text-red-400 mt-1">{error}</p>
+        <p className="text-xs text-danger mt-1">{error}</p>
       ) : helperText ? (
-        <p className="text-xs text-gray-400 mt-1">{helperText}</p>
+        <p className="text-xs text-muted mt-1">{helperText}</p>
       ) : null}
     </div>
   );

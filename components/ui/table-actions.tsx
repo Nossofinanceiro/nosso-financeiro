@@ -34,7 +34,7 @@ export function TableActions({
           }}
           title="Visualizar detalhes"
           aria-label="Visualizar"
-          className="p-1.5 rounded-lg text-gray-400 hover:text-white hover:bg-gray-800 transition-colors cursor-pointer"
+          className="p-1.5 rounded-lg text-muted hover:text-foreground hover:bg-surface-secondary transition-colors cursor-pointer"
         >
           <Eye className="w-4 h-4" />
         </button>
@@ -49,7 +49,7 @@ export function TableActions({
           }}
           title="Editar registro"
           aria-label="Editar"
-          className="p-1.5 rounded-lg text-gray-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors cursor-pointer"
+          className="p-1.5 rounded-lg text-muted hover:text-primary hover:bg-primary/10 transition-colors cursor-pointer"
         >
           <Edit className="w-4 h-4" />
         </button>
@@ -64,18 +64,18 @@ export function TableActions({
                 type="button"
                 title="Excluir registro"
                 aria-label="Excluir"
-                className="p-1.5 rounded-lg text-gray-400 hover:text-red-400 hover:bg-red-500/10 transition-colors cursor-pointer"
+                className="p-1.5 rounded-lg text-muted hover:text-danger hover:bg-danger/10 transition-colors cursor-pointer"
               >
                 <Trash2 className="w-4 h-4" />
               </button>
             }
             content={
               <div className="space-y-3 w-56 text-left">
-                <div className="flex items-center gap-2 text-red-400 font-semibold text-xs">
+                <div className="flex items-center gap-2 text-danger font-semibold text-xs">
                   <AlertTriangle className="w-4 h-4 shrink-0" />
                   <span>Excluir este registro?</span>
                 </div>
-                <p className="text-xs text-gray-400">
+                <p className="text-xs text-muted">
                   Esta ação excluirá o item permanentemente.
                 </p>
                 <div className="flex items-center justify-end gap-2 pt-1">

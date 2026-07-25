@@ -50,28 +50,28 @@ export function DashboardGreeting({
   };
 
   return (
-    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-gray-800/80">
+    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-border/80">
       <div className="space-y-1">
-        <h1 className="text-2xl font-bold text-white tracking-tight sm:text-3xl">
+        <h1 className="text-2xl font-bold text-foreground tracking-tight sm:text-3xl">
           {getGreeting()}, {userName}! 👋
         </h1>
-        <p className="text-sm text-gray-400">
+        <p className="text-sm text-muted">
           {familyTitle ? `Família: ${familyTitle}` : "Visão geral e controle financeiro familiar."}
         </p>
       </div>
 
       {/* Month Selector */}
-      <div className="flex items-center gap-2 bg-gray-900 border border-gray-800 p-1.5 rounded-xl shadow-md self-start sm:self-auto">
+      <div className="flex items-center gap-2 bg-surface border border-border p-1.5 rounded-xl shadow-md self-start sm:self-auto">
         <button
           onClick={handlePrevMonth}
           aria-label="Mês anterior"
-          className="p-1.5 rounded-lg text-gray-400 hover:text-white hover:bg-gray-800 transition-colors cursor-pointer"
+          className="p-1.5 rounded-lg text-muted hover:text-foreground hover:bg-surface-secondary transition-colors cursor-pointer"
         >
           <ChevronLeft className="w-4 h-4" />
         </button>
 
-        <div className="flex items-center gap-2 px-2 text-sm font-semibold text-white">
-          <Calendar className="w-4 h-4 text-emerald-400 shrink-0" />
+        <div className="flex items-center gap-2 px-2 text-sm font-semibold text-foreground">
+          <Calendar className="w-4 h-4 text-primary shrink-0" />
           <span className="min-w-[120px] text-center font-medium">
             {formatMonthDisplay(selectedMonth)}
           </span>
@@ -80,7 +80,7 @@ export function DashboardGreeting({
         <button
           onClick={handleNextMonth}
           aria-label="Próximo mês"
-          className="p-1.5 rounded-lg text-gray-400 hover:text-white hover:bg-gray-800 transition-colors cursor-pointer"
+          className="p-1.5 rounded-lg text-muted hover:text-foreground hover:bg-surface-secondary transition-colors cursor-pointer"
         >
           <ChevronRight className="w-4 h-4" />
         </button>

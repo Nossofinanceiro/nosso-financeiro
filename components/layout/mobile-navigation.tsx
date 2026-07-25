@@ -32,11 +32,11 @@ export function MobileNavigation({ isOpen, onClose }: MobileNavigationProps) {
       />
 
       {/* Drawer */}
-      <div className="relative w-72 max-w-[80vw] bg-gray-900 h-full shadow-2xl z-10 flex flex-col animate-in slide-in-from-left duration-200">
+      <div className="relative w-72 max-w-[80vw] bg-surface h-full shadow-2xl z-10 flex flex-col animate-in slide-in-from-left duration-200">
         <button
           onClick={onClose}
           aria-label="Fechar menu"
-          className="absolute top-4 right-4 z-20 p-1.5 rounded-lg text-gray-400 hover:text-white hover:bg-gray-800 transition-colors"
+          className="absolute top-4 right-4 z-20 p-1.5 rounded-lg text-muted hover:text-foreground hover:bg-surface-secondary transition-colors"
         >
           <X className="w-5 h-5" />
         </button>

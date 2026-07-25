@@ -9,9 +9,9 @@ const alertVariants = cva(
     variants: {
       variant: {
         info: "bg-blue-500/10 text-blue-300 border-blue-500/20 [&>svg]:text-blue-400",
-        success: "bg-emerald-500/10 text-emerald-300 border-emerald-500/20 [&>svg]:text-emerald-400",
+        success: "bg-primary/10 text-emerald-300 border-primary/20 [&>svg]:text-primary",
         warning: "bg-amber-500/10 text-amber-300 border-amber-500/20 [&>svg]:text-amber-400",
-        danger: "bg-red-500/10 text-red-300 border-red-500/20 [&>svg]:text-red-400",
+        danger: "bg-danger/10 text-red-300 border-danger/20 [&>svg]:text-danger",
       },
     },
     defaultVariants: {
@@ -42,7 +42,7 @@ function Alert({ className, variant = "info", title, children, ...props }: Alert
     >
       <Icon className="w-5 h-5 shrink-0 mt-0.5" />
       <div className="space-y-0.5">
-        {title && <h5 className="font-semibold leading-none tracking-tight text-white">{title}</h5>}
+        {title && <h5 className="font-semibold leading-none tracking-tight text-foreground">{title}</h5>}
         <div className="text-sm opacity-90">{children}</div>
       </div>
     </div>

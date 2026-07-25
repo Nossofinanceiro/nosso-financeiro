@@ -1,7 +1,49 @@
 @import "tailwindcss";
 
+@theme {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-secondary: var(--surface-secondary);
+  --color-border: var(--border);
+  --color-border-subtle: var(--border-subtle);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+  --color-info: var(--info);
+}
+
 @layer base {
   :root {
+    /* Light Mode (novo) */
+    --background: #F7FBF9;
+    --surface: #FFFFFF;
+    --surface-secondary: #F0F5F2;
+    --border: #DDE8E3;
+    --border-subtle: #E2E8F0;
+    --foreground: #0F172A;
+    --muted: #475569;
+    
+    --primary: #10b981;
+    --primary-hover: #059669;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+    --info: #3b82f6;
+
+    /* Safe Area Variables for Mobile/iPhone Dynamic Island */
+    --sat: env(safe-area-inset-top, 0px);
+    --sar: env(safe-area-inset-right, 0px);
+    --sab: env(safe-area-inset-bottom, 0px);
+    --sal: env(safe-area-inset-left, 0px);
+  }
+
+  .dark {
+    /* Dark Mode (original) */
     --background: #090d16;
     --surface: #111827;
     --surface-secondary: #1f2937;
@@ -16,12 +58,6 @@
     --warning: #f59e0b;
     --danger: #ef4444;
     --info: #3b82f6;
-
-    /* Safe Area Variables for Mobile/iPhone Dynamic Island */
-    --sat: env(safe-area-inset-top, 0px);
-    --sar: env(safe-area-inset-right, 0px);
-    --sab: env(safe-area-inset-bottom, 0px);
-    --sal: env(safe-area-inset-left, 0px);
   }
 }
 
@@ -39,6 +75,9 @@ body {
   min-height: -webkit-fill-available;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-y: contain;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
 }
 
 /* Safe Area Inset Helpers */
@@ -75,16 +114,16 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #090d16;
+  background: var(--background);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1f2937;
+  background: var(--surface-secondary);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #374151;
+  background: var(--border);
 }
 
 /* Hide scrollbar for clean horizontal tab/nav scroll */

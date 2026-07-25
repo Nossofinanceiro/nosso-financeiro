@@ -34,14 +34,14 @@ export function DatePicker({
       {label && (
         <label
           htmlFor={dateId}
-          className="block text-sm font-medium text-gray-300"
+          className="block text-sm font-medium text-foreground"
         >
           {label}
         </label>
       )}
 
       <div className="relative flex items-center">
-        <Calendar className="absolute left-3 w-4 h-4 text-gray-400 pointer-events-none" />
+        <Calendar className="absolute left-3 w-4 h-4 text-muted pointer-events-none" />
         <input
           type="date"
           id={dateId}
@@ -49,8 +49,8 @@ export function DatePicker({
           onChange={handleChange}
           disabled={disabled}
           className={cn(
-            "w-full bg-gray-950/60 border border-gray-800 text-gray-100 placeholder-gray-500 rounded-lg text-sm pl-10 pr-3.5 py-2.5 transition-all focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed [color-scheme:dark]",
-            error && "border-red-500/60 focus:ring-red-500",
+            "w-full bg-background/60 border border-border text-foreground placeholder-gray-500 rounded-lg text-sm pl-10 pr-3.5 py-2.5 transition-all focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed [color-scheme:dark]",
+            error && "border-danger/60 focus:ring-red-500",
             className
           )}
           {...props}
@@ -58,9 +58,9 @@ export function DatePicker({
       </div>
 
       {error ? (
-        <p className="text-xs text-red-400 mt-1">{error}</p>
+        <p className="text-xs text-danger mt-1">{error}</p>
       ) : helperText ? (
-        <p className="text-xs text-gray-400 mt-1">{helperText}</p>
+        <p className="text-xs text-muted mt-1">{helperText}</p>
       ) : null}
     </div>
   );

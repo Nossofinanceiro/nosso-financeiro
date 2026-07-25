@@ -37,13 +37,13 @@ export function DespesasList({
 
   if (isError) {
     return (
-      <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-6 flex flex-col items-center justify-center text-center">
-        <AlertCircle className="w-10 h-10 text-red-400 mb-3" />
-        <h3 className="text-lg font-medium text-red-400 mb-1">Erro ao carregar despesas</h3>
-        <p className="text-sm text-red-400/80 mb-4 max-w-md">
+      <div className="bg-danger/10 border border-danger/20 rounded-xl p-6 flex flex-col items-center justify-center text-center">
+        <AlertCircle className="w-10 h-10 text-danger mb-3" />
+        <h3 className="text-lg font-medium text-danger mb-1">Erro ao carregar despesas</h3>
+        <p className="text-sm text-danger/80 mb-4 max-w-md">
           {error?.message || "Não foi possível carregar os dados. Verifique sua conexão ou tente novamente."}
         </p>
-        <Button onClick={onRetry} variant="secondary" className="border-red-500/20 text-red-500 hover:bg-red-500/10 hover:text-red-400">
+        <Button onClick={onRetry} variant="secondary" className="border-danger/20 text-danger hover:bg-danger/10 hover:text-danger">
           Tentar Novamente
         </Button>
       </div>
@@ -104,7 +104,7 @@ export function DespesasList({
             variant={filterMode === "paga" ? "primary" : "ghost"}
             size="sm"
             onClick={() => setFilterMode("paga")}
-            className={filterMode === "paga" ? "bg-slate-800 text-emerald-400" : "text-slate-400 hover:text-emerald-400"}
+            className={filterMode === "paga" ? "bg-slate-800 text-primary" : "text-slate-400 hover:text-primary"}
           >
             Paga
           </Button>
@@ -166,7 +166,7 @@ export function DespesasList({
                 : "Você ainda não possui despesas neste período com este status."}
             </p>
             {!searchTerm && filterMode === "all" && (
-              <Button onClick={onCreateNew} className="bg-emerald-600 hover:bg-emerald-700">
+              <Button onClick={onCreateNew} className="bg-primary hover:bg-emerald-700">
                 Criar Primeira Despesa
               </Button>
             )}

@@ -38,7 +38,7 @@ export function ReceitaCard({ receita, onEdit, onMarkAsReceived, onCancel, onRea
 
   const statusColor = {
     pendente: "bg-amber-500/10 text-amber-500 border-amber-500/20",
-    recebida: "bg-emerald-500/10 text-emerald-500 border-emerald-500/20",
+    recebida: "bg-primary/10 text-primary border-primary/20",
     cancelada: "bg-slate-800 text-slate-400 border-slate-700",
   }[receita.status] || "bg-slate-800 text-slate-400 border-slate-700";
 
@@ -56,7 +56,7 @@ export function ReceitaCard({ receita, onEdit, onMarkAsReceived, onCancel, onRea
   const valorExibicao = receita.status === "recebida" ? (receita.valor_recebido || receita.valor_previsto) : receita.valor_previsto;
 
   return (
-    <Card className={`flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 gap-4 transition-colors group ${receita.status === 'cancelada' ? 'opacity-60' : 'hover:border-emerald-500/30'}`}>
+    <Card className={`flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 gap-4 transition-colors group ${receita.status === 'cancelada' ? 'opacity-60' : 'hover:border-primary/30'}`}>
       <div className="flex items-center gap-4">
         <div 
           className="p-3 rounded-xl flex items-center justify-center shrink-0"
@@ -69,7 +69,7 @@ export function ReceitaCard({ receita, onEdit, onMarkAsReceived, onCancel, onRea
         </div>
         
         <div>
-          <h3 className={`font-medium ${receita.status === 'cancelada' ? 'text-slate-400 line-through' : 'text-white'}`}>
+          <h3 className={`font-medium ${receita.status === 'cancelada' ? 'text-slate-400 line-through' : 'text-foreground'}`}>
             {receita.descricao}
           </h3>
           <div className="flex flex-wrap items-center gap-2 mt-1">
@@ -93,14 +93,14 @@ export function ReceitaCard({ receita, onEdit, onMarkAsReceived, onCancel, onRea
         
         <div className="flex items-center gap-4">
           <div className="text-right">
-            <p className={`text-sm font-semibold ${receita.status === 'recebida' ? 'text-emerald-400' : receita.status === 'cancelada' ? 'text-slate-400' : 'text-white'}`}>
+            <p className={`text-sm font-semibold ${receita.status === 'recebida' ? 'text-primary' : receita.status === 'cancelada' ? 'text-slate-400' : 'text-foreground'}`}>
               {formatCurrency(valorExibicao || 0)}
             </p>
           </div>
 
           <DropdownMenu
             trigger={
-              <Button variant="ghost" size="sm" className="h-8 w-8 p-0 text-slate-400 hover:text-white">
+              <Button variant="ghost" size="sm" className="h-8 w-8 p-0 text-slate-400 hover:text-foreground">
                 <span className="sr-only">Abrir menu</span>
                 <MoreHorizontal className="w-5 h-5" />
               </Button>
@@ -109,7 +109,7 @@ export function ReceitaCard({ receita, onEdit, onMarkAsReceived, onCancel, onRea
               ...(receita.status === "pendente" ? [
                 {
                   label: "Marcar como Recebida",
-                  icon: <CheckCircle2 className="w-4 h-4 text-emerald-500" />,
+                  icon: <CheckCircle2 className="w-4 h-4 text-primary" />,
                   onClick: () => onMarkAsReceived(receita),
                 },
                 {

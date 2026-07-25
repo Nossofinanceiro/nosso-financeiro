@@ -57,7 +57,7 @@ export function Modal({
         role="dialog"
         aria-modal="true"
         className={cn(
-          "relative w-full max-w-lg bg-gray-900 border border-gray-800 rounded-xl shadow-2xl z-10 space-y-4 p-6 overflow-y-auto max-h-[95vh] transition-all transform animate-in fade-in zoom-in-95 duration-150",
+          "relative w-full max-w-lg bg-surface border border-border rounded-xl shadow-2xl z-10 space-y-4 p-6 overflow-y-auto max-h-[95vh] transition-all transform animate-in fade-in zoom-in-95 duration-150",
           className
         )}
       >
@@ -65,30 +65,30 @@ export function Modal({
         <div className="flex items-start justify-between">
           <div className="space-y-1">
             {title && (
-              <h2 className="text-lg font-semibold text-white tracking-tight">
+              <h2 className="text-lg font-semibold text-foreground tracking-tight">
                 {title}
               </h2>
             )}
             {description && (
-              <p className="text-sm text-gray-400">{description}</p>
+              <p className="text-sm text-muted">{description}</p>
             )}
           </div>
 
           <button
             onClick={onClose}
             aria-label="Fechar modal"
-            className="p-1 rounded-lg text-gray-400 hover:text-white hover:bg-gray-800 transition-colors cursor-pointer"
+            className="p-1 rounded-lg text-muted hover:text-foreground hover:bg-surface-secondary transition-colors cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Content */}
-        <div className="py-2 text-gray-200">{children}</div>
+        <div className="py-2 text-foreground">{children}</div>
 
         {/* Footer */}
         {footer && (
-          <div className="flex items-center justify-end gap-3 pt-4 border-t border-gray-800/80">
+          <div className="flex items-center justify-end gap-3 pt-4 border-t border-border/80">
             {footer}
           </div>
         )}

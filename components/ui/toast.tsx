@@ -76,8 +76,8 @@ function ToastItem({
   }[toast.variant || "info"];
 
   const borderStyles = {
-    success: "border-emerald-500/30 bg-emerald-950/90 text-emerald-300",
-    error: "border-red-500/30 bg-red-950/90 text-red-300",
+    success: "border-primary/30 bg-emerald-950/90 text-emerald-300",
+    error: "border-danger/30 bg-red-950/90 text-red-300",
     warning: "border-amber-500/30 bg-amber-950/90 text-amber-300",
     info: "border-blue-500/30 bg-blue-950/90 text-blue-300",
   }[toast.variant || "info"];
@@ -91,14 +91,14 @@ function ToastItem({
     >
       <Icon className="w-5 h-5 shrink-0 mt-0.5" />
       <div className="flex-1 min-w-0">
-        <h5 className="text-sm font-semibold text-white tracking-tight">{toast.title}</h5>
+        <h5 className="text-sm font-semibold text-foreground tracking-tight">{toast.title}</h5>
         {toast.description && (
           <p className="text-xs opacity-90 mt-0.5">{toast.description}</p>
         )}
       </div>
       <button
         onClick={onClose}
-        className="p-1 rounded-lg text-gray-400 hover:text-white transition-colors cursor-pointer"
+        className="p-1 rounded-lg text-muted hover:text-foreground transition-colors cursor-pointer"
         aria-label="Fechar notificação"
       >
         <X className="w-4 h-4" />

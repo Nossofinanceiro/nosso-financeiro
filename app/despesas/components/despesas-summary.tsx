@@ -43,7 +43,7 @@ export function DespesasSummary({ despesas, isLoading }: DespesasSummaryProps) {
           <span className="text-slate-400 font-medium">Total Previsto</span>
         </div>
         <div className="z-10">
-          <h2 className="text-2xl font-bold text-white">-US$ {formatCurrency(totalPrevisto).replace("US$", "").trim()}</h2>
+          <h2 className="text-2xl font-bold text-foreground">-US$ {formatCurrency(totalPrevisto).replace("US$", "").trim()}</h2>
         </div>
       </div>
 

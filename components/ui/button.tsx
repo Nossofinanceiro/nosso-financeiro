@@ -4,18 +4,18 @@ import { Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center font-medium rounded-lg transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900 disabled:opacity-50 disabled:pointer-events-none cursor-pointer disabled:cursor-not-allowed select-none",
+  "inline-flex items-center justify-center font-medium rounded-lg transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900 disabled:opacity-50 disabled:pointer-events-none cursor-pointer disabled:cursor-not-allowed select-none",
   {
     variants: {
       variant: {
         primary:
-          "bg-emerald-600 text-white hover:bg-emerald-500 active:bg-emerald-700 shadow-lg shadow-emerald-600/20 border border-emerald-500/30",
+          "bg-primary text-foreground hover:bg-primary active:bg-emerald-700 shadow-lg shadow-emerald-600/20 border border-primary/30",
         secondary:
-          "bg-gray-800 text-gray-100 hover:bg-gray-700 active:bg-gray-800 border border-gray-700/60",
+          "bg-surface-secondary text-foreground hover:bg-border active:bg-surface-secondary border border-border-subtle/60",
         ghost:
-          "bg-transparent text-gray-300 hover:bg-gray-800/60 hover:text-white active:bg-gray-800",
+          "bg-transparent text-foreground hover:bg-surface-secondary/60 hover:text-foreground active:bg-surface-secondary",
         danger:
-          "bg-red-600 text-white hover:bg-red-500 active:bg-red-700 shadow-lg shadow-red-600/20 border border-red-500/30",
+          "bg-red-600 text-foreground hover:bg-danger active:bg-red-700 shadow-lg shadow-red-600/20 border border-danger/30",
       },
       size: {
         sm: "h-8 px-3 text-xs gap-1.5",

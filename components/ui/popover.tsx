@@ -52,7 +52,7 @@ export function Popover({
       {isOpen && (
         <div
           className={cn(
-            "absolute z-50 mt-2 p-4 rounded-xl bg-gray-900 border border-gray-800 shadow-2xl animate-in fade-in zoom-in-95 duration-150 min-w-[240px]",
+            "absolute z-50 mt-2 p-4 rounded-xl bg-surface border border-border shadow-2xl animate-in fade-in zoom-in-95 duration-150 min-w-[240px]",
             align === "right" ? "right-0" : "left-0",
             className
           )}

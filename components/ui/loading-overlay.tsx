@@ -22,15 +22,15 @@ export function LoadingOverlay({
       aria-busy="true"
       aria-live="polite"
       className={cn(
-        "flex flex-col items-center justify-center bg-gray-950/80 backdrop-blur-sm z-50 transition-opacity p-4",
+        "flex flex-col items-center justify-center bg-background/80 backdrop-blur-sm z-50 transition-opacity p-4",
         fullPage ? "fixed inset-0" : "absolute inset-0 rounded-xl",
         className
       )}
     >
-      <div className="flex flex-col items-center gap-3 p-6 bg-gray-900 border border-gray-800 rounded-2xl shadow-2xl">
-        <Loader2 className="w-8 h-8 text-emerald-400 animate-spin" />
+      <div className="flex flex-col items-center gap-3 p-6 bg-surface border border-border rounded-2xl shadow-2xl">
+        <Loader2 className="w-8 h-8 text-primary animate-spin" />
         {message && (
-          <p className="text-sm font-medium text-gray-200">{message}</p>
+          <p className="text-sm font-medium text-foreground">{message}</p>
         )}
       </div>
     </div>

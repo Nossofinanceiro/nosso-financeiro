@@ -18,7 +18,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
         {label && (
           <label
             htmlFor={textareaId}
-            className="block text-sm font-medium text-gray-300"
+            className="block text-sm font-medium text-foreground"
           >
             {label}
           </label>
@@ -28,8 +28,8 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
           id={textareaId}
           disabled={disabled}
           className={cn(
-            "w-full min-h-[90px] bg-gray-950/60 border border-gray-800 text-gray-100 placeholder-gray-500 rounded-lg text-sm p-3.5 transition-all focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed resize-y",
-            error && "border-red-500/60 focus:ring-red-500",
+            "w-full min-h-[90px] bg-background/60 border border-border text-foreground placeholder-gray-500 rounded-lg text-sm p-3.5 transition-all focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed resize-y",
+            error && "border-danger/60 focus:ring-red-500",
             className
           )}
           ref={ref}
@@ -37,9 +37,9 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
         />
 
         {error ? (
-          <p className="text-xs text-red-400 mt-1">{error}</p>
+          <p className="text-xs text-danger mt-1">{error}</p>
         ) : helperText ? (
-          <p className="text-xs text-gray-400 mt-1">{helperText}</p>
+          <p className="text-xs text-muted mt-1">{helperText}</p>
         ) : null}
       </div>
     );

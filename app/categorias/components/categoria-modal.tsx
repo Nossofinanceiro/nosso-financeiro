@@ -104,7 +104,7 @@ export function CategoriaModal({ isOpen, onClose, categoriaToEdit, defaultTipo =
             placeholder="Ex: Alimentação, Salário..."
             className="bg-slate-900 border-slate-700"
           />
-          {errors.nome && <p className="text-xs text-red-400">{errors.nome}</p>}
+          {errors.nome && <p className="text-xs text-danger">{errors.nome}</p>}
         </div>
 
         <div className="space-y-2">
@@ -119,7 +119,7 @@ export function CategoriaModal({ isOpen, onClose, categoriaToEdit, defaultTipo =
             className="bg-slate-900 border-slate-700"
             disabled={!!categoriaToEdit} // Generally good practice to not change type after creation
           />
-          {errors.tipo && <p className="text-xs text-red-400">{errors.tipo}</p>}
+          {errors.tipo && <p className="text-xs text-danger">{errors.tipo}</p>}
         </div>
 
         <div className="space-y-2">
@@ -139,7 +139,7 @@ export function CategoriaModal({ isOpen, onClose, categoriaToEdit, defaultTipo =
               placeholder="#000000"
             />
           </div>
-          {errors.cor && <p className="text-xs text-red-400">{errors.cor}</p>}
+          {errors.cor && <p className="text-xs text-danger">{errors.cor}</p>}
         </div>
 
         <div className="space-y-2">
@@ -166,7 +166,7 @@ export function CategoriaModal({ isOpen, onClose, categoriaToEdit, defaultTipo =
           <Button type="button" variant="ghost" onClick={onClose} disabled={isPending}>
             Cancelar
           </Button>
-          <Button type="submit" disabled={isPending} className="bg-emerald-600 hover:bg-emerald-700 text-white">
+          <Button type="submit" disabled={isPending} className="bg-primary hover:bg-emerald-700 text-foreground">
             {isPending ? "Salvando..." : "Salvar"}
           </Button>
         </div>

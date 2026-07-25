@@ -107,7 +107,7 @@ export function RecebimentoModal({ isOpen, onClose, receita }: RecebimentoModalP
           <Button type="button" variant="ghost" onClick={onClose} disabled={isPending}>
             Cancelar
           </Button>
-          <Button type="submit" disabled={isPending} className="bg-emerald-600 hover:bg-emerald-700 text-white">
+          <Button type="submit" disabled={isPending} className="bg-primary hover:bg-emerald-700 text-foreground">
             {isPending ? "Confirmando..." : "Confirmar Recebimento"}
           </Button>
         </div>

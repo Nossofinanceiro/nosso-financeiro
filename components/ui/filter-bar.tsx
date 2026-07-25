@@ -28,7 +28,7 @@ export function FilterBar({
   return (
     <div
       className={cn(
-        "flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3 p-4 rounded-2xl bg-[#111827] border border-gray-800/80 shadow-md",
+        "flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3 p-4 rounded-2xl bg-[#111827] border border-border/80 shadow-md",
         className
       )}
     >
@@ -48,7 +48,7 @@ export function FilterBar({
             variant="ghost"
             size="sm"
             onClick={onClearFilters}
-            className="text-xs text-gray-400 hover:text-white"
+            className="text-xs text-muted hover:text-foreground"
           >
             <RotateCcw className="w-3.5 h-3.5" />
             <span>Limpar filtros</span>

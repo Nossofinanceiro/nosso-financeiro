@@ -60,7 +60,7 @@ export default function DashboardPage() {
             <StatCard
               title="Saldo Atual Familiar"
               value={data.saldo_atual}
-              icon={<Wallet className="w-5 h-5 text-emerald-400" />}
+              icon={<Wallet className="w-5 h-5 text-primary" />}
               description="Soma de todas as contas ativas"
               variant="highlight"
             />
@@ -68,7 +68,7 @@ export default function DashboardPage() {
             <StatCard
               title="Receitas do Mês"
               value={data.receitas_recebidas}
-              icon={<TrendingUp className="w-5 h-5 text-emerald-400" />}
+              icon={<TrendingUp className="w-5 h-5 text-primary" />}
               trend={{
                 value: `Pendente: US$ ${data.receitas_pendentes.toFixed(2)}`,
                 isPositive: true,
@@ -80,7 +80,7 @@ export default function DashboardPage() {
             <StatCard
               title="Despesas do Mês"
               value={-data.despesas_pagas}
-              icon={<TrendingDown className="w-5 h-5 text-red-400" />}
+              icon={<TrendingDown className="w-5 h-5 text-danger" />}
               trend={{
                 value: `Pendente: US$ ${data.despesas_pendentes.toFixed(2)}`,
                 isNegative: true,

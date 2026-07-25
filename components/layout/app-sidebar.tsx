@@ -84,12 +84,12 @@ export function AppSidebar({
   return (
     <aside
       className={cn(
-        "flex flex-col bg-gray-900 border-r border-gray-800/80 transition-all duration-300 h-full select-none",
+        "flex flex-col bg-surface border-r border-border transition-all duration-300 h-full select-none",
         collapsed ? "w-16" : "w-60"
       )}
     >
       {/* Top Branding */}
-      <div className="h-14 px-3.5 flex items-center justify-between border-b border-gray-800/80 shrink-0">
+      <div className="h-14 px-3.5 flex items-center justify-between border-b border-border shrink-0">
         <Link
           href="/dashboard"
           className="flex items-center gap-2.5 overflow-hidden"
@@ -106,7 +106,7 @@ export function AppSidebar({
           <button
             onClick={onToggleCollapse}
             aria-label={collapsed ? "Expandir menu" : "Recolher menu"}
-            className="hidden md:flex p-1 rounded-lg text-gray-400 hover:text-white hover:bg-gray-800 transition-colors cursor-pointer"
+            className="hidden md:flex p-1 rounded-lg text-muted hover:text-foreground hover:bg-surface-secondary transition-colors cursor-pointer"
           >
             {collapsed ? (
               <ChevronRight className="w-4 h-4" />
@@ -121,7 +121,7 @@ export function AppSidebar({
       <div className="flex-1 overflow-y-auto px-2 py-3 space-y-1">
         <div className="px-2 pb-1.5">
           {!collapsed && (
-            <p className="text-[10px] font-semibold text-gray-500 uppercase tracking-wider">
+            <p className="text-[10px] font-semibold text-muted uppercase tracking-wider">
               Navegação
             </p>
           )}
@@ -140,16 +140,16 @@ export function AppSidebar({
               className={cn(
                 "flex items-center gap-3 px-3 h-[44px] rounded-lg text-sm font-medium transition-all group relative",
                 isActive
-                  ? "bg-emerald-500/10 text-emerald-400 font-semibold border-l-2 border-emerald-500"
-                  : "text-gray-400 hover:text-gray-100 hover:bg-gray-800/50"
+                  ? "bg-primary/10 text-primary font-semibold border-l-2 border-primary"
+                  : "text-muted hover:text-foreground hover:bg-surface-secondary"
               )}
             >
               <Icon
                 className={cn(
                   "w-4 h-4 shrink-0 transition-colors",
                   isActive
-                    ? "text-emerald-400"
-                    : "text-gray-400 group-hover:text-gray-200"
+                    ? "text-primary"
+                    : "text-muted group-hover:text-foreground"
                 )}
               />
               {!collapsed && <span>{item.title}</span>}
@@ -159,9 +159,9 @@ export function AppSidebar({
 
         {/* Separator & Design System Link */}
         <div className="pt-3 pb-1.5 px-2">
-          <div className="h-[1px] bg-gray-800/80 mb-2" />
+          <div className="h-[1px] bg-border mb-2" />
           {!collapsed && (
-            <p className="text-[10px] font-semibold text-gray-500 uppercase tracking-wider mb-1">
+            <p className="text-[10px] font-semibold text-muted uppercase tracking-wider mb-1">
               Desenvolvimento
             </p>
           )}
@@ -173,31 +173,31 @@ export function AppSidebar({
           title={collapsed ? "Design System" : undefined}
           className={cn(
             "flex items-center gap-3 px-3 h-[44px] rounded-lg text-sm font-medium transition-all group",
-            pathname === "/design-system"
-              ? "bg-emerald-500/10 text-emerald-400 font-semibold border-l-2 border-emerald-500"
-              : "text-gray-400 hover:text-gray-100 hover:bg-gray-800/50"
+              pathname === "/design-system"
+                ? "bg-primary/10 text-primary font-semibold border-l-2 border-primary"
+                : "text-muted hover:text-foreground hover:bg-surface-secondary"
           )}
         >
-          <Palette className="w-4 h-4 shrink-0 text-emerald-400" />
+          <Palette className="w-4 h-4 shrink-0 text-primary" />
           {!collapsed && <span>Design System</span>}
         </Link>
       </div>
 
       {/* Footer User Info & Logout */}
-      <div className="p-2.5 border-t border-gray-800/80 shrink-0 bg-gray-950/40">
+      <div className="p-3 border-t border-border shrink-0">
         <div className="flex items-center justify-between gap-2">
           <div className="flex items-center gap-2.5 overflow-hidden">
-            <div className="w-8 h-8 rounded-full bg-emerald-600/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center font-bold text-xs shrink-0">
+            <div className="w-8 h-8 rounded-full bg-primary/20 text-primary border border-primary/30 flex items-center justify-center font-bold text-xs shrink-0">
               {userName.charAt(0).toUpperCase()}
             </div>
             {!collapsed && (
               <div className="flex flex-col min-w-0">
-                <span className="text-xs font-medium text-white truncate">
+                <p className="text-sm font-medium text-foreground truncate">
                   {userName}
-                </span>
-                <span className="text-[10px] text-gray-400 truncate">
+                </p>
+                <p className="text-xs text-muted truncate">
                   {userEmail}
-                </span>
+                </p>
               </div>
             )}
           </div>
@@ -205,7 +205,7 @@ export function AppSidebar({
           <button
             onClick={handleLogout}
             title="Sair da conta"
-            className="p-1.5 rounded-lg text-gray-400 hover:text-red-400 hover:bg-red-500/10 transition-colors cursor-pointer shrink-0"
+            className="w-full flex items-center justify-center p-2 rounded-lg text-muted hover:bg-surface-secondary hover:text-danger transition-colors cursor-pointer shrink-0"
           >
             <LogOut className="w-4 h-4" />
           </button>

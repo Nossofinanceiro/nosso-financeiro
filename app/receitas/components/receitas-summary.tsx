@@ -38,20 +38,20 @@ export function ReceitasSummary({ receitas = [], isLoading }: ReceitasSummaryPro
           </div>
           <span className="text-sm font-medium">Total Previsto</span>
         </div>
-        <div className="text-2xl font-bold text-white pl-12">
+        <div className="text-2xl font-bold text-foreground pl-12">
           {formatCurrency(totalPrevisto)}
         </div>
       </Card>
 
       <Card className="p-4 bg-slate-900 border-slate-800 flex flex-col justify-center relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 rounded-full -mr-16 -mt-16 blur-2xl pointer-events-none" />
+        <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -mr-16 -mt-16 blur-2xl pointer-events-none" />
         <div className="flex items-center gap-3 text-slate-400 mb-2">
-          <div className="p-2 bg-emerald-500/10 text-emerald-400 rounded-lg">
+          <div className="p-2 bg-primary/10 text-primary rounded-lg">
             <Wallet className="w-5 h-5" />
           </div>
           <span className="text-sm font-medium">Total Recebido</span>
         </div>
-        <div className="text-2xl font-bold text-emerald-400 pl-12">
+        <div className="text-2xl font-bold text-primary pl-12">
           {formatCurrency(totalRecebido)}
         </div>
       </Card>

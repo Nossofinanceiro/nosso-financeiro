@@ -82,7 +82,7 @@ export function DespesaCard({
             )}
             
             {isPaga && (
-              <span className="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-500 text-xs font-medium border border-emerald-500/20">
+              <span className="px-2 py-0.5 rounded-full bg-primary/10 text-primary text-xs font-medium border border-primary/20">
                 Paga
               </span>
             )}
@@ -111,7 +111,7 @@ export function DespesaCard({
 
         <DropdownMenu
           trigger={
-            <Button variant="ghost" size="sm" className="h-8 w-8 text-slate-400 hover:text-white p-0">
+            <Button variant="ghost" size="sm" className="h-8 w-8 text-slate-400 hover:text-foreground p-0">
               <span className="sr-only">Abrir menu</span>
               <MoreHorizontal className="h-4 w-4" />
             </Button>
@@ -127,7 +127,7 @@ export function DespesaCard({
             ...( isPendente && !isCancelada ? [
               {
                 label: "Marcar como Paga",
-                icon: <CheckCircle2 className="w-4 h-4 text-emerald-400" />,
+                icon: <CheckCircle2 className="w-4 h-4 text-primary" />,
                 onClick: () => onMarkAsPaid(despesa),
               }
             ] : []),

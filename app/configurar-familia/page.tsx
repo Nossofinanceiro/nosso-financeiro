@@ -117,23 +117,23 @@ export default function ConfigurarFamiliaPage() {
 
   if (fetchingUser) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-950 p-4">
+      <div className="min-h-screen flex items-center justify-center bg-background p-4">
         <div className="text-center space-y-3">
-          <div className="inline-block w-8 h-8 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin" />
-          <p className="text-sm text-gray-400">Verificando dados da conta...</p>
+          <div className="inline-block w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin" />
+          <p className="text-sm text-muted">Verificando dados da conta...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-950 p-4">
-      <div className="w-full max-w-md bg-gray-900/90 border border-gray-800 backdrop-blur-xl p-8 rounded-2xl shadow-2xl space-y-6">
+    <div className="min-h-screen flex items-center justify-center bg-background p-4">
+      <div className="w-full max-w-md bg-surface/90 border border-border backdrop-blur-xl p-8 rounded-2xl shadow-2xl space-y-6">
         <div className="text-center space-y-2">
           <div className="mb-6 flex flex-col items-center justify-center">
             <img src="/logo.png" alt="Nosso Financeiro" className="h-20 object-contain" />
           </div>
-          <p className="text-sm text-gray-400">
+          <p className="text-sm text-muted">
             Vamos finalizar a configuração da sua família para dar início ao controle financeiro.
           </p>
         </div>
@@ -146,7 +146,7 @@ export default function ConfigurarFamiliaPage() {
 
         <form onSubmit={handleConfigurar} className="space-y-4">
           <div className="space-y-1.5">
-            <label htmlFor="nomeFamilia" className="block text-sm font-medium text-gray-300">
+            <label htmlFor="nomeFamilia" className="block text-sm font-medium text-foreground">
               Nome da Família
             </label>
             <Input
@@ -160,7 +160,7 @@ export default function ConfigurarFamiliaPage() {
           </div>
 
           <div className="space-y-1.5">
-            <label htmlFor="nomeUsuario" className="block text-sm font-medium text-gray-300">
+            <label htmlFor="nomeUsuario" className="block text-sm font-medium text-foreground">
               Seu Nome de Exibição
             </label>
             <Input

@@ -40,12 +40,12 @@ export function CategoriasList({
 
   if (isError) {
     return (
-      <div className="flex flex-col items-center justify-center p-8 bg-slate-900/50 border border-red-500/20 rounded-2xl text-center space-y-4">
-        <div className="w-12 h-12 bg-red-500/10 rounded-full flex items-center justify-center text-red-500 mb-2">
+      <div className="flex flex-col items-center justify-center p-8 bg-slate-900/50 border border-danger/20 rounded-2xl text-center space-y-4">
+        <div className="w-12 h-12 bg-danger/10 rounded-full flex items-center justify-center text-danger mb-2">
           <RefreshCw className="w-6 h-6" />
         </div>
         <div className="max-w-md">
-          <h3 className="text-lg font-medium text-white">Erro ao carregar categorias</h3>
+          <h3 className="text-lg font-medium text-foreground">Erro ao carregar categorias</h3>
           <p className="text-sm text-slate-400 mt-1 mb-6">
             {error?.message || "Ocorreu um erro inesperado ao buscar os dados. Tente novamente."}
           </p>
@@ -64,11 +64,11 @@ export function CategoriasList({
           <PlusCircle className="w-8 h-8" />
         </div>
         <div>
-          <h3 className="text-lg font-medium text-white">Nenhuma categoria cadastrada.</h3>
+          <h3 className="text-lg font-medium text-foreground">Nenhuma categoria cadastrada.</h3>
           <p className="text-sm text-slate-400 mt-1 mb-6 max-w-sm">
             Crie categorias para classificar suas despesas e receitas.
           </p>
-          <Button onClick={onCreateNew} className="bg-emerald-600 hover:bg-emerald-700 text-white">
+          <Button onClick={onCreateNew} className="bg-primary hover:bg-emerald-700 text-foreground">
             <PlusCircle className="w-4 h-4 mr-2" />
             Criar primeira categoria
           </Button>

@@ -55,17 +55,17 @@ export function AccountsSummaryList({ accounts }: AccountsSummaryListProps) {
           return (
             <div
               key={conta.id}
-              className="p-4 rounded-xl bg-gray-950/40 border border-gray-800/60 flex items-center justify-between gap-3 hover:border-gray-700 transition-colors"
+              className="p-4 rounded-xl bg-background/40 border border-border/60 flex items-center justify-between gap-3 hover:border-border-subtle transition-colors"
             >
               <div className="flex items-center gap-3 min-w-0">
                 <div
-                  className="w-9 h-9 rounded-xl flex items-center justify-center text-white shrink-0 shadow-md"
+                  className="w-9 h-9 rounded-xl flex items-center justify-center text-foreground shrink-0 shadow-md"
                   style={{ backgroundColor: conta.cor || "#10b981" }}
                 >
                   <Landmark className="w-5 h-5" />
                 </div>
                 <div className="min-w-0 space-y-0.5">
-                  <p className="text-sm font-semibold text-white truncate">
+                  <p className="text-sm font-semibold text-foreground truncate">
                     {conta.nome}
                   </p>
                   <Badge variant="neutral" className="text-[10px] py-0 px-1.5">
@@ -77,7 +77,7 @@ export function AccountsSummaryList({ accounts }: AccountsSummaryListProps) {
               <div className="text-right shrink-0">
                 <span
                   className={`text-sm font-mono font-bold ${
-                    saldo >= 0 ? "text-emerald-400" : "text-red-400"
+                    saldo >= 0 ? "text-primary" : "text-danger"
                   }`}
                 >
                   {formatCurrency(saldo)}
