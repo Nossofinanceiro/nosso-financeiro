@@ -73,14 +73,15 @@ export function PeriodForecastSection() {
   };
 
   return (
-    <div className="space-y-6 mt-12 mb-8 animate-in fade-in duration-200">
+    <div className="space-y-6 mt-8 mb-12 animate-in fade-in duration-200">
+      {/* Header */}
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div>
-          <h2 className="text-xl font-bold text-foreground flex items-center gap-2">
-            <CalendarDays className="w-5 h-5 text-primary" />
-            Previsão do Período
+          <h2 className="text-2xl font-bold text-foreground flex items-center gap-2">
+            <Wallet className="w-6 h-6 text-primary" />
+            Até o Próximo Pagamento
           </h2>
-          <p className="text-sm text-muted">Analise seu dinheiro disponível até uma data</p>
+          <p className="text-sm text-muted mt-1">Visão imediata do seu fôlego financeiro</p>
         </div>
         
         <div className="flex bg-surface border border-border p-1 rounded-xl">
@@ -88,7 +89,7 @@ export function PeriodForecastSection() {
             variant={mode === "proximo_pagamento" ? "primary" : "ghost"}
             size="sm"
             onClick={() => setMode("proximo_pagamento")}
-            className={mode === "proximo_pagamento" ? "bg-primary text-foreground hover:bg-primary/90" : "text-muted hover:text-foreground hover:bg-surface-secondary"}
+            className={mode === "proximo_pagamento" ? "bg-primary text-primary-foreground hover:bg-primary/90" : "text-muted hover:text-foreground hover:bg-surface-secondary"}
           >
             Próximo Pagamento
           </Button>
@@ -96,7 +97,7 @@ export function PeriodForecastSection() {
             variant={mode === "fim_mes" ? "primary" : "ghost"}
             size="sm"
             onClick={() => setMode("fim_mes")}
-            className={mode === "fim_mes" ? "bg-primary text-foreground hover:bg-primary/90" : "text-muted hover:text-foreground hover:bg-surface-secondary"}
+            className={mode === "fim_mes" ? "bg-primary text-primary-foreground hover:bg-primary/90" : "text-muted hover:text-foreground hover:bg-surface-secondary"}
           >
             Fim do Mês
           </Button>
@@ -104,13 +105,14 @@ export function PeriodForecastSection() {
             variant={mode === "personalizado" ? "primary" : "ghost"}
             size="sm"
             onClick={() => setMode("personalizado")}
-            className={mode === "personalizado" ? "bg-primary text-foreground hover:bg-primary/90" : "text-muted hover:text-foreground hover:bg-surface-secondary"}
+            className={mode === "personalizado" ? "bg-primary text-primary-foreground hover:bg-primary/90" : "text-muted hover:text-foreground hover:bg-surface-secondary"}
           >
             Personalizado
           </Button>
         </div>
       </div>
 
+      {/* Date Pickers for custom mode */}
       {mode === "personalizado" && (
         <div className="flex items-center gap-4 bg-surface border border-border p-4 rounded-xl w-max">
           <div className="flex items-center gap-2">
@@ -140,12 +142,7 @@ export function PeriodForecastSection() {
       )}
 
       {isLoading ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          <Skeleton className="h-28 rounded-xl bg-surface border border-border" />
-          <Skeleton className="h-28 rounded-xl bg-surface border border-border" />
-          <Skeleton className="h-28 rounded-xl bg-surface border border-border" />
-          <Skeleton className="h-28 rounded-xl bg-surface border border-border" />
-        </div>
+        <Skeleton className="h-64 rounded-3xl bg-surface border border-border" />
       ) : isError ? (
         <div className="p-4 bg-danger/10 border border-danger/20 text-danger rounded-xl text-center">
           Ocorreu um erro ao carregar a previsão.
@@ -158,164 +155,131 @@ export function PeriodForecastSection() {
               <p className="text-sm text-amber-500">Nenhum próximo pagamento cadastrado no sistema. O período analisado estendeu-se até o fim do mês.</p>
             </div>
           )}
-          
-          <div className="bg-surface/50 border border-border/50 p-4 rounded-xl flex flex-wrap gap-x-8 gap-y-2">
-            <div className="text-sm">
-              <span className="text-muted">Período: </span>
-              <span className="text-foreground font-medium">
-                {format(new Date(data.data_inicial), "dd MMM", { locale: ptBR })} a {format(new Date(data.data_final), "dd MMM yyyy", { locale: ptBR })}
-              </span>
-            </div>
-            {data.proximo_pagamento && mode === "proximo_pagamento" && (
-              <div className="text-sm">
-                <span className="text-muted">Data do Pagamento: </span>
-                <span className="text-primary font-medium">
-                  {format(new Date(data.proximo_pagamento.data), "dd MMM yyyy", { locale: ptBR })}
-                </span>
-              </div>
-            )}
-          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <Card className="p-5 flex flex-col justify-between bg-surface border-border">
-              <div className="flex items-center gap-2 mb-2">
-                <Wallet className="w-4 h-4 text-primary" />
-                <h3 className="text-sm font-medium text-foreground">Saldo Atual</h3>
-              </div>
-              <p className="text-xl font-bold text-foreground">{formatCurrency(data.saldo_atual_familiar)}</p>
-            </Card>
-
-            <Card className="p-5 flex flex-col justify-between bg-surface border-border">
-              <div className="flex items-center gap-2 mb-2">
-                <TrendingDown className="w-4 h-4 text-danger" />
-                <h3 className="text-sm font-medium text-foreground">Despesas no Período</h3>
-              </div>
-              <p className="text-xl font-bold text-danger">-{formatCurrency(data.despesas_pendentes_no_periodo)}</p>
-            </Card>
-
-            <Card className="p-5 flex flex-col justify-between bg-surface border-primary/30">
-              <div className="flex items-center gap-2 mb-2">
-                <CalendarCheck className="w-4 h-4 text-primary" />
-                <h3 className="text-sm font-medium text-primary">Disponível (Dinheiro Atual)</h3>
-              </div>
-              <p className="text-xl font-bold text-primary">{formatCurrency(data.disponivel_com_dinheiro_atual)}</p>
-              <p className="text-xs text-muted mt-1">Quanto sobra pagando apenas com o que já tem</p>
-            </Card>
-
-            {mode === "proximo_pagamento" && data.proximo_pagamento ? (
-              <Card className="p-5 flex flex-col justify-between bg-surface border-border relative overflow-hidden">
-                <div className="absolute top-0 right-0 p-2 opacity-10">
-                  <TrendingUp className="w-16 h-16" />
+          {/* Destaque Gigante */}
+          <Card className="bg-surface border-border overflow-hidden rounded-3xl p-6 md:p-10 shadow-xl">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              {/* Coluna 1 e 2: Saldo Atual e Despesas -> Vai sobrar */}
+              <div className="lg:col-span-2 space-y-8 flex flex-col justify-center">
+                
+                <div className="flex flex-col sm:flex-row gap-6 sm:gap-12">
+                  <div>
+                    <p className="text-sm font-medium text-muted mb-1">Saldo disponível hoje</p>
+                    <p className="text-2xl font-semibold text-foreground">{formatCurrency(data.saldo_atual_familiar)}</p>
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium text-muted mb-1">Contas a pagar até dia {format(new Date(data.data_final), "dd/MM")}</p>
+                    <p className="text-2xl font-semibold text-danger">-{formatCurrency(data.despesas_pendentes_no_periodo)}</p>
+                  </div>
                 </div>
-                <div className="flex items-center gap-2 mb-2">
-                  <TrendingUp className="w-4 h-4 text-amber-400" />
-                  <h3 className="text-sm font-medium text-foreground">Pós Pagamento</h3>
-                </div>
-                <p className="text-xl font-bold text-foreground">
-                  {formatCurrency(data.disponivel_com_dinheiro_atual + data.proximo_pagamento.valor)}
-                </p>
-                <p className="text-xs text-muted mt-1">Saldo após entrar {formatCurrency(data.proximo_pagamento.valor)}</p>
-              </Card>
-            ) : (
-              <Card className="p-5 flex flex-col justify-between bg-surface border-border">
-                <div className="flex items-center gap-2 mb-2">
-                  <Calendar className="w-4 h-4 text-amber-400" />
-                  <h3 className="text-sm font-medium text-foreground">Previsto em {format(new Date(data.data_final), "dd/MM")}</h3>
-                </div>
-                <p className="text-xl font-bold text-foreground">{formatCurrency(data.saldo_previsto_na_data_final)}</p>
-                <p className="text-xs text-muted mt-1">
-                  Inclui {formatCurrency(data.receitas_previstas_no_periodo)} de receitas no período
-                </p>
-              </Card>
-            )}
-          </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
-            <div className="space-y-3">
-              <h4 className="text-sm font-medium text-foreground flex items-center gap-2">
-                <TrendingDown className="w-4 h-4 text-danger" />
-                Despesas consideradas no cálculo
-              </h4>
-              <div className="bg-surface border border-border rounded-xl overflow-hidden divide-y divide-slate-800/50">
-                {data.lancamentos_despesas.length > 0 ? (
-                  data.lancamentos_despesas.map(d => {
-                    // @ts-expect-error - Joined property from Supabase
-                    const categoria = d.categorias;
-                    // @ts-expect-error - Joined property from Supabase
-                    const conta = d.contas;
-                    const Icon = getDynamicIcon(categoria?.icone);
-                    return (
-                      <div key={d.id} className="p-3 flex items-center justify-between hover:bg-surface-secondary/50 transition-colors">
-                        <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 rounded-lg bg-surface-secondary flex items-center justify-center text-muted">
-                            <Icon className="w-4 h-4" />
-                          </div>
-                          <div>
-                            <p className="text-sm text-foreground font-medium">{d.descricao}</p>
-                            <p className="text-xs text-muted flex items-center gap-2">
-                              <span>{conta?.nome || "Sem conta"}</span>
-                              <span>•</span>
-                              <span>{format(new Date(d.data_vencimento!), "dd MMM")}</span>
-                            </p>
-                          </div>
-                        </div>
-                        <div className="text-right">
-                          <p className="text-sm font-medium text-foreground">{formatCurrency(d.valor_pago || d.valor_previsto)}</p>
-                          {d.status === "atrasada" && (
-                            <Badge variant="neutral" className="bg-danger/10 text-danger py-0 text-[9px]">Atrasada</Badge>
-                          )}
-                        </div>
+                <div className="pt-6 border-t border-border-subtle">
+                  <p className="text-lg font-medium text-foreground mb-2">Vai sobrar</p>
+                  <p className={`text-5xl md:text-6xl font-black tracking-tight ${data.disponivel_com_dinheiro_atual >= 0 ? "text-primary" : "text-danger"}`}>
+                    {formatCurrency(data.disponivel_com_dinheiro_atual)}
+                  </p>
+                </div>
+
+              </div>
+
+              {/* Coluna 3: Próximo Pagamento Info */}
+              <div className="lg:col-span-1">
+                {data.proximo_pagamento && mode === "proximo_pagamento" ? (
+                  <div className="h-full bg-primary/10 border border-primary/20 rounded-2xl p-6 flex flex-col justify-center relative overflow-hidden">
+                    <div className="absolute top-0 right-0 p-4 opacity-10">
+                      <TrendingUp className="w-24 h-24 text-primary" />
+                    </div>
+                    <p className="text-sm font-bold text-primary uppercase tracking-wider mb-4 flex items-center gap-2">
+                      <CalendarCheck className="w-4 h-4" />
+                      Próximo Pagamento
+                    </p>
+                    <div className="space-y-4 relative z-10">
+                      <div>
+                        <p className="text-sm text-primary/80">Quem recebe</p>
+                        <p className="text-lg font-semibold text-primary">{data.proximo_pagamento.pessoas?.join(", ") || "Geral"}</p>
                       </div>
-                    )
-                  })
+                      <div>
+                        <p className="text-sm text-primary/80">Data prevista</p>
+                        <p className="text-xl font-bold text-primary">{format(new Date(data.proximo_pagamento.data!), "dd/MM/yyyy")}</p>
+                      </div>
+                      <div>
+                        <p className="text-sm text-primary/80">Valor total estimado</p>
+                        <p className="text-2xl font-black text-primary">+{formatCurrency(data.proximo_pagamento.valor)}</p>
+                      </div>
+                    </div>
+                  </div>
                 ) : (
-                  <div className="p-6 text-center text-sm text-muted">
-                    Nenhuma despesa pendente no período.
+                  <div className="h-full bg-surface-secondary border border-border rounded-2xl p-6 flex flex-col justify-center relative overflow-hidden">
+                    <div className="absolute top-0 right-0 p-4 opacity-5">
+                      <Calendar className="w-24 h-24 text-foreground" />
+                    </div>
+                    <p className="text-sm font-bold text-muted uppercase tracking-wider mb-4 flex items-center gap-2">
+                      <Calendar className="w-4 h-4" />
+                      Final do Período
+                    </p>
+                    <div className="space-y-4 relative z-10">
+                      <div>
+                        <p className="text-sm text-muted">Data limite</p>
+                        <p className="text-xl font-bold text-foreground">{format(new Date(data.data_final), "dd/MM/yyyy")}</p>
+                      </div>
+                      <div>
+                        <p className="text-sm text-muted">Receitas no período</p>
+                        <p className="text-2xl font-black text-primary">+{formatCurrency(data.receitas_previstas_no_periodo)}</p>
+                      </div>
+                      <div>
+                        <p className="text-sm text-muted">Saldo após receitas</p>
+                        <p className="text-xl font-bold text-foreground">{formatCurrency(data.saldo_previsto_na_data_final)}</p>
+                      </div>
+                    </div>
                   </div>
                 )}
               </div>
             </div>
+          </Card>
 
-            <div className="space-y-3">
-              <h4 className="text-sm font-medium text-foreground flex items-center gap-2">
-                <TrendingUp className="w-4 h-4 text-primary" />
-                Receitas previstas no período
-              </h4>
-              <div className="bg-surface border border-border rounded-xl overflow-hidden divide-y divide-slate-800/50">
-                {data.lancamentos_receitas.length > 0 ? (
-                  data.lancamentos_receitas.map(r => {
-                    // @ts-expect-error - Joined property from Supabase
-                    const categoria = r.categorias;
-                    // @ts-expect-error - Joined property from Supabase
-                    const conta = r.contas;
-                    const Icon = getDynamicIcon(categoria?.icone);
-                    return (
-                      <div key={r.id} className="p-3 flex items-center justify-between hover:bg-surface-secondary/50 transition-colors">
-                        <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 rounded-lg bg-surface-secondary flex items-center justify-center text-muted">
-                            <Icon className="w-4 h-4" />
-                          </div>
-                          <div>
-                            <p className="text-sm text-foreground font-medium">{r.descricao}</p>
-                            <p className="text-xs text-muted flex items-center gap-2">
-                              <span>{conta?.nome || "Sem conta"}</span>
-                              <span>•</span>
-                              <span>{format(new Date(r.data_prevista!), "dd MMM")}</span>
-                            </p>
-                          </div>
+          {/* Lista de Despesas */}
+          <div className="mt-8">
+            <h4 className="text-sm font-semibold text-muted uppercase tracking-wider mb-4 flex items-center gap-2">
+              <TrendingDown className="w-4 h-4" />
+              Essas despesas entram nesse cálculo
+            </h4>
+            <div className="bg-surface border border-border rounded-2xl overflow-hidden divide-y divide-border-subtle">
+              {data.lancamentos_despesas.length > 0 ? (
+                data.lancamentos_despesas.map(d => {
+                  // @ts-expect-error - Joined property from Supabase
+                  const categoria = d.categorias;
+                  // @ts-expect-error - Joined property from Supabase
+                  const conta = d.contas;
+                  const Icon = getDynamicIcon(categoria?.icone);
+                  return (
+                    <div key={d.id} className="p-3 flex items-center justify-between hover:bg-surface-secondary/50 transition-colors">
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 rounded-lg bg-surface-secondary flex items-center justify-center text-muted">
+                          <Icon className="w-4 h-4" />
                         </div>
-                        <div className="text-right">
-                          <p className="text-sm font-medium text-foreground">{formatCurrency(r.valor_previsto)}</p>
+                        <div>
+                          <p className="text-sm text-foreground font-medium">{d.descricao}</p>
+                          <p className="text-xs text-muted flex items-center gap-2">
+                            <span>{conta?.nome || "Sem conta"}</span>
+                            <span>•</span>
+                            <span>{format(new Date(d.data_vencimento!), "dd MMM")}</span>
+                          </p>
                         </div>
                       </div>
-                    )
-                  })
-                ) : (
-                  <div className="p-6 text-center text-sm text-muted">
-                    Nenhuma receita extra no período.
-                  </div>
-                )}
-              </div>
+                      <div className="text-right">
+                        <p className="text-sm font-medium text-foreground">{formatCurrency(d.valor_pago || d.valor_previsto)}</p>
+                        {d.status === "atrasada" && (
+                          <Badge variant="neutral" className="bg-danger/10 text-danger py-0 text-[9px] mt-1 block w-max ml-auto">Atrasada</Badge>
+                        )}
+                      </div>
+                    </div>
+                  )
+                })
+              ) : (
+                <div className="p-6 text-center text-sm text-muted">
+                  Nenhuma despesa pendente no período.
+                </div>
+              )}
             </div>
           </div>
         </div>

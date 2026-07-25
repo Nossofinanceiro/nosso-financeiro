@@ -261,13 +261,12 @@ export const periodForecastResponseSchema = z.object({
   receitas_previstas_no_periodo: monetarySchema,
   disponivel_com_dinheiro_atual: monetarySchema,
   saldo_previsto_na_data_final: monetarySchema,
-  proximo_pagamento: z
-    .object({
-      data: z.string(),
-      valor: monetarySchema,
-      descricao: z.string(),
-    })
-    .nullable(),
+  proximo_pagamento: z.object({
+    data: isoDateSchema.optional(),
+    valor: monetarySchema,
+    descricao: z.string(),
+    pessoas: z.array(z.string()).optional(),
+  }).nullable(),
   lancamentos_despesas: z.array(despesaSchema),
   lancamentos_receitas: z.array(receitaSchema),
 });

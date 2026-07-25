@@ -5,47 +5,56 @@ import { Despesa, Receita, despesaSchema, receitaSchema } from "@/lib/schemas";
 
 export class PeriodForecastRepository {
 
-  async getProximoPagamento(familiaId: string, aPartirDe: string): Promise<{ data: string; valor: number; descricao: string } | null> {
+  async getProximoPagamento(familiaId: string, aPartirDe: string): Promise<{ data: string; valor: number; descricao: string; pessoas: string[] } | null> {
     try {
       const supabase = createClient();
       
-      // Encontra a primeira data de receita pendente >= aPartirDe
-      const { data: proximaReceitaData, error: errorData } = await supabase
+      // Busca receitas pendentes futuras com a categoria para identificar salário
+      const { data: receitas, error: errorReceitas } = await supabase
         .from("receitas")
-        .select("data_prevista")
+        .select("data_prevista, valor_previsto, descricao, pessoa, categorias(nome)")
         .eq("familia_id", familiaId)
         .eq("status", "pendente")
         .gte("data_prevista", aPartirDe)
-        .order("data_prevista", { ascending: true })
-        .limit(1)
-        .maybeSingle();
-
-      if (errorData) throw errorData;
-      if (!proximaReceitaData || !proximaReceitaData.data_prevista) return null;
-
-      const proximaData = proximaReceitaData.data_prevista;
-
-      // Busca TODAS as receitas pendentes nessa data
-      const { data: receitasNoDia, error: errorReceitas } = await supabase
-        .from("receitas")
-        .select("descricao, valor_previsto")
-        .eq("familia_id", familiaId)
-        .eq("status", "pendente")
-        .eq("data_prevista", proximaData);
+        .order("data_prevista", { ascending: true });
 
       if (errorReceitas) throw errorReceitas;
+      if (!receitas || receitas.length === 0) return null;
 
-      if (!receitasNoDia || receitasNoDia.length === 0) return null;
+      // Procura a primeira data que possui uma receita de "Salário"
+      let proximaData = null;
+      for (const r of receitas) {
+        const catName = (r.categorias as any)?.nome?.toLowerCase() || "";
+        if (catName.includes("salário") || catName.includes("salario")) {
+          proximaData = r.data_prevista;
+          break;
+        }
+      }
+
+      // Se não encontrou salário, pega a primeira data disponível (fallback)
+      if (!proximaData) {
+        proximaData = receitas[0].data_prevista;
+      }
+
+      if (!proximaData) return null;
+
+      // Pega todas as receitas dessa data específica
+      const receitasNoDia = receitas.filter((r: any) => r.data_prevista === proximaData);
 
       const valorTotal = receitasNoDia.reduce((acc: number, r: Record<string, unknown>) => acc + Number(r.valor_previsto), 0);
       const descricao = receitasNoDia.length === 1 
         ? receitasNoDia[0].descricao 
         : `${receitasNoDia.length} receitas combinadas`;
+      
+      const pessoas = receitasNoDia
+        .map((r: any) => r.pessoa || "Geral")
+        .filter((v: any, i: number, a: any[]) => a.indexOf(v) === i); // distinct
 
       return {
         data: proximaData,
         valor: valorTotal,
         descricao,
+        pessoas,
       };
     } catch (err) {
       throw parseSupabaseError(err);

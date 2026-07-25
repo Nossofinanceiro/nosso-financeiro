@@ -55,6 +55,9 @@ export default function DashboardPage() {
             onMonthChange={setSelectedMonth}
           />
 
+          {/* Seção Previsão do Período */}
+          <PeriodForecastSection />
+
           {/* Cards Principais da Primeira Dobra */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <StatCard
@@ -97,9 +100,6 @@ export default function DashboardPage() {
               variant="neutral"
             />
           </div>
-
-          {/* Seção Previsão do Período */}
-          <PeriodForecastSection />
 
           {/* Grid Intermediário: Contas, Próximas Despesas e Gráfico */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
