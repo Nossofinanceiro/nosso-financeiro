@@ -7,7 +7,7 @@ import { Alert } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { StatCard } from "@/components/ui/stat-card";
 import { useDashboardSummary } from "@/hooks/use-dashboard-summary";
-import { DashboardGreeting } from "@/features/dashboard/components/dashboard-greeting";
+import { DashboardGreeting, DashboardMonthSelector } from "@/features/dashboard/components/dashboard-greeting";
 import { PeriodForecastSection } from "@/features/dashboard/components/period-forecast-section";
 import { ExpensesCategoryChart } from "@/features/dashboard/components/expenses-category-chart";
 import { UpcomingExpensesList } from "@/features/dashboard/components/upcoming-expenses-list";
@@ -47,22 +47,42 @@ export default function DashboardPage() {
           </div>
         </div>
       ) : data ? (
-        <div className="space-y-6 animate-in fade-in duration-200">
-          {/* Primeira Dobra: Saudação e Seletor de Mês */}
-          <DashboardGreeting
-            userName="Clayton e Janine"
-            familyTitle={data.familia.nome}
-            selectedMonth={selectedMonth}
-            onMonthChange={setSelectedMonth}
-          />
+        <div className="flex flex-col gap-6 md:block md:space-y-6 animate-in fade-in duration-200">
+          {/* Primeira Dobra: Saudação */}
+          <div className="order-1 md:order-none">
+            <DashboardGreeting
+              userName="Clayton e Janine"
+              familyTitle={data.familia.nome}
+              selectedMonth={selectedMonth}
+              onMonthChange={setSelectedMonth}
+              hideMonthSelectorOnMobile={true}
+            />
+          </div>
 
-          <ActivePlanejamentoWidget familiaId={data.familia.id} />
+          <div className="order-3 md:order-none hidden md:block">
+            <ActivePlanejamentoWidget familiaId={data.familia.id} />
+          </div>
 
           {/* Seção Previsão do Período */}
-          <PeriodForecastSection />
+          <div className="order-2 md:order-none">
+            <PeriodForecastSection 
+              renderMobileMonthSelector={
+                <DashboardMonthSelector 
+                  selectedMonth={selectedMonth} 
+                  onMonthChange={setSelectedMonth}
+                  className="w-full sm:w-auto flex justify-between sm:justify-start mt-2" 
+                />
+              }
+            />
+          </div>
+
+          <div className="order-4 md:order-none md:hidden mt-2">
+            <ActivePlanejamentoWidget familiaId={data.familia.id} />
+          </div>
 
           {/* Cards Principais da Primeira Dobra */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="order-5 md:order-none contents md:block space-y-6 md:space-y-0">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <StatCard
               title="Saldo Atual Familiar"
               value={data.saldo_atual}
@@ -114,6 +134,7 @@ export default function DashboardPage() {
             <div className="lg:col-span-1">
               <ExpensesCategoryChart categories={data.despesas_por_categoria} />
             </div>
+          </div>
           </div>
         </div>
       ) : null}

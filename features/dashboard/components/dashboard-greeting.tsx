@@ -8,21 +8,10 @@ export interface DashboardGreetingProps {
   familyTitle?: string;
   selectedMonth: string; // YYYY-MM
   onMonthChange: (month: string) => void;
+  hideMonthSelectorOnMobile?: boolean;
 }
 
-export function DashboardGreeting({
-  userName,
-  familyTitle,
-  selectedMonth,
-  onMonthChange,
-}: DashboardGreetingProps) {
-  const getGreeting = () => {
-    const hour = new Date().getHours();
-    if (hour >= 5 && hour < 12) return "Bom dia";
-    if (hour >= 12 && hour < 18) return "Boa tarde";
-    return "Boa noite";
-  };
-
+export function DashboardMonthSelector({ selectedMonth, onMonthChange, className }: { selectedMonth: string, onMonthChange: (month: string) => void, className?: string }) {
   const handlePrevMonth = () => {
     const [year, month] = selectedMonth.split("-").map(Number);
     const date = new Date(year, month - 2, 1);
@@ -50,7 +39,49 @@ export function DashboardGreeting({
   };
 
   return (
-    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-border/80">
+    <div className={`flex items-center gap-2 bg-surface border border-border p-1.5 rounded-xl shadow-md self-start sm:self-auto ${className || ''}`}>
+      <button
+        onClick={handlePrevMonth}
+        aria-label="Mês anterior"
+        className="p-1.5 rounded-lg text-muted hover:text-foreground hover:bg-surface-secondary transition-colors cursor-pointer"
+      >
+        <ChevronLeft className="w-4 h-4" />
+      </button>
+
+      <div className="flex items-center gap-2 px-2 text-sm font-semibold text-foreground">
+        <Calendar className="w-4 h-4 text-primary shrink-0" />
+        <span className="min-w-[120px] text-center font-medium">
+          {formatMonthDisplay(selectedMonth)}
+        </span>
+      </div>
+
+      <button
+        onClick={handleNextMonth}
+        aria-label="Próximo mês"
+        className="p-1.5 rounded-lg text-muted hover:text-foreground hover:bg-surface-secondary transition-colors cursor-pointer"
+      >
+        <ChevronRight className="w-4 h-4" />
+      </button>
+    </div>
+  );
+}
+
+export function DashboardGreeting({
+  userName,
+  familyTitle,
+  selectedMonth,
+  onMonthChange,
+  hideMonthSelectorOnMobile = false,
+}: DashboardGreetingProps) {
+  const getGreeting = () => {
+    const hour = new Date().getHours();
+    if (hour >= 5 && hour < 12) return "Bom dia";
+    if (hour >= 12 && hour < 18) return "Boa tarde";
+    return "Boa noite";
+  };
+
+  return (
+    <div className={`flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border/80 ${hideMonthSelectorOnMobile ? 'pb-2 md:pb-4' : 'pb-4'}`}>
       <div className="space-y-1">
         <h1 className="text-2xl font-bold text-foreground tracking-tight sm:text-3xl">
           {getGreeting()}, {userName}! 👋
@@ -61,30 +92,11 @@ export function DashboardGreeting({
       </div>
 
       {/* Month Selector */}
-      <div className="flex items-center gap-2 bg-surface border border-border p-1.5 rounded-xl shadow-md self-start sm:self-auto">
-        <button
-          onClick={handlePrevMonth}
-          aria-label="Mês anterior"
-          className="p-1.5 rounded-lg text-muted hover:text-foreground hover:bg-surface-secondary transition-colors cursor-pointer"
-        >
-          <ChevronLeft className="w-4 h-4" />
-        </button>
-
-        <div className="flex items-center gap-2 px-2 text-sm font-semibold text-foreground">
-          <Calendar className="w-4 h-4 text-primary shrink-0" />
-          <span className="min-w-[120px] text-center font-medium">
-            {formatMonthDisplay(selectedMonth)}
-          </span>
-        </div>
-
-        <button
-          onClick={handleNextMonth}
-          aria-label="Próximo mês"
-          className="p-1.5 rounded-lg text-muted hover:text-foreground hover:bg-surface-secondary transition-colors cursor-pointer"
-        >
-          <ChevronRight className="w-4 h-4" />
-        </button>
-      </div>
+      <DashboardMonthSelector 
+        selectedMonth={selectedMonth} 
+        onMonthChange={onMonthChange} 
+        className={hideMonthSelectorOnMobile ? 'hidden md:flex' : 'flex'} 
+      />
     </div>
   );
 }
