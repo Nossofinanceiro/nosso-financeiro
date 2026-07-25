@@ -21,7 +21,10 @@ import {
   Tag,
   ArrowRight,
   ArrowDown,
-  ChevronRight
+  ChevronRight,
+  User,
+  CalendarClock,
+  CircleDollarSign
 } from "lucide-react";
 import * as Icons from "lucide-react";
 
@@ -92,37 +95,62 @@ export function PeriodForecastSection() {
 
     const resultado = data.disponivel_com_dinheiro_atual;
     const isNegative = resultado < 0;
-    const isWarning = !isNegative && resultado < 150;
 
+    // Lógica da barra de comprometimento
+    let percentualComprometido = 0;
+    if (data.saldo_atual_familiar > 0) {
+      percentualComprometido = (data.despesas_pendentes_no_periodo / data.saldo_atual_familiar) * 100;
+    } else if (data.despesas_pendentes_no_periodo > 0) {
+      percentualComprometido = 104; // Simulando > 100%
+    }
+
+    let statusIcon = "";
+    let statusLabel = "";
+    let barColor = "";
     let statusColor = "";
     let statusBg = "";
     let titleMessage = "";
     let assistantMessage = "";
-    let titleColor = "";
 
-    if (isNegative) {
-      statusColor = "text-danger";
-      statusBg = "bg-danger/10 border border-danger/20";
-      titleColor = "text-danger";
-      titleMessage = "FALTARÃO";
-      assistantMessage = `🚨 Faltarão aproximadamente ${formatCurrency(Math.abs(resultado))} antes do próximo pagamento.`;
-    } else if (isWarning) {
-      statusColor = "text-amber-500";
-      statusBg = "bg-amber-500/10 border border-amber-500/20";
-      titleColor = "text-amber-500";
-      titleMessage = "VOCÊ TERÁ";
-      assistantMessage = "⚠️ Atenção. O orçamento está bastante apertado para este período.";
-    } else {
+    if (percentualComprometido <= 60) {
+      statusIcon = "🟢";
+      statusLabel = "Situação confortável";
+      barColor = "bg-emerald-500";
       statusColor = "text-emerald-500";
-      statusBg = "bg-emerald-500/10 border border-emerald-500/20 text-emerald-600";
-      titleColor = "text-emerald-500";
+      statusBg = "bg-emerald-500/10 text-emerald-600";
       titleMessage = "VOCÊ TERÁ";
       assistantMessage = "✅ Vocês conseguem chegar ao próximo pagamento com tranquilidade.";
+    } else if (percentualComprometido <= 85) {
+      statusIcon = "🟡";
+      statusLabel = "Atenção";
+      barColor = "bg-amber-400";
+      statusColor = "text-amber-500";
+      statusBg = "bg-amber-500/10 text-amber-600";
+      titleMessage = "VOCÊ TERÁ";
+      assistantMessage = "⚠️ Atenção. O orçamento está bastante apertado para este período.";
+    } else if (percentualComprometido <= 100) {
+      statusIcon = "🟠";
+      statusLabel = "Orçamento apertado";
+      barColor = "bg-orange-500";
+      statusColor = "text-orange-500";
+      statusBg = "bg-orange-500/10 text-orange-600";
+      titleMessage = "VOCÊ TERÁ";
+      assistantMessage = "⚠️ Atenção. Há dinheiro exato, sem margem de erro.";
+    } else {
+      statusIcon = "🔴";
+      statusLabel = "Orçamento insuficiente";
+      barColor = "bg-red-500";
+      statusColor = "text-danger";
+      statusBg = "bg-danger/10 text-danger";
+      titleMessage = "FALTARÃO";
+      assistantMessage = `🚨 Faltarão aproximadamente ${formatCurrency(Math.abs(resultado))} antes do próximo pagamento.`;
     }
 
     const topDespesas = [...data.lancamentos_despesas]
       .sort((a, b) => (b.valor_pago || b.valor_previsto) - (a.valor_pago || a.valor_previsto))
       .slice(0, 3);
+
+    const sortedDespesas = [...data.lancamentos_despesas].sort((a, b) => new Date(a.data_vencimento!).getTime() - new Date(b.data_vencimento!).getTime());
 
     return (
       <div className="space-y-6 mt-6">
@@ -133,76 +161,112 @@ export function PeriodForecastSection() {
           </div>
         )}
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
           {/* Main Giant Card */}
-          <div className="lg:col-span-2">
-            <Card className="bg-surface border-border overflow-hidden rounded-[2rem] p-8 md:p-12 shadow-xl h-full flex flex-col justify-center text-center relative">
-              <div className="relative z-10 flex flex-col h-full justify-between">
-                <div>
-                  <h3 className={`text-xl md:text-2xl font-bold tracking-widest ${titleColor} mb-2`}>
-                    {titleMessage}
-                  </h3>
-                  <p className={`text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter ${statusColor}`}>
-                    {formatCurrency(Math.abs(resultado))}
+          <div className="xl:col-span-2 flex flex-col">
+            <Card className="bg-surface border-border overflow-hidden rounded-[2rem] p-8 md:p-12 shadow-xl flex-1 flex flex-col justify-center text-center relative transition-all duration-500">
+              <div className="relative z-10 flex flex-col justify-between items-center h-full">
+                
+                {/* Cabeçalho do Card */}
+                <div className="flex flex-col items-center justify-center space-y-6 w-full">
+                  <div className="flex flex-col items-center">
+                    <span className="flex items-center gap-2 text-sm md:text-base font-bold uppercase tracking-widest text-muted-foreground mb-2">
+                      {statusIcon} {statusLabel}
+                    </span>
+                    <h3 className="text-xl md:text-2xl font-bold tracking-widest text-foreground opacity-90 transition-all duration-500">
+                      {titleMessage}
+                    </h3>
+                  </div>
+
+                  {/* Número Principal */}
+                  <p className={`text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter ${statusColor} transition-all duration-500 drop-shadow-sm`}>
+                    {isNegative ? formatCurrency(resultado) : formatCurrency(resultado)}
                   </p>
-                  <div className="flex justify-center mt-6">
-                    <div className={`px-5 py-2.5 rounded-full text-sm font-semibold shadow-sm ${statusBg}`}>
-                      {assistantMessage}
-                    </div>
+                  
+                  {/* Assistant Message */}
+                  <div className={`px-6 py-2.5 rounded-full text-sm font-medium transition-colors duration-500 ${statusBg}`}>
+                    {assistantMessage}
                   </div>
                 </div>
 
-                {/* Matemática Visual */}
-                <div className="mt-12 flex flex-col md:flex-row justify-center items-center gap-4 text-center bg-surface-secondary/50 rounded-2xl p-6 border border-border">
-                  <div className="flex flex-col items-center">
-                    <p className="text-sm font-medium text-muted mb-1">Saldo hoje</p>
-                    <p className="text-xl font-bold text-foreground">{formatCurrency(data.saldo_atual_familiar)}</p>
+                {/* Barra de Comprometimento */}
+                <div className="w-full max-w-lg mx-auto mt-12 mb-6">
+                  <div className="flex justify-between items-end mb-2">
+                    <span className="text-sm font-semibold text-muted-foreground">Comprometimento</span>
+                    <span className={`text-sm font-bold ${percentualComprometido > 100 ? "text-danger" : "text-foreground"}`}>
+                      {percentualComprometido.toFixed(0)}%
+                    </span>
                   </div>
-                  <ArrowRight className="w-5 h-5 text-muted hidden md:block opacity-50" />
-                  <ArrowDown className="w-5 h-5 text-muted block md:hidden opacity-50" />
-                  <div className="flex flex-col items-center">
-                    <p className="text-sm font-medium text-muted mb-1">Despesas do período</p>
-                    <p className="text-xl font-bold text-danger">-{formatCurrency(data.despesas_pendentes_no_periodo)}</p>
-                  </div>
-                  <ArrowRight className="w-5 h-5 text-muted hidden md:block opacity-50" />
-                  <ArrowDown className="w-5 h-5 text-muted block md:hidden opacity-50" />
-                  <div className="flex flex-col items-center">
-                    <p className="text-sm font-medium text-muted mb-1">Resultado final</p>
-                    <p className={`text-xl font-bold ${statusColor}`}>{formatCurrency(resultado)}</p>
+                  <div className="w-full h-3 bg-surface-secondary rounded-full overflow-hidden shadow-inner">
+                    <div 
+                      className={`h-full rounded-full transition-all duration-1000 ease-out ${barColor}`} 
+                      style={{ width: `${Math.min(percentualComprometido, 100)}%` }}
+                    />
                   </div>
                 </div>
+
+                {/* Matemática Visual - Estilo Fórmula */}
+                <div className="mt-8 flex flex-wrap justify-center items-center gap-3 md:gap-6 text-center bg-surface-secondary/40 rounded-[1.5rem] p-6 border border-border/50 w-full">
+                  <div className="flex flex-col items-center min-w-28">
+                    <p className="text-xs font-semibold text-muted uppercase tracking-wider mb-1">Saldo disponível</p>
+                    <p className="text-lg font-bold text-foreground">{formatCurrency(data.saldo_atual_familiar)}</p>
+                  </div>
+                  <p className="text-xl font-black text-muted-foreground">−</p>
+                  <div className="flex flex-col items-center min-w-28">
+                    <p className="text-xs font-semibold text-muted uppercase tracking-wider mb-1">Despesas do período</p>
+                    <p className="text-lg font-bold text-foreground">{formatCurrency(data.despesas_pendentes_no_periodo)}</p>
+                  </div>
+                  <p className="text-xl font-black text-muted-foreground">=</p>
+                  <div className="flex flex-col items-center min-w-28">
+                    <p className="text-xs font-semibold text-muted uppercase tracking-wider mb-1">Resultado</p>
+                    <p className={`text-lg font-bold ${statusColor}`}>{formatCurrency(resultado)}</p>
+                  </div>
+                </div>
+
               </div>
             </Card>
           </div>
 
           {/* Right Column: Next Payment & Top 3 */}
-          <div className="lg:col-span-1 flex flex-col gap-6">
+          <div className="xl:col-span-1 flex flex-col gap-6">
             {data.proximo_pagamento && mode === "proximo_pagamento" ? (
-              <div className="bg-surface border border-border rounded-[2rem] p-8 shadow-sm flex flex-col justify-center relative overflow-hidden flex-1">
-                <div className="absolute -top-4 -right-4 opacity-5">
-                  <TrendingUp className="w-32 h-32 text-primary" />
+              <div className="bg-surface border border-border rounded-[2rem] p-8 shadow-sm flex flex-col justify-center relative overflow-hidden flex-1 transition-all duration-500">
+                <div className="absolute -top-4 -right-4 opacity-[0.03]">
+                  <Wallet className="w-32 h-32 text-foreground" />
                 </div>
-                <p className="text-xs font-bold text-muted uppercase tracking-wider mb-6 flex items-center gap-2 relative z-10">
+                <p className="text-xs font-bold text-muted uppercase tracking-wider mb-8 flex items-center gap-2 relative z-10">
                   <CalendarCheck className="w-4 h-4 text-primary" />
                   Próximo Pagamento
                 </p>
-                <div className="space-y-5 relative z-10">
-                  <div>
-                    <p className="text-2xl lg:text-3xl font-bold text-foreground leading-tight">
+                <div className="space-y-6 relative z-10">
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                      <User className="w-5 h-5" />
+                    </div>
+                    <p className="text-xl font-bold text-foreground leading-tight">
                       {data.proximo_pagamento.pessoas?.join(", ") || "Geral"}
                     </p>
-                    <p className="text-base text-primary font-medium mt-1">
+                  </div>
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                      <CalendarClock className="w-5 h-5" />
+                    </div>
+                    <p className="text-xl font-bold text-foreground">
                       {format(new Date(data.proximo_pagamento.data!), "dd 'de' MMMM", { locale: ptBR })}
                     </p>
                   </div>
-                  <div className="pt-5 border-t border-border-subtle">
-                    <p className="text-sm text-muted mb-1">Valor total estimado</p>
-                    <p className="text-3xl font-black text-primary">+{formatCurrency(data.proximo_pagamento.valor)}</p>
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                      <CircleDollarSign className="w-5 h-5" />
+                    </div>
+                    <p className="text-2xl font-black text-primary">
+                      +{formatCurrency(data.proximo_pagamento.valor)}
+                    </p>
                   </div>
                 </div>
               </div>
             ) : (
-              <div className="bg-surface border border-border rounded-[2rem] p-8 shadow-sm flex flex-col justify-center relative overflow-hidden flex-1">
+              <div className="bg-surface-secondary border border-border rounded-[2rem] p-8 shadow-sm flex flex-col justify-center relative overflow-hidden flex-1 transition-all duration-500">
                 <p className="text-xs font-bold text-muted uppercase tracking-wider mb-6 flex items-center gap-2 relative z-10">
                   <Calendar className="w-4 h-4 text-foreground" />
                   Final do Período
@@ -222,12 +286,12 @@ export function PeriodForecastSection() {
               </div>
             )}
 
-            <div className="bg-surface border border-border rounded-[2rem] p-6 lg:p-8 shadow-sm">
-              <p className="text-xs font-bold text-muted uppercase tracking-wider mb-5 flex items-center gap-2">
+            <div className="bg-surface border border-border rounded-[2rem] p-6 lg:p-8 shadow-sm transition-all duration-500">
+              <p className="text-xs font-bold text-muted uppercase tracking-wider mb-6 flex items-center gap-2">
                 <TrendingDown className="w-4 h-4 text-danger" />
                 Maiores Despesas (Top 3)
               </p>
-              <div className="space-y-4">
+              <div className="space-y-5">
                 {topDespesas.map((d, index) => {
                   const percent = data.despesas_pendentes_no_periodo > 0 
                     ? ((d.valor_pago || d.valor_previsto) / data.despesas_pendentes_no_periodo) * 100 
@@ -236,12 +300,17 @@ export function PeriodForecastSection() {
                     <div key={d.id} className="group">
                       <div className="flex justify-between items-center mb-1.5">
                         <div className="flex items-center gap-2 overflow-hidden">
-                          <span className="text-xs font-bold text-muted">{index + 1}.</span>
+                          <span className="text-xs font-bold text-muted w-4">{index + 1}.</span>
                           <p className="text-sm font-medium text-foreground truncate">{d.descricao}</p>
                         </div>
-                        <p className="text-sm font-bold text-danger shrink-0 ml-3">
-                          {formatCurrency(d.valor_pago || d.valor_previsto)}
-                        </p>
+                        <div className="flex items-center gap-3 shrink-0 ml-3">
+                          <p className="text-xs font-semibold text-muted bg-surface-secondary px-2 py-0.5 rounded-md">
+                            {percent.toFixed(0)}%
+                          </p>
+                          <p className="text-sm font-bold text-foreground">
+                            {formatCurrency(d.valor_pago || d.valor_previsto)}
+                          </p>
+                        </div>
                       </div>
                       <div className="w-full h-1.5 bg-surface-secondary rounded-full overflow-hidden">
                         <div 
@@ -262,20 +331,20 @@ export function PeriodForecastSection() {
 
         {/* Lista completa das despesas condensada */}
         <div className="mt-8">
-          <details className="group bg-surface border border-border rounded-2xl overflow-hidden shadow-sm">
+          <details className="group bg-surface border border-border rounded-[1.5rem] overflow-hidden shadow-sm transition-all duration-300">
             <summary className="flex items-center justify-between cursor-pointer list-none p-5 text-sm font-bold text-foreground hover:bg-surface-secondary transition-colors">
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center">
+                <div className="w-10 h-10 rounded-full bg-surface-secondary border border-border flex items-center justify-center text-foreground">
                   <TrendingDown className="w-4 h-4" />
                 </div>
-                Ver todas as despesas deste cálculo ({data.lancamentos_despesas.length})
+                Ver despesas consideradas ({sortedDespesas.length})
               </div>
-              <ChevronRight className="w-5 h-5 text-muted transition-transform group-open:rotate-90" />
+              <ChevronRight className="w-5 h-5 text-muted transition-transform duration-300 group-open:rotate-90" />
             </summary>
             
-            <div className="bg-surface border-t border-border divide-y divide-border-subtle max-h-96 overflow-y-auto">
-              {data.lancamentos_despesas.length > 0 ? (
-                data.lancamentos_despesas.map(d => {
+            <div className="bg-surface border-t border-border divide-y divide-border-subtle max-h-96 overflow-y-auto animate-in slide-in-from-top-4 duration-300">
+              {sortedDespesas.length > 0 ? (
+                sortedDespesas.map(d => {
                   // @ts-expect-error - Joined property from Supabase
                   const categoria = d.categorias;
                   // @ts-expect-error - Joined property from Supabase
@@ -283,16 +352,16 @@ export function PeriodForecastSection() {
                   const Icon = getDynamicIcon(categoria?.icone);
                   return (
                     <div key={d.id} className="p-4 flex items-center justify-between hover:bg-surface-secondary/50 transition-colors">
-                      <div className="flex items-center gap-3">
+                      <div className="flex items-center gap-4">
                         <div className="w-10 h-10 rounded-xl bg-surface-secondary border border-border flex items-center justify-center text-muted shrink-0">
                           <Icon className="w-5 h-5" />
                         </div>
                         <div>
-                          <p className="text-sm text-foreground font-medium">{d.descricao}</p>
-                          <p className="text-xs text-muted flex items-center gap-2 mt-0.5">
+                          <p className="text-sm text-foreground font-semibold">{d.descricao}</p>
+                          <p className="text-xs text-muted flex items-center gap-2 mt-1">
+                            <span className="bg-surface-secondary px-2 py-0.5 rounded-sm">{format(new Date(d.data_vencimento!), "dd MMM")}</span>
+                            <span className="text-border">•</span>
                             <span>{conta?.nome || "Sem conta"}</span>
-                            <span className="text-[10px]">•</span>
-                            <span>{format(new Date(d.data_vencimento!), "dd MMM")}</span>
                           </p>
                         </div>
                       </div>
@@ -318,7 +387,7 @@ export function PeriodForecastSection() {
   };
 
   return (
-    <div className="mt-8 mb-16 animate-in fade-in duration-200">
+    <div className="mt-8 mb-16 animate-in fade-in duration-500">
       {/* Header Interativo */}
       <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
         <div>
@@ -344,7 +413,7 @@ export function PeriodForecastSection() {
             variant={mode === "proximo_pagamento" ? "primary" : "ghost"}
             size="sm"
             onClick={() => setMode("proximo_pagamento")}
-            className={`whitespace-nowrap ${mode === "proximo_pagamento" ? "bg-primary text-primary-foreground hover:bg-primary/90" : "text-muted hover:text-foreground hover:bg-surface-secondary"}`}
+            className={`whitespace-nowrap transition-colors ${mode === "proximo_pagamento" ? "bg-primary text-primary-foreground hover:bg-primary/90" : "text-muted hover:text-foreground hover:bg-surface-secondary"}`}
           >
             Próximo Pagamento
           </Button>
@@ -352,7 +421,7 @@ export function PeriodForecastSection() {
             variant={mode === "fim_mes" ? "primary" : "ghost"}
             size="sm"
             onClick={() => setMode("fim_mes")}
-            className={`whitespace-nowrap ${mode === "fim_mes" ? "bg-primary text-primary-foreground hover:bg-primary/90" : "text-muted hover:text-foreground hover:bg-surface-secondary"}`}
+            className={`whitespace-nowrap transition-colors ${mode === "fim_mes" ? "bg-primary text-primary-foreground hover:bg-primary/90" : "text-muted hover:text-foreground hover:bg-surface-secondary"}`}
           >
             Fim do Mês
           </Button>
@@ -360,7 +429,7 @@ export function PeriodForecastSection() {
             variant={mode === "personalizado" ? "primary" : "ghost"}
             size="sm"
             onClick={() => setMode("personalizado")}
-            className={`whitespace-nowrap ${mode === "personalizado" ? "bg-primary text-primary-foreground hover:bg-primary/90" : "text-muted hover:text-foreground hover:bg-surface-secondary"}`}
+            className={`whitespace-nowrap transition-colors ${mode === "personalizado" ? "bg-primary text-primary-foreground hover:bg-primary/90" : "text-muted hover:text-foreground hover:bg-surface-secondary"}`}
           >
             Personalizado
           </Button>
@@ -369,14 +438,14 @@ export function PeriodForecastSection() {
 
       {/* Date Pickers apenas se Personalizado */}
       {mode === "personalizado" && (
-        <div className="flex flex-col sm:flex-row items-center gap-4 bg-surface border border-border p-4 rounded-xl mt-6">
+        <div className="flex flex-col sm:flex-row items-center gap-4 bg-surface border border-border p-4 rounded-xl mt-6 animate-in slide-in-from-top-2 duration-300">
           <div className="flex items-center gap-2 w-full sm:w-auto">
             <span className="text-sm font-medium text-muted w-8">De:</span>
             <input 
               type="date" 
               value={dataInicial} 
               onChange={(e) => setDataInicial(e.target.value)}
-              className="flex-1 bg-surface-secondary border border-border-subtle rounded-lg px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+              className="flex-1 bg-surface-secondary border border-border-subtle rounded-lg px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-colors"
             />
           </div>
           <div className="flex items-center gap-2 w-full sm:w-auto">
@@ -390,7 +459,7 @@ export function PeriodForecastSection() {
                 }
               }}
               min={dataInicial}
-              className="flex-1 bg-surface-secondary border border-border-subtle rounded-lg px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+              className="flex-1 bg-surface-secondary border border-border-subtle rounded-lg px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-colors"
             />
           </div>
         </div>
