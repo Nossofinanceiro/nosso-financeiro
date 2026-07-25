@@ -18,7 +18,20 @@ export class PlanejamentosRepository {
 
       if (error) throw error;
       return z.array(planejamentoSchema).parse(data || []);
-    } catch (err) {
+    } catch (err: any) {
+      if (typeof window !== 'undefined') {
+        fetch('/api/test', {
+          method: 'POST',
+          body: JSON.stringify({
+            from: 'Repository',
+            message: err.message,
+            stack: err.stack,
+            code: err.code,
+            details: err.details,
+            raw: err
+          })
+        });
+      }
       throw parseSupabaseError(err);
     }
   }
@@ -136,6 +149,52 @@ export class PlanejamentosRepository {
         .eq("id", id);
 
       if (error) throw error;
+    } catch (err) {
+      throw parseSupabaseError(err);
+    }
+  }
+
+  async aplicarPlanejamento(id: string): Promise<void> {
+    try {
+      const supabase = createClient();
+      
+      // 1. Fetch Planejamento and Items
+      const planejamento = await this.getPlanejamento(id);
+      if (!planejamento) throw new Error("Planejamento não encontrado");
+
+      // 2. Loop through items and create real records
+      for (const item of planejamento.itens || []) {
+        const isReceita = ["nova_receita_mensal", "receita_unica", "entrada", "entrada_inicial"].includes(item.tipo);
+        const isDespesa = ["nova_despesa_mensal", "despesa_unica", "saida", "parcelamento"].includes(item.tipo);
+        
+        if (isReceita) {
+          await supabase.from("receitas").insert({
+            familia_id: planejamento.familia_id,
+            descricao: `[Plan: ${planejamento.titulo}] ${item.descricao}`,
+            valor_previsto: item.valor,
+            status: "pendente",
+            data_prevista: item.data_inicial || new Date().toISOString(),
+            mes_referencia: item.data_inicial ? String(item.data_inicial).substring(0, 7) + "-01" : new Date().toISOString().substring(0, 7) + "-01",
+            recorrente: item.recorrencia === "mensal",
+            observacoes: "Gerado automaticamente pelo Simulador Financeiro."
+          });
+        } else if (isDespesa) {
+          await supabase.from("despesas").insert({
+            familia_id: planejamento.familia_id,
+            descricao: `[Plan: ${planejamento.titulo}] ${item.descricao}`,
+            valor_previsto: item.valor,
+            status: "pendente",
+            data_vencimento: item.data_inicial || new Date().toISOString(),
+            mes_referencia: item.data_inicial ? String(item.data_inicial).substring(0, 7) + "-01" : new Date().toISOString().substring(0, 7) + "-01",
+            recorrente: item.recorrencia === "mensal",
+            observacoes: "Gerado automaticamente pelo Simulador Financeiro."
+          });
+        }
+      }
+
+      // 3. Mark plan as concluido
+      await this.updatePlanejamento(id, { status: "concluido" });
+
     } catch (err) {
       throw parseSupabaseError(err);
     }

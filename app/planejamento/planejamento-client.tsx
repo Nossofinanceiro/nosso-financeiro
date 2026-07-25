@@ -12,6 +12,7 @@ import { ptBR } from "date-fns/locale";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Skeleton } from "@/components/ui/skeleton";
+import { AppShell } from "@/components/layout/app-shell";
 
 interface Props {
   familiaId: string;
@@ -28,8 +29,20 @@ export function PlanejamentoClient({ familiaId }: Props) {
         const repo = new PlanejamentosRepository();
         const data = await repo.getPlanejamentos(familiaId);
         setPlanejamentos(data);
-      } catch (error) {
-        console.error("Erro ao carregar planejamentos", error);
+      } catch (err: any) {
+        console.error("Erro ao carregar planejamentos", err);
+        fetch('/api/test', {
+          method: 'POST',
+          body: JSON.stringify({
+            from: 'PlanejamentoClient',
+            message: err.message,
+            stack: err.stack,
+            code: err.code,
+            details: err.details,
+            originalError: err.originalError,
+            raw: err
+          })
+        });
       } finally {
         setLoading(false);
       }
@@ -39,7 +52,8 @@ export function PlanejamentoClient({ familiaId }: Props) {
 
   if (loading) {
     return (
-      <div className="p-6 md:p-8 max-w-7xl mx-auto space-y-6">
+      <AppShell title="Planejamento">
+        <div className="p-6 md:p-8 max-w-7xl mx-auto space-y-6">
         <div className="flex justify-between items-center">
           <Skeleton className="h-10 w-48" />
           <Skeleton className="h-10 w-32" />
@@ -47,12 +61,14 @@ export function PlanejamentoClient({ familiaId }: Props) {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {[1, 2, 3].map(i => <Skeleton key={i} className="h-64 rounded-[2rem]" />)}
         </div>
-      </div>
+        </div>
+      </AppShell>
     );
   }
 
   return (
-    <div className="p-6 md:p-8 max-w-7xl mx-auto space-y-8 animate-in fade-in duration-500">
+    <AppShell title="Planejamento">
+      <div className="p-6 md:p-8 max-w-7xl mx-auto space-y-8 animate-in fade-in duration-500">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <h1 className="text-3xl font-bold text-foreground flex items-center gap-3">
@@ -184,5 +200,6 @@ export function PlanejamentoClient({ familiaId }: Props) {
         </div>
       )}
     </div>
+    </AppShell>
   );
 }

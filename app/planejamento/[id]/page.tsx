@@ -1,36 +1,52 @@
+"use client";
+
+import React, { useEffect, useState, use } from "react";
 import { PlanejamentoDetailClient } from "./planejamento-detail-client";
 import { AuthRepository } from "@/lib/repositories/auth.repository";
 import { FamiliaRepository } from "@/lib/repositories/familia.repository";
-import { PlanejamentosRepository } from "@/lib/repositories/planejamentos.repository";
-import { redirect } from "next/navigation";
-import { Metadata } from "next";
+import { useRouter } from "next/navigation";
+import { PageLoading } from "@/components/ui/page-loading";
+import { AppShell } from "@/components/layout/app-shell";
 
-export const metadata: Metadata = {
-  title: "Simulação de Planejamento | Nosso Financeiro",
-  description: "Painel de controle para simulação financeira.",
-};
+export default function PlanejamentoDetailPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const resolvedParams = use(params);
+  const router = useRouter();
+  const [familiaId, setFamiliaId] = useState<string | null>(null);
 
-export default async function PlanejamentoDetailPage({ params }: { params: { id: string } }) {
-  const authRepo = new AuthRepository();
-  const user = await authRepo.getCurrentUser().catch(() => null);
+  useEffect(() => {
+    async function loadUser() {
+      try {
+        const authRepo = new AuthRepository();
+        const user = await authRepo.getCurrentUser();
+        
+        if (!user) {
+          router.push("/login");
+          return;
+        }
 
-  if (!user) {
-    redirect("/login");
-  }
-
-  const familiaRepo = new FamiliaRepository();
-  const familia = await familiaRepo.getFamiliaDoUsuario(user.id, user.nome);
-
-  const isNew = params.id === "novo";
-  let planejamento = null;
-
-  if (!isNew) {
-    const planRepo = new PlanejamentosRepository();
-    planejamento = await planRepo.getPlanejamento(params.id);
-    if (!planejamento) {
-      redirect("/planejamento");
+        const familiaRepo = new FamiliaRepository();
+        const familia = await familiaRepo.getFamiliaDoUsuario(user.id, user.nome);
+        setFamiliaId(familia.id);
+      } catch (error) {
+        console.error("Error loading user or family", error);
+        router.push("/login");
+      }
     }
+    
+    loadUser();
+  }, [router]);
+
+  if (!familiaId) {
+    return (
+      <AppShell title="Planejamento">
+        <PageLoading />
+      </AppShell>
+    );
   }
 
-  return <PlanejamentoDetailClient familiaId={familia.id} planejamento={planejamento} />;
+  return <PlanejamentoDetailClient planejamentoId={resolvedParams.id} familiaId={familiaId} />;
 }

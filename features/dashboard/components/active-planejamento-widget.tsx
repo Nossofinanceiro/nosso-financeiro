@@ -10,12 +10,15 @@ import Link from "next/link";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 
+import { SimulacaoService, SimulacaoResult } from "@/lib/services/simulacao.service";
+
 interface Props {
   familiaId: string;
 }
 
 export function ActivePlanejamentoWidget({ familiaId }: Props) {
   const [activePlan, setActivePlan] = useState<Planejamento | null>(null);
+  const [simulacao, setSimulacao] = useState<SimulacaoResult | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -23,12 +26,15 @@ export function ActivePlanejamentoWidget({ familiaId }: Props) {
       try {
         const repo = new PlanejamentosRepository();
         const plans = await repo.getPlanejamentos(familiaId);
-        // Find the first active plan
         const active = plans.find(p => p.status === "ativo");
+        
         if (active) {
           setActivePlan(active);
+          const simService = new SimulacaoService();
+          const sim = await simService.gerarSimulacao(active);
+          setSimulacao(sim);
         }
-      } catch (err) {
+      } catch (err: any) {
         console.error(err);
       } finally {
         setLoading(false);
@@ -54,13 +60,17 @@ export function ActivePlanejamentoWidget({ familiaId }: Props) {
 
         <div className="flex items-center gap-8">
           <div className="hidden sm:block text-right">
-            <p className="text-xs font-bold text-primary-foreground/80 mb-0.5">Valor Estimado</p>
+            <p className="text-xs font-bold text-primary-foreground/80 mb-0.5">Valor Total</p>
             <p className="font-bold">{formatCurrency(activePlan.valor_estimado)}</p>
           </div>
-          {activePlan.data_prevista && (
+          {simulacao && (
             <div className="hidden md:block text-right">
-              <p className="text-xs font-bold text-primary-foreground/80 mb-0.5">Data Alvo</p>
-              <p className="font-bold">{format(new Date(activePlan.data_prevista), "MMM yyyy", { locale: ptBR })}</p>
+              <p className="text-xs font-bold text-primary-foreground/80 mb-0.5">Data Prevista</p>
+              <p className={`font-bold ${simulacao.diagnostico.viavel_na_data ? 'text-emerald-300' : 'text-danger'}`}>
+                {simulacao.diagnostico.data_realista 
+                  ? format(new Date(simulacao.diagnostico.data_realista + "-01T12:00:00Z"), "MMM yyyy", { locale: ptBR }) 
+                  : "Inviável"}
+              </p>
             </div>
           )}
           <div className="w-10 h-10 rounded-full bg-primary-foreground text-primary flex items-center justify-center shadow-sm group-hover:translate-x-1 transition-transform">
