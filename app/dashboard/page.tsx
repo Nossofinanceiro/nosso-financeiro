@@ -81,7 +81,7 @@ export default function DashboardPage() {
           </div>
 
           {/* Cards Principais da Primeira Dobra */}
-          <div className="order-5 md:order-none contents md:block space-y-6 md:space-y-0">
+          <div className="order-5 md:order-none flex flex-col gap-6 md:block md:space-y-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <StatCard
               title="Saldo Atual Familiar"

@@ -153,18 +153,18 @@ export function PeriodForecastSection({ renderMobileMonthSelector }: { renderMob
     const sortedDespesas = [...data.lancamentos_despesas].sort((a, b) => new Date(a.data_vencimento!).getTime() - new Date(b.data_vencimento!).getTime());
 
     return (
-      <div className="contents md:block">
+      <div className="order-3 md:order-none w-full">
         {mode === "proximo_pagamento" && !data.proximo_pagamento && (
-          <div className="order-1 md:order-none md:mb-6 p-4 bg-amber-500/10 border border-amber-500/20 rounded-xl flex items-center gap-3">
+          <div className="mb-4 md:mb-6 p-4 bg-amber-500/10 border border-amber-500/20 rounded-xl flex items-center gap-3">
             <AlertCircle className="w-5 h-5 text-amber-500 shrink-0" />
             <p className="text-sm text-amber-500">Nenhum próximo pagamento cadastrado no sistema. O período analisado estendeu-se até o fim do mês.</p>
           </div>
         )}
 
-        <div className="contents md:grid md:grid-cols-1 xl:grid-cols-3 md:gap-6">
+        <div className="flex flex-col gap-4 md:grid md:grid-cols-1 xl:grid-cols-3 md:gap-6 w-full">
           {/* Main Giant Card */}
-          <div className="order-4 md:order-none xl:col-span-2 flex flex-col">
-            <Card className="bg-surface border-border overflow-hidden rounded-[2rem] p-3 md:p-12 shadow-xl flex-1 flex flex-col justify-center text-center relative transition-all duration-500">
+          <div className="xl:col-span-2 flex flex-col w-full">
+            <Card className="bg-surface border-border overflow-hidden rounded-[2rem] p-3 md:p-12 shadow-xl flex-1 flex flex-col justify-center text-center relative transition-all duration-500 w-full">
               <div className="relative z-10 flex flex-col justify-between items-center h-full">
                 
                 {/* Cabeçalho do Card */}
@@ -228,9 +228,9 @@ export function PeriodForecastSection({ renderMobileMonthSelector }: { renderMob
           </div>
 
           {/* Right Column: Next Payment & Top 3 */}
-          <div className="contents md:flex xl:col-span-1 md:flex-col md:gap-6">
+          <div className="flex flex-col gap-4 md:gap-6 xl:col-span-1 w-full">
             {data.proximo_pagamento ? (
-              <div className="order-5 md:order-none bg-surface border border-border rounded-[2rem] p-6 md:p-8 shadow-sm flex flex-col justify-center relative overflow-hidden flex-1 transition-all duration-500">
+              <div className="bg-surface border border-border rounded-[2rem] p-6 md:p-8 shadow-sm flex flex-col justify-center relative overflow-hidden flex-1 transition-all duration-500 w-full">
                 <div className="absolute -top-4 -right-4 opacity-[0.03]">
                   <Wallet className="w-32 h-32 text-foreground" />
                 </div>
@@ -299,7 +299,7 @@ export function PeriodForecastSection({ renderMobileMonthSelector }: { renderMob
                 </div>
               </div>
             ) : (
-              <div className="order-5 md:order-none bg-surface border border-border rounded-[2rem] p-8 shadow-sm flex flex-col justify-center items-center text-center relative overflow-hidden flex-1 transition-all duration-500">
+              <div className="bg-surface border border-border rounded-[2rem] p-8 shadow-sm flex flex-col justify-center items-center text-center relative overflow-hidden flex-1 transition-all duration-500 w-full">
                 <div className="w-16 h-16 rounded-full bg-surface-secondary flex items-center justify-center text-muted mb-4">
                   <Calendar className="w-8 h-8" />
                 </div>
@@ -311,7 +311,7 @@ export function PeriodForecastSection({ renderMobileMonthSelector }: { renderMob
               </div>
             )}
 
-            <div className="order-6 md:order-none bg-surface border border-border rounded-[2rem] p-6 lg:p-8 shadow-sm transition-all duration-500">
+            <div className="bg-surface border border-border rounded-[2rem] p-6 lg:p-8 shadow-sm transition-all duration-500 w-full">
               <p className="text-xs font-bold text-muted uppercase tracking-wider mb-6 flex items-center gap-2">
                 <TrendingDown className="w-4 h-4 text-danger" />
                 Maiores Despesas (Top 3)
@@ -355,7 +355,7 @@ export function PeriodForecastSection({ renderMobileMonthSelector }: { renderMob
         </div>
 
         {/* Lista completa das despesas condensada */}
-        <div className="order-7 md:order-none md:mt-8">
+        <div className="mt-4 md:mt-8 w-full">
           <details className="group bg-surface border border-border rounded-[1.5rem] overflow-hidden shadow-sm transition-all duration-300">
             <summary className="flex items-center justify-between cursor-pointer list-none p-5 text-sm font-bold text-foreground hover:bg-surface-secondary transition-colors">
               <div className="flex items-center gap-3">
@@ -412,9 +412,9 @@ export function PeriodForecastSection({ renderMobileMonthSelector }: { renderMob
   };
 
   return (
-    <div className="mt-0 md:mt-8 mb-16 animate-in fade-in duration-500 flex flex-col gap-2 md:gap-0 md:block">
+    <div className="mt-0 md:mt-8 mb-16 animate-in fade-in duration-500 flex flex-col gap-2 md:gap-0 md:block w-full">
       {/* Header Interativo */}
-      <div className="order-2 md:order-none flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+      <div className="order-1 md:order-none flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 w-full">
         <div className="hidden md:block">
           <h2 className="text-2xl font-bold text-foreground flex items-center gap-2">
             <Wallet className="w-6 h-6 text-primary" />
@@ -462,7 +462,7 @@ export function PeriodForecastSection({ renderMobileMonthSelector }: { renderMob
       </div>
 
       {/* Date Pickers & Mobile Month Selector */}
-      <div className="order-3 md:order-none flex flex-col gap-2 md:gap-4 md:mt-6">
+      <div className="order-2 md:order-none flex flex-col gap-2 md:gap-4 md:mt-6 w-full">
         {mode === "personalizado" && (
           <div className="flex flex-col sm:flex-row items-center gap-2 md:gap-4 bg-surface border border-border p-2 md:p-4 rounded-xl animate-in slide-in-from-top-2 duration-300">
           <div className="flex items-center gap-2 w-full sm:w-auto">
