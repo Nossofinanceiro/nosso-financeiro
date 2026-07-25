@@ -276,6 +276,33 @@ export const periodForecastResponseSchema = z.object({
   lancamentos_receitas: z.array(receitaSchema),
 });
 
+export const planejamentoItemSchema = z.object({
+  id: uuidSchema,
+  planejamento_id: uuidSchema,
+  tipo: z.enum(["entrada", "saida"]),
+  descricao: z.string().min(1, "Descrição é obrigatória"),
+  valor: monetarySchema,
+  mensal: z.boolean().default(false),
+  criado_em: z.string().optional(),
+  atualizado_em: z.string().optional(),
+});
+
+export const planejamentoSchema = z.object({
+  id: uuidSchema,
+  familia_id: uuidSchema,
+  categoria_id: uuidSchema.nullable().optional(),
+  titulo: z.string().min(1, "Título é obrigatório"),
+  descricao: z.string().nullable().optional(),
+  data_prevista: isoDateSchema.nullable().optional(),
+  valor_estimado: monetarySchema.default(0),
+  prioridade: z.enum(["baixa", "media", "alta"]).default("media"),
+  status: z.enum(["ativo", "concluido", "cancelado"]).default("ativo"),
+  observacoes: z.string().nullable().optional(),
+  criado_em: z.string().optional(),
+  atualizado_em: z.string().optional(),
+  itens: z.array(planejamentoItemSchema).optional(),
+});
+
 // ==========================================
 // 3. Exported Inferred Types
 // ==========================================
@@ -298,3 +325,5 @@ export type FilterParams = z.infer<typeof filterSchema>;
 export type PaginationParams = z.infer<typeof paginationSchema>;
 export type PeriodForecastRequest = z.infer<typeof periodForecastRequestSchema>;
 export type PeriodForecastResponse = z.infer<typeof periodForecastResponseSchema>;
+export type Planejamento = z.infer<typeof planejamentoSchema>;
+export type PlanejamentoItem = z.infer<typeof planejamentoItemSchema>;

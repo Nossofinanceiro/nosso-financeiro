@@ -12,6 +12,7 @@ import { PeriodForecastSection } from "@/features/dashboard/components/period-fo
 import { ExpensesCategoryChart } from "@/features/dashboard/components/expenses-category-chart";
 import { UpcomingExpensesList } from "@/features/dashboard/components/upcoming-expenses-list";
 import { AccountsSummaryList } from "@/features/dashboard/components/accounts-summary-list";
+import { ActivePlanejamentoWidget } from "@/features/dashboard/components/active-planejamento-widget";
 import {
   Wallet,
   TrendingUp,
@@ -54,6 +55,8 @@ export default function DashboardPage() {
             selectedMonth={selectedMonth}
             onMonthChange={setSelectedMonth}
           />
+
+          <ActivePlanejamentoWidget familiaId={data.familia.id} />
 
           {/* Seção Previsão do Período */}
           <PeriodForecastSection />
