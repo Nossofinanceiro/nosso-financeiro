@@ -247,7 +247,7 @@ export function PeriodForecastSection() {
                             <p className="text-lg font-bold text-foreground">{item.pessoa || "Geral"}</p>
                             <p className="text-sm font-medium text-muted">{item.descricao}</p>
                           </div>
-                          <p className="text-xl font-bold text-primary">+{formatCurrency(item.valor)}</p>
+                          <p className="text-xl font-bold text-primary">{formatCurrency(item.valor)}</p>
                         </div>
                       ))}
                       <div className="pt-2 border-t border-border flex justify-between items-center">
@@ -255,7 +255,7 @@ export function PeriodForecastSection() {
                           <p className="text-sm font-medium text-muted mb-0.5">Total em {format(new Date(data.proximo_pagamento.data!), "dd 'de' MMMM", { locale: ptBR })}</p>
                           <p className="text-xs text-muted">Faltam {Math.max(0, Math.ceil((new Date(data.proximo_pagamento.data!).getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24)))} dias</p>
                         </div>
-                        <p className="text-2xl font-black text-primary">+{formatCurrency(data.proximo_pagamento.valor)}</p>
+                        <p className="text-2xl font-black text-primary">{formatCurrency(data.proximo_pagamento.valor)}</p>
                       </div>
                     </div>
                   ) : (
@@ -291,7 +291,7 @@ export function PeriodForecastSection() {
                           <CircleDollarSign className="w-5 h-5" />
                         </div>
                         <p className="text-3xl font-black text-primary">
-                          +{formatCurrency(data.proximo_pagamento.valor)}
+                          {formatCurrency(data.proximo_pagamento.valor)}
                         </p>
                       </div>
                     </>
