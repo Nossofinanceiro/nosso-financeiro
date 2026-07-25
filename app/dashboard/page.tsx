@@ -49,7 +49,7 @@ export default function DashboardPage() {
         <div className="space-y-6 animate-in fade-in duration-200">
           {/* Primeira Dobra: Saudação e Seletor de Mês */}
           <DashboardGreeting
-            userName={data.usuario.nome}
+            userName="Clayton e Janine"
             familyTitle={data.familia.nome}
             selectedMonth={selectedMonth}
             onMonthChange={setSelectedMonth}
