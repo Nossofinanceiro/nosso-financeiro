@@ -97,18 +97,18 @@ export function CategoriaModal({ isOpen, onClose, categoriaToEdit, defaultTipo =
     >
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="space-y-2">
-          <label className="text-sm font-medium text-slate-300">Nome *</label>
+          <label className="text-sm font-medium text-foreground">Nome *</label>
           <Input
             value={nome}
             onChange={(e) => setNome(e.target.value)}
             placeholder="Ex: Alimentação, Salário..."
-            className="bg-slate-900 border-slate-700"
+            className="bg-surface border-border-subtle"
           />
           {errors.nome && <p className="text-xs text-danger">{errors.nome}</p>}
         </div>
 
         <div className="space-y-2">
-          <label className="text-sm font-medium text-slate-300">Tipo *</label>
+          <label className="text-sm font-medium text-foreground">Tipo *</label>
           <Select
             value={tipo}
             onChange={(e) => setTipo(e.target.value as "receita" | "despesa")}
@@ -116,26 +116,26 @@ export function CategoriaModal({ isOpen, onClose, categoriaToEdit, defaultTipo =
               { value: "despesa", label: "Despesa" },
               { value: "receita", label: "Receita" },
             ]}
-            className="bg-slate-900 border-slate-700"
+            className="bg-surface border-border-subtle"
             disabled={!!categoriaToEdit} // Generally good practice to not change type after creation
           />
           {errors.tipo && <p className="text-xs text-danger">{errors.tipo}</p>}
         </div>
 
         <div className="space-y-2">
-          <label className="text-sm font-medium text-slate-300">Cor *</label>
+          <label className="text-sm font-medium text-foreground">Cor *</label>
           <div className="flex gap-2 items-center">
             <Input
               type="color"
               value={cor}
               onChange={(e) => setCor(e.target.value)}
-              className="w-12 h-10 p-1 bg-slate-900 border-slate-700 cursor-pointer"
+              className="w-12 h-10 p-1 bg-surface border-border-subtle cursor-pointer"
             />
             <Input
               type="text"
               value={cor}
               onChange={(e) => setCor(e.target.value)}
-              className="flex-1 bg-slate-900 border-slate-700"
+              className="flex-1 bg-surface border-border-subtle"
               placeholder="#000000"
             />
           </div>
@@ -143,14 +143,14 @@ export function CategoriaModal({ isOpen, onClose, categoriaToEdit, defaultTipo =
         </div>
 
         <div className="space-y-2">
-          <label className="text-sm font-medium text-slate-300">Ícone</label>
+          <label className="text-sm font-medium text-foreground">Ícone</label>
           <Input
             value={icone}
             onChange={(e) => setIcone(e.target.value)}
             placeholder="Ex: tag, home, shopping-cart..."
-            className="bg-slate-900 border-slate-700"
+            className="bg-surface border-border-subtle"
           />
-          <p className="text-[10px] text-slate-500">Nome de um ícone Lucide (ex: home, car, coffee)</p>
+          <p className="text-[10px] text-muted">Nome de um ícone Lucide (ex: home, car, coffee)</p>
         </div>
 
         <div className="flex items-center pt-2">
@@ -166,7 +166,7 @@ export function CategoriaModal({ isOpen, onClose, categoriaToEdit, defaultTipo =
           <Button type="button" variant="ghost" onClick={onClose} disabled={isPending}>
             Cancelar
           </Button>
-          <Button type="submit" disabled={isPending} className="bg-primary hover:bg-emerald-700 text-foreground">
+          <Button type="submit" disabled={isPending} className="bg-primary hover:bg-primary/90 text-foreground">
             {isPending ? "Salvando..." : "Salvar"}
           </Button>
         </div>

@@ -28,7 +28,7 @@ export function FilterBar({
   return (
     <div
       className={cn(
-        "flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3 p-4 rounded-2xl bg-[#111827] border border-border/80 shadow-md",
+        "flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3 p-4 rounded-2xl bg-surface border border-border/80 shadow-md",
         className
       )}
     >

@@ -107,7 +107,7 @@ export function TransferModal({ isOpen, onClose }: TransferModalProps) {
         )}
 
         <div className="space-y-2">
-          <label className="text-sm font-medium text-slate-300">Conta de Origem</label>
+          <label className="text-sm font-medium text-foreground">Conta de Origem</label>
           <Select
             value={contaOrigemId}
             onChange={(e) => setContaOrigemId(e.target.value)}
@@ -118,7 +118,7 @@ export function TransferModal({ isOpen, onClose }: TransferModalProps) {
         </div>
 
         <div className="space-y-2">
-          <label className="text-sm font-medium text-slate-300">Conta de Destino</label>
+          <label className="text-sm font-medium text-foreground">Conta de Destino</label>
           <Select
             value={contaDestinoId}
             onChange={(e) => setContaDestinoId(e.target.value)}
@@ -130,7 +130,7 @@ export function TransferModal({ isOpen, onClose }: TransferModalProps) {
 
         <div className="grid grid-cols-2 gap-4">
           <div className="space-y-2">
-            <label className="text-sm font-medium text-slate-300">Valor</label>
+            <label className="text-sm font-medium text-foreground">Valor</label>
             <CurrencyInput
               value={valor}
               onChange={setValor}
@@ -140,7 +140,7 @@ export function TransferModal({ isOpen, onClose }: TransferModalProps) {
           </div>
 
           <div className="space-y-2">
-            <label className="text-sm font-medium text-slate-300">Data</label>
+            <label className="text-sm font-medium text-foreground">Data</label>
             <Input
               type="date"
               value={dataTransferencia}
@@ -152,7 +152,7 @@ export function TransferModal({ isOpen, onClose }: TransferModalProps) {
         </div>
 
         <div className="space-y-2">
-          <label className="text-sm font-medium text-slate-300">Descrição (opcional)</label>
+          <label className="text-sm font-medium text-foreground">Descrição (opcional)</label>
           <Input
             value={descricao}
             onChange={(e) => setDescricao(e.target.value)}

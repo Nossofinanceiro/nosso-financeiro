@@ -92,7 +92,7 @@ export function PagamentoModal({ isOpen, onClose, despesa }: PagamentoModalProps
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-1">
+            <label className="block text-sm font-medium text-foreground mb-1">
               Valor Pago *
             </label>
             <input
@@ -100,33 +100,33 @@ export function PagamentoModal({ isOpen, onClose, despesa }: PagamentoModalProps
               step="0.01"
               value={valorPago}
               onChange={(e) => setValorPago(e.target.value)}
-              className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:ring-2 focus:ring-primary"
+              className="w-full bg-surface border border-border-subtle rounded-lg px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
             />
             {errors.valorPago && <p className="text-xs text-danger mt-1">{errors.valorPago}</p>}
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-1">
+            <label className="block text-sm font-medium text-foreground mb-1">
               Data do Pagamento *
             </label>
             <input
               type="date"
               value={dataPagamento}
               onChange={(e) => setDataPagamento(e.target.value)}
-              className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:ring-2 focus:ring-primary"
+              className="w-full bg-surface border border-border-subtle rounded-lg px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
             />
             {errors.dataPagamento && <p className="text-xs text-danger mt-1">{errors.dataPagamento}</p>}
           </div>
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-1">
+          <label className="block text-sm font-medium text-foreground mb-1">
             Conta de Saída *
           </label>
           <select
             value={contaId}
             onChange={(e) => setContaId(e.target.value)}
-            className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:ring-2 focus:ring-primary"
+            className="w-full bg-surface border border-border-subtle rounded-lg px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
           >
             <option value="">Selecione...</option>
             {contas.map(c => (
@@ -144,7 +144,7 @@ export function PagamentoModal({ isOpen, onClose, despesa }: PagamentoModalProps
             variant="primary" 
             type="submit" 
             disabled={isPending}
-            className="bg-primary hover:bg-emerald-700"
+            className="bg-primary hover:bg-primary/90"
           >
             {isPending ? "Confirmando..." : "Confirmar Pagamento"}
           </Button>

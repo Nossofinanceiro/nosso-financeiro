@@ -137,14 +137,14 @@ export function DespesaModal({ isOpen, onClose, despesaToEdit, selectedMonth }: 
       <form onSubmit={handleSubmit} className="space-y-4">
         {/* Descrição */}
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-1">
+          <label className="block text-sm font-medium text-foreground mb-1">
             Descrição *
           </label>
           <input
             type="text"
             value={descricao}
             onChange={(e) => setDescricao(e.target.value)}
-            className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-primary"
+            className="w-full bg-surface border border-border-subtle rounded-lg px-3 py-2 text-sm text-foreground placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-primary"
             placeholder="Ex: Conta de Luz"
           />
           {errors.descricao && <p className="text-xs text-danger mt-1">{errors.descricao}</p>}
@@ -153,7 +153,7 @@ export function DespesaModal({ isOpen, onClose, despesaToEdit, selectedMonth }: 
         <div className="grid grid-cols-2 gap-4">
           {/* Valor */}
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-1">
+            <label className="block text-sm font-medium text-foreground mb-1">
               Valor Previsto *
             </label>
             <input
@@ -161,7 +161,7 @@ export function DespesaModal({ isOpen, onClose, despesaToEdit, selectedMonth }: 
               step="0.01"
               value={valorPrevisto}
               onChange={(e) => setValorPrevisto(e.target.value)}
-              className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:ring-2 focus:ring-primary"
+              className="w-full bg-surface border border-border-subtle rounded-lg px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
               placeholder="0.00"
             />
             {errors.valor_previsto && <p className="text-xs text-danger mt-1">{errors.valor_previsto}</p>}
@@ -169,14 +169,14 @@ export function DespesaModal({ isOpen, onClose, despesaToEdit, selectedMonth }: 
 
           {/* Data */}
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-1">
+            <label className="block text-sm font-medium text-foreground mb-1">
               Data de Vencimento *
             </label>
             <input
               type="date"
               value={dataVencimento}
               onChange={(e) => setDataVencimento(e.target.value)}
-              className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:ring-2 focus:ring-primary"
+              className="w-full bg-surface border border-border-subtle rounded-lg px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
             />
             {errors.data_vencimento && <p className="text-xs text-danger mt-1">{errors.data_vencimento}</p>}
           </div>
@@ -185,13 +185,13 @@ export function DespesaModal({ isOpen, onClose, despesaToEdit, selectedMonth }: 
         <div className="grid grid-cols-2 gap-4">
           {/* Categoria */}
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-1">
+            <label className="block text-sm font-medium text-foreground mb-1">
               Categoria *
             </label>
             <select
               value={categoriaId}
               onChange={(e) => setCategoriaId(e.target.value)}
-              className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:ring-2 focus:ring-primary"
+              className="w-full bg-surface border border-border-subtle rounded-lg px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
             >
               <option value="">Selecione...</option>
               {categoriasDespesa.map(c => (
@@ -203,13 +203,13 @@ export function DespesaModal({ isOpen, onClose, despesaToEdit, selectedMonth }: 
 
           {/* Conta */}
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-1">
+            <label className="block text-sm font-medium text-foreground mb-1">
               Conta de Saída *
             </label>
             <select
               value={contaId}
               onChange={(e) => setContaId(e.target.value)}
-              className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:ring-2 focus:ring-primary"
+              className="w-full bg-surface border border-border-subtle rounded-lg px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
             >
               <option value="">Selecione...</option>
               {contas.map(c => (
@@ -222,13 +222,13 @@ export function DespesaModal({ isOpen, onClose, despesaToEdit, selectedMonth }: 
 
         {/* Observações */}
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-1">
+          <label className="block text-sm font-medium text-foreground mb-1">
             Observações
           </label>
           <textarea
             value={observacoes}
             onChange={(e) => setObservacoes(e.target.value)}
-            className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-primary"
+            className="w-full bg-surface border border-border-subtle rounded-lg px-3 py-2 text-sm text-foreground placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-primary"
             placeholder="Detalhes adicionais..."
             rows={2}
           />
@@ -241,9 +241,9 @@ export function DespesaModal({ isOpen, onClose, despesaToEdit, selectedMonth }: 
             id="recorrente"
             checked={recorrente}
             onChange={(e) => setRecorrente(e.target.checked)}
-            className="rounded border-slate-700 bg-slate-900 text-primary focus:ring-primary focus:ring-offset-slate-950"
+            className="rounded border-border-subtle bg-surface text-primary focus:ring-primary focus:ring-offset-slate-950"
           />
-          <label htmlFor="recorrente" className="text-sm font-medium text-slate-300 cursor-pointer">
+          <label htmlFor="recorrente" className="text-sm font-medium text-foreground cursor-pointer">
             Despesa recorrente
           </label>
         </div>
@@ -256,7 +256,7 @@ export function DespesaModal({ isOpen, onClose, despesaToEdit, selectedMonth }: 
             variant="primary" 
             type="submit" 
             disabled={isPending}
-            className="bg-primary hover:bg-emerald-700"
+            className="bg-primary hover:bg-primary/90"
           >
             {isPending ? "Salvando..." : "Salvar"}
           </Button>

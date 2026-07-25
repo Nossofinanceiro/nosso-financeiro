@@ -76,7 +76,7 @@ function ToastItem({
   }[toast.variant || "info"];
 
   const borderStyles = {
-    success: "border-primary/30 bg-emerald-950/90 text-emerald-300",
+    success: "border-primary/30 bg-emerald-950/90 text-primary",
     error: "border-danger/30 bg-red-950/90 text-red-300",
     warning: "border-amber-500/30 bg-amber-950/90 text-amber-300",
     info: "border-blue-500/30 bg-blue-950/90 text-blue-300",

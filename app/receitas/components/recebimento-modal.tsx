@@ -70,35 +70,35 @@ export function RecebimentoModal({ isOpen, onClose, receita }: RecebimentoModalP
     >
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="space-y-2">
-          <label className="text-sm font-medium text-slate-300">Valor Recebido *</label>
+          <label className="text-sm font-medium text-foreground">Valor Recebido *</label>
           <Input
             type="number"
             step="0.01"
             value={valorRecebido}
             onChange={(e) => setValorRecebido(e.target.value)}
-            className="bg-slate-900 border-slate-700"
+            className="bg-surface border-border-subtle"
             required
           />
         </div>
 
         <div className="space-y-2">
-          <label className="text-sm font-medium text-slate-300">Data de Recebimento *</label>
+          <label className="text-sm font-medium text-foreground">Data de Recebimento *</label>
           <Input
             type="date"
             value={dataRecebimento}
             onChange={(e) => setDataRecebimento(e.target.value)}
-            className="bg-slate-900 border-slate-700"
+            className="bg-surface border-border-subtle"
             required
           />
         </div>
 
         <div className="space-y-2">
-          <label className="text-sm font-medium text-slate-300">Conta de Destino *</label>
+          <label className="text-sm font-medium text-foreground">Conta de Destino *</label>
           <Select
             value={contaId}
             onChange={(e) => setContaId(e.target.value)}
             options={[{ value: "", label: "Selecione a conta..." }, ...contas.map((c) => ({ value: c.id, label: c.nome }))]}
-            className="bg-slate-900 border-slate-700"
+            className="bg-surface border-border-subtle"
             required
           />
         </div>
@@ -107,7 +107,7 @@ export function RecebimentoModal({ isOpen, onClose, receita }: RecebimentoModalP
           <Button type="button" variant="ghost" onClick={onClose} disabled={isPending}>
             Cancelar
           </Button>
-          <Button type="submit" disabled={isPending} className="bg-primary hover:bg-emerald-700 text-foreground">
+          <Button type="submit" disabled={isPending} className="bg-primary hover:bg-primary/90 text-foreground">
             {isPending ? "Confirmando..." : "Confirmar Recebimento"}
           </Button>
         </div>

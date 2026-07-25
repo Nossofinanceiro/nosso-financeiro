@@ -54,7 +54,7 @@ export default function ContasPage() {
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
         <div>
           <h2 className="text-xl font-semibold text-foreground">Contas</h2>
-          <p className="text-sm text-slate-400">Gerencie suas contas bancárias e carteiras</p>
+          <p className="text-sm text-muted">Gerencie suas contas bancárias e carteiras</p>
         </div>
         <div className="hidden sm:flex gap-3">
           <Button variant="secondary" onClick={() => setIsTransferModalOpen(true)}>
@@ -94,7 +94,7 @@ export default function ContasPage() {
         </div>
       ) : !contas || contas.length === 0 ? (
         <EmptyState
-          icon={<Wallet className="w-12 h-12 text-slate-400" />}
+          icon={<Wallet className="w-12 h-12 text-muted" />}
           title="Nenhuma conta cadastrada"
           description="Todas as suas contas aparecerão aqui."
           action={

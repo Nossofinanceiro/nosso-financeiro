@@ -25,9 +25,9 @@ export function DespesasSummary({ despesas, isLoading }: DespesasSummaryProps) {
   if (isLoading) {
     return (
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-        <Skeleton className="h-32 rounded-xl bg-slate-900 border-slate-800" />
-        <Skeleton className="h-32 rounded-xl bg-slate-900 border-slate-800" />
-        <Skeleton className="h-32 rounded-xl bg-slate-900 border-slate-800" />
+        <Skeleton className="h-32 rounded-xl bg-surface border-border" />
+        <Skeleton className="h-32 rounded-xl bg-surface border-border" />
+        <Skeleton className="h-32 rounded-xl bg-surface border-border" />
       </div>
     );
   }
@@ -35,12 +35,12 @@ export function DespesasSummary({ despesas, isLoading }: DespesasSummaryProps) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
       {/* Total Previsto */}
-      <div className="bg-slate-900 border border-slate-800 rounded-xl p-5 flex flex-col justify-between overflow-hidden relative">
+      <div className="bg-surface border border-border rounded-xl p-5 flex flex-col justify-between overflow-hidden relative">
         <div className="flex items-center gap-3 mb-2 z-10">
           <div className="p-2 bg-blue-500/10 text-blue-400 rounded-lg">
             <TrendingDown className="w-5 h-5" />
           </div>
-          <span className="text-slate-400 font-medium">Total Previsto</span>
+          <span className="text-muted font-medium">Total Previsto</span>
         </div>
         <div className="z-10">
           <h2 className="text-2xl font-bold text-foreground">-US$ {formatCurrency(totalPrevisto).replace("US$", "").trim()}</h2>
@@ -48,7 +48,7 @@ export function DespesasSummary({ despesas, isLoading }: DespesasSummaryProps) {
       </div>
 
       {/* Total Pago */}
-      <div className="bg-slate-900 border border-slate-800 rounded-xl p-5 flex flex-col justify-between overflow-hidden relative group">
+      <div className="bg-surface border border-border rounded-xl p-5 flex flex-col justify-between overflow-hidden relative group">
         <div className="absolute inset-0 bg-rose-500/5 group-hover:bg-rose-500/10 transition-colors duration-300" />
         {/* Glow effect */}
         <div className="absolute -bottom-8 -right-8 w-24 h-24 bg-rose-500/20 rounded-full blur-2xl" />
@@ -57,7 +57,7 @@ export function DespesasSummary({ despesas, isLoading }: DespesasSummaryProps) {
           <div className="p-2 bg-rose-500/10 text-rose-400 rounded-lg">
             <Wallet className="w-5 h-5" />
           </div>
-          <span className="text-slate-400 font-medium">Total Pago</span>
+          <span className="text-muted font-medium">Total Pago</span>
         </div>
         <div className="z-10">
           <h2 className="text-2xl font-bold text-rose-400">-US$ {formatCurrency(totalPago).replace("US$", "").trim()}</h2>
@@ -65,12 +65,12 @@ export function DespesasSummary({ despesas, isLoading }: DespesasSummaryProps) {
       </div>
 
       {/* Total Pendente */}
-      <div className="bg-slate-900 border border-slate-800 rounded-xl p-5 flex flex-col justify-between overflow-hidden relative">
+      <div className="bg-surface border border-border rounded-xl p-5 flex flex-col justify-between overflow-hidden relative">
         <div className="flex items-center gap-3 mb-2 z-10">
           <div className="p-2 bg-amber-500/10 text-amber-400 rounded-lg">
             <Clock className="w-5 h-5" />
           </div>
-          <span className="text-slate-400 font-medium">Total Pendente</span>
+          <span className="text-muted font-medium">Total Pendente</span>
         </div>
         <div className="z-10">
           <h2 className="text-2xl font-bold text-amber-400">-US$ {formatCurrency(totalPendente).replace("US$", "").trim()}</h2>

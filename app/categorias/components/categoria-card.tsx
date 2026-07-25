@@ -45,19 +45,19 @@ export function CategoriaCard({ categoria, onEdit, onToggleStatus }: CategoriaCa
         </div>
         
         <div>
-          <h3 className={`font-semibold text-lg ${!isAtiva && 'text-slate-400'}`}>
+          <h3 className={`font-semibold text-lg ${!isAtiva && 'text-muted'}`}>
             {categoria.nome}
             {categoria.categoria_sistema && (
               <Badge variant="neutral" className="ml-2 text-[10px] py-0">Sistema</Badge>
             )}
           </h3>
           <div className="flex items-center gap-2 mt-1">
-            <span className="text-sm text-slate-400">{typeLabel}</span>
-            <span className="text-slate-600">•</span>
+            <span className="text-sm text-muted">{typeLabel}</span>
+            <span className="text-muted">•</span>
             {isAtiva ? (
               <Badge variant="success" className="bg-primary/5 text-primary border-primary/20 text-xs py-0">Ativa</Badge>
             ) : (
-              <Badge variant="neutral" className="bg-slate-800 text-slate-400 border-slate-700 text-xs py-0">Inativa</Badge>
+              <Badge variant="neutral" className="bg-surface-secondary text-muted border-border-subtle text-xs py-0">Inativa</Badge>
             )}
           </div>
         </div>
@@ -66,7 +66,7 @@ export function CategoriaCard({ categoria, onEdit, onToggleStatus }: CategoriaCa
       <div className="flex items-center w-full sm:w-auto justify-end mt-2 sm:mt-0">
         <DropdownMenu
           trigger={
-            <Button variant="ghost" size="sm" className="h-8 w-8 p-0 text-slate-400 hover:text-foreground">
+            <Button variant="ghost" size="sm" className="h-8 w-8 p-0 text-muted hover:text-foreground">
               <span className="sr-only">Abrir menu</span>
               <MoreHorizontal className="w-5 h-5" />
             </Button>

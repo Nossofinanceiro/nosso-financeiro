@@ -103,18 +103,18 @@ export function ContaModal({ isOpen, onClose, contaToEdit }: ContaModalProps) {
     >
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="space-y-2">
-          <label className="text-sm font-medium text-slate-300">Nome *</label>
+          <label className="text-sm font-medium text-foreground">Nome *</label>
           <Input
             value={nome}
             onChange={(e) => setNome(e.target.value)}
             placeholder="Ex: Nubank, Carteira..."
-            className="bg-slate-900 border-slate-700"
+            className="bg-surface border-border-subtle"
           />
           {errors.nome && <p className="text-xs text-danger">{errors.nome}</p>}
         </div>
 
         <div className="space-y-2">
-          <label className="text-sm font-medium text-slate-300">Tipo *</label>
+          <label className="text-sm font-medium text-foreground">Tipo *</label>
           <Select
             value={tipo}
             onChange={(e) => setTipo(e.target.value)}
@@ -124,17 +124,17 @@ export function ContaModal({ isOpen, onClose, contaToEdit }: ContaModalProps) {
               { value: "dinheiro", label: "Cash (Dinheiro)" },
               { value: "outra", label: "Investment/Credit/Outros" },
             ]}
-            className="bg-slate-900 border-slate-700"
+            className="bg-surface border-border-subtle"
           />
           {errors.tipo && <p className="text-xs text-danger">{errors.tipo}</p>}
         </div>
 
         <div className="space-y-2">
-          <label className="text-sm font-medium text-slate-300">Saldo Inicial *</label>
+          <label className="text-sm font-medium text-foreground">Saldo Inicial *</label>
           <CurrencyInput
             value={saldoInicial}
             onChange={(val) => setSaldoInicial(val)}
-            className="bg-slate-900 border-slate-700"
+            className="bg-surface border-border-subtle"
             disabled={!!contaToEdit} // Let's disable for edits if we want to restrict
           />
           {errors.saldo_inicial && <p className="text-xs text-danger">{errors.saldo_inicial}</p>}

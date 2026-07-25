@@ -41,7 +41,7 @@ export function DespesaCard({
   const valorExibicao = isPaga ? (despesa.valor_pago || despesa.valor_previsto) : despesa.valor_previsto;
 
   return (
-    <div className={`bg-slate-900 border ${isCancelada ? 'border-slate-800 opacity-60' : 'border-slate-800'} rounded-xl p-4 flex flex-col md:flex-row md:items-center justify-between gap-4 transition-all hover:border-slate-700 group`}>
+    <div className={`bg-surface border ${isCancelada ? 'border-border opacity-60' : 'border-border'} rounded-xl p-4 flex flex-col md:flex-row md:items-center justify-between gap-4 transition-all hover:border-border-subtle group`}>
       
       <div className="flex items-center gap-4">
         {/* Ícone */}
@@ -58,20 +58,20 @@ export function DespesaCard({
 
         {/* Detalhes */}
         <div>
-          <h3 className={`font-semibold ${isCancelada ? 'text-slate-500 line-through' : 'text-slate-200'}`}>
+          <h3 className={`font-semibold ${isCancelada ? 'text-muted line-through' : 'text-foreground'}`}>
             {despesa.descricao}
           </h3>
           
           <div className="flex flex-wrap items-center gap-2 mt-1 text-sm">
-            <span className="text-slate-400">
+            <span className="text-muted">
               {categoria?.nome || 'Sem Categoria'}
             </span>
-            <span className="text-slate-600">•</span>
-            <span className="text-slate-400">
+            <span className="text-muted">•</span>
+            <span className="text-muted">
               {conta?.nome || 'Sem Conta'}
             </span>
-            <span className="text-slate-600">•</span>
-            <span className="text-slate-400">
+            <span className="text-muted">•</span>
+            <span className="text-muted">
               {despesa.data_vencimento ? format(new Date(despesa.data_vencimento), "dd 'de' MMM", { locale: ptBR }) : 'Sem data'}
             </span>
 
@@ -88,7 +88,7 @@ export function DespesaCard({
             )}
 
             {isCancelada && (
-              <span className="px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 text-xs font-medium border border-slate-700">
+              <span className="px-2 py-0.5 rounded-full bg-surface-secondary text-muted text-xs font-medium border border-border-subtle">
                 Cancelada
               </span>
             )}
@@ -99,11 +99,11 @@ export function DespesaCard({
       <div className="flex items-center justify-between md:justify-end gap-4">
         {/* Valor */}
         <div className="text-right">
-          <p className={`font-bold ${isCancelada ? 'text-slate-500' : 'text-rose-400'}`}>
+          <p className={`font-bold ${isCancelada ? 'text-muted' : 'text-rose-400'}`}>
             -US$ {formatCurrency(valorExibicao || 0).replace("US$", "").trim()}
           </p>
           {isPaga && despesa.data_pagamento && (
-            <p className="text-xs text-slate-500">
+            <p className="text-xs text-muted">
               Pago em {format(new Date(despesa.data_pagamento), "dd/MM")}
             </p>
           )}
@@ -111,7 +111,7 @@ export function DespesaCard({
 
         <DropdownMenu
           trigger={
-            <Button variant="ghost" size="sm" className="h-8 w-8 text-slate-400 hover:text-foreground p-0">
+            <Button variant="ghost" size="sm" className="h-8 w-8 text-muted hover:text-foreground p-0">
               <span className="sr-only">Abrir menu</span>
               <MoreHorizontal className="h-4 w-4" />
             </Button>

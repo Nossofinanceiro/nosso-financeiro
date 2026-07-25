@@ -50,7 +50,7 @@ export function Tabs({ tabs, activeTab, onTabChange, className }: TabsProps) {
                 className={cn(
                   "px-1.5 py-0.5 rounded-full text-[10px] font-bold",
                   isActive
-                    ? "bg-primary/20 text-emerald-300"
+                    ? "bg-primary/20 text-primary"
                     : "bg-surface-secondary text-muted"
                 )}
               >

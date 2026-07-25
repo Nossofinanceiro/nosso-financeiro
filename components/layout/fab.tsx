@@ -72,7 +72,7 @@ export function Fab() {
         <button
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Adicionar lançamento rápido"
-          className="w-14 h-14 rounded-full bg-primary hover:bg-primary text-foreground shadow-2xl flex items-center justify-center border border-emerald-400/40 active:scale-95 transition-all cursor-pointer touch-target"
+          className="w-14 h-14 rounded-full bg-primary hover:bg-primary text-foreground shadow-2xl flex items-center justify-center border border-primary/40 active:scale-95 transition-all cursor-pointer touch-target"
         >
           <Plus className={cn("w-7 h-7 transition-transform duration-200", menuOpen && "rotate-45")} />
         </button>
@@ -90,7 +90,7 @@ export function Fab() {
           </Button>
         }
       >
-        <div className="p-4 rounded-xl bg-primary/10 border border-primary/20 text-emerald-300 text-sm flex items-center gap-3">
+        <div className="p-4 rounded-xl bg-primary/10 border border-primary/20 text-primary text-sm flex items-center gap-3">
           <ShieldCheck className="w-6 h-6 shrink-0 text-primary" />
           <span>
             A infraestrutura visual de <strong>{activeModalAction}</strong> está totalmente pronta para a integração das regras de negócio financeiras.

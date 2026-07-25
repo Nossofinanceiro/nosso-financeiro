@@ -39,8 +39,8 @@ export function ReceitaCard({ receita, onEdit, onMarkAsReceived, onCancel, onRea
   const statusColor = {
     pendente: "bg-amber-500/10 text-amber-500 border-amber-500/20",
     recebida: "bg-primary/10 text-primary border-primary/20",
-    cancelada: "bg-slate-800 text-slate-400 border-slate-700",
-  }[receita.status] || "bg-slate-800 text-slate-400 border-slate-700";
+    cancelada: "bg-surface-secondary text-muted border-border-subtle",
+  }[receita.status] || "bg-surface-secondary text-muted border-border-subtle";
 
   const statusLabel = {
     pendente: "Pendente",
@@ -69,16 +69,16 @@ export function ReceitaCard({ receita, onEdit, onMarkAsReceived, onCancel, onRea
         </div>
         
         <div>
-          <h3 className={`font-medium ${receita.status === 'cancelada' ? 'text-slate-400 line-through' : 'text-foreground'}`}>
+          <h3 className={`font-medium ${receita.status === 'cancelada' ? 'text-muted line-through' : 'text-foreground'}`}>
             {receita.descricao}
           </h3>
           <div className="flex flex-wrap items-center gap-2 mt-1">
-            <span className="text-xs text-slate-400">{categoria?.nome || "Sem categoria"}</span>
-            <span className="text-slate-600">•</span>
-            <span className="text-xs text-slate-400">{conta?.nome || "Sem conta"}</span>
-            <span className="text-slate-600">•</span>
-            <span className="text-xs text-slate-400">{dataFormatada}</span>
-            <span className="text-slate-600 hidden sm:inline">•</span>
+            <span className="text-xs text-muted">{categoria?.nome || "Sem categoria"}</span>
+            <span className="text-muted">•</span>
+            <span className="text-xs text-muted">{conta?.nome || "Sem conta"}</span>
+            <span className="text-muted">•</span>
+            <span className="text-xs text-muted">{dataFormatada}</span>
+            <span className="text-muted hidden sm:inline">•</span>
             <Badge variant="neutral" className={`${statusColor} text-[10px] py-0 px-1.5 h-4 hidden sm:inline-flex`}>
               {statusLabel}
             </Badge>
@@ -93,14 +93,14 @@ export function ReceitaCard({ receita, onEdit, onMarkAsReceived, onCancel, onRea
         
         <div className="flex items-center gap-4">
           <div className="text-right">
-            <p className={`text-sm font-semibold ${receita.status === 'recebida' ? 'text-primary' : receita.status === 'cancelada' ? 'text-slate-400' : 'text-foreground'}`}>
+            <p className={`text-sm font-semibold ${receita.status === 'recebida' ? 'text-primary' : receita.status === 'cancelada' ? 'text-muted' : 'text-foreground'}`}>
               {formatCurrency(valorExibicao || 0)}
             </p>
           </div>
 
           <DropdownMenu
             trigger={
-              <Button variant="ghost" size="sm" className="h-8 w-8 p-0 text-slate-400 hover:text-foreground">
+              <Button variant="ghost" size="sm" className="h-8 w-8 p-0 text-muted hover:text-foreground">
                 <span className="sr-only">Abrir menu</span>
                 <MoreHorizontal className="w-5 h-5" />
               </Button>

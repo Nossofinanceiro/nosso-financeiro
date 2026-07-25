@@ -82,13 +82,13 @@ export function DespesasList({
   return (
     <div className="space-y-4">
       {/* Filtros e Busca */}
-      <div className="flex flex-col sm:flex-row gap-4 justify-between items-center bg-slate-900 border border-slate-800 rounded-xl p-4">
-        <div className="flex gap-2 p-1 bg-slate-950 rounded-lg overflow-x-auto w-full sm:w-auto pb-2 sm:pb-1">
+      <div className="flex flex-col sm:flex-row gap-4 justify-between items-center bg-surface border border-border rounded-xl p-4">
+        <div className="flex gap-2 p-1 bg-background rounded-lg overflow-x-auto w-full sm:w-auto pb-2 sm:pb-1">
           <Button
             variant={filterMode === "all" ? "primary" : "ghost"}
             size="sm"
             onClick={() => setFilterMode("all")}
-            className={filterMode === "all" ? "bg-slate-800" : "text-slate-400"}
+            className={filterMode === "all" ? "bg-surface-secondary" : "text-muted"}
           >
             Todas
           </Button>
@@ -96,7 +96,7 @@ export function DespesasList({
             variant={filterMode === "pendente" ? "primary" : "ghost"}
             size="sm"
             onClick={() => setFilterMode("pendente")}
-            className={filterMode === "pendente" ? "bg-slate-800 text-amber-400" : "text-slate-400 hover:text-amber-400"}
+            className={filterMode === "pendente" ? "bg-surface-secondary text-amber-400" : "text-muted hover:text-amber-400"}
           >
             Pendente
           </Button>
@@ -104,7 +104,7 @@ export function DespesasList({
             variant={filterMode === "paga" ? "primary" : "ghost"}
             size="sm"
             onClick={() => setFilterMode("paga")}
-            className={filterMode === "paga" ? "bg-slate-800 text-primary" : "text-slate-400 hover:text-primary"}
+            className={filterMode === "paga" ? "bg-surface-secondary text-primary" : "text-muted hover:text-primary"}
           >
             Paga
           </Button>
@@ -112,7 +112,7 @@ export function DespesasList({
             variant={filterMode === "cancelada" ? "primary" : "ghost"}
             size="sm"
             onClick={() => setFilterMode("cancelada")}
-            className={filterMode === "cancelada" ? "bg-slate-800 text-slate-400" : "text-slate-400 hover:text-slate-300"}
+            className={filterMode === "cancelada" ? "bg-surface-secondary text-muted" : "text-muted hover:text-foreground"}
           >
             Cancelada
           </Button>
@@ -120,17 +120,17 @@ export function DespesasList({
 
         <div className="relative w-full sm:w-64 shrink-0">
           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <Search className="h-4 w-4 text-slate-500" />
+            <Search className="h-4 w-4 text-muted" />
           </div>
           <input
             type="text"
             placeholder="Buscar despesas..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full bg-slate-950 border border-slate-800 rounded-lg pl-9 pr-3 py-2 text-sm text-slate-200 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-700"
+            className="w-full bg-background border border-border rounded-lg pl-9 pr-3 py-2 text-sm text-foreground placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-slate-700"
           />
           <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-            <Filter className="h-4 w-4 text-slate-500" />
+            <Filter className="h-4 w-4 text-muted" />
           </div>
         </div>
       </div>
@@ -140,7 +140,7 @@ export function DespesasList({
         {isLoading ? (
           // Skeletons
           Array.from({ length: 4 }).map((_, i) => (
-            <Skeleton key={i} className="h-24 w-full bg-slate-900 border border-slate-800 rounded-xl" />
+            <Skeleton key={i} className="h-24 w-full bg-surface border border-border rounded-xl" />
           ))
         ) : filteredDespesas.length > 0 ? (
           filteredDespesas.map((despesa, index) => (
@@ -155,18 +155,18 @@ export function DespesasList({
             </div>
           ))
         ) : (
-          <div className="bg-slate-900 border border-slate-800 border-dashed rounded-xl p-12 flex flex-col items-center justify-center text-center">
-            <div className="w-16 h-16 bg-slate-800 rounded-full flex items-center justify-center mb-4">
-              <Plus className="w-8 h-8 text-slate-500" />
+          <div className="bg-surface border border-border border-dashed rounded-xl p-12 flex flex-col items-center justify-center text-center">
+            <div className="w-16 h-16 bg-surface-secondary rounded-full flex items-center justify-center mb-4">
+              <Plus className="w-8 h-8 text-muted" />
             </div>
-            <h3 className="text-lg font-medium text-slate-300 mb-2">Nenhuma despesa encontrada</h3>
-            <p className="text-slate-500 max-w-sm mx-auto mb-6">
+            <h3 className="text-lg font-medium text-foreground mb-2">Nenhuma despesa encontrada</h3>
+            <p className="text-muted max-w-sm mx-auto mb-6">
               {searchTerm 
                 ? "Sua busca não retornou nenhum resultado. Tente outros termos." 
                 : "Você ainda não possui despesas neste período com este status."}
             </p>
             {!searchTerm && filterMode === "all" && (
-              <Button onClick={onCreateNew} className="bg-primary hover:bg-emerald-700">
+              <Button onClick={onCreateNew} className="bg-primary hover:bg-primary/90">
                 Criar Primeira Despesa
               </Button>
             )}

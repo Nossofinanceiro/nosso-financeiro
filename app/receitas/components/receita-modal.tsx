@@ -138,37 +138,37 @@ export function ReceitaModal({ isOpen, onClose, receitaToEdit, selectedMonth }: 
     >
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="space-y-2">
-          <label className="text-sm font-medium text-slate-300">Descrição *</label>
+          <label className="text-sm font-medium text-foreground">Descrição *</label>
           <Input
             value={descricao}
             onChange={(e) => setDescricao(e.target.value)}
             placeholder="Ex: Salário, Freelance, Rendimentos..."
-            className="bg-slate-900 border-slate-700"
+            className="bg-surface border-border-subtle"
           />
           {errors.descricao && <p className="text-xs text-danger">{errors.descricao}</p>}
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="space-y-2">
-            <label className="text-sm font-medium text-slate-300">Valor Previsto *</label>
+            <label className="text-sm font-medium text-foreground">Valor Previsto *</label>
             <Input
               type="number"
               step="0.01"
               value={valorPrevisto}
               onChange={(e) => setValorPrevisto(e.target.value)}
               placeholder="0,00"
-              className="bg-slate-900 border-slate-700"
+              className="bg-surface border-border-subtle"
             />
             {errors.valor_previsto && <p className="text-xs text-danger">{errors.valor_previsto}</p>}
           </div>
 
           <div className="space-y-2">
-            <label className="text-sm font-medium text-slate-300">Data Prevista *</label>
+            <label className="text-sm font-medium text-foreground">Data Prevista *</label>
             <Input
               type="date"
               value={dataPrevista}
               onChange={(e) => setDataPrevista(e.target.value)}
-              className="bg-slate-900 border-slate-700"
+              className="bg-surface border-border-subtle"
             />
             {errors.data_prevista && <p className="text-xs text-danger">{errors.data_prevista}</p>}
           </div>
@@ -176,35 +176,35 @@ export function ReceitaModal({ isOpen, onClose, receitaToEdit, selectedMonth }: 
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="space-y-2">
-            <label className="text-sm font-medium text-slate-300">Categoria *</label>
+            <label className="text-sm font-medium text-foreground">Categoria *</label>
             <Select
               value={categoriaId}
               onChange={(e) => setCategoriaId(e.target.value)}
               options={[{ value: "", label: "Selecione..." }, ...categoriasReceita.map(c => ({ value: c.id, label: c.nome }))]}
-              className="bg-slate-900 border-slate-700"
+              className="bg-surface border-border-subtle"
             />
             {errors.categoria_id && <p className="text-xs text-danger">{errors.categoria_id}</p>}
           </div>
 
           <div className="space-y-2">
-            <label className="text-sm font-medium text-slate-300">Conta de Destino *</label>
+            <label className="text-sm font-medium text-foreground">Conta de Destino *</label>
             <Select
               value={contaId}
               onChange={(e) => setContaId(e.target.value)}
               options={[{ value: "", label: "Selecione..." }, ...contas.map(c => ({ value: c.id, label: c.nome }))]}
-              className="bg-slate-900 border-slate-700"
+              className="bg-surface border-border-subtle"
             />
             {errors.conta_id && <p className="text-xs text-danger">{errors.conta_id}</p>}
           </div>
         </div>
 
         <div className="space-y-2">
-          <label className="text-sm font-medium text-slate-300">Observações</label>
+          <label className="text-sm font-medium text-foreground">Observações</label>
           <Input
             value={observacoes}
             onChange={(e) => setObservacoes(e.target.value)}
             placeholder="Detalhes adicionais..."
-            className="bg-slate-900 border-slate-700"
+            className="bg-surface border-border-subtle"
           />
         </div>
 
@@ -221,7 +221,7 @@ export function ReceitaModal({ isOpen, onClose, receitaToEdit, selectedMonth }: 
           <Button type="button" variant="ghost" onClick={onClose} disabled={isPending}>
             Cancelar
           </Button>
-          <Button type="submit" disabled={isPending} className="bg-primary hover:bg-emerald-700 text-foreground">
+          <Button type="submit" disabled={isPending} className="bg-primary hover:bg-primary/90 text-foreground">
             {isPending ? "Salvando..." : "Salvar"}
           </Button>
         </div>

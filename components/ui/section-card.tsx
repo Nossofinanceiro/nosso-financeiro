@@ -20,7 +20,7 @@ export function SectionCard({
   return (
     <div
       className={cn(
-        "rounded-2xl border border-border/80 bg-[#111827] shadow-xl overflow-hidden flex flex-col",
+        "rounded-2xl border border-border/80 bg-surface shadow-xl overflow-hidden flex flex-col",
         className
       )}
       {...props}

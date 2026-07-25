@@ -16,7 +16,7 @@ export function ReceitasSummary({ receitas = [], isLoading }: ReceitasSummaryPro
     return (
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
         {[1, 2, 3].map((i) => (
-          <Skeleton key={i} className="h-[100px] rounded-xl bg-slate-800/50 border border-slate-800" />
+          <Skeleton key={i} className="h-[100px] rounded-xl bg-surface-secondary/50 border border-border" />
         ))}
       </div>
     );
@@ -31,8 +31,8 @@ export function ReceitasSummary({ receitas = [], isLoading }: ReceitasSummaryPro
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-      <Card className="p-4 bg-slate-900 border-slate-800 flex flex-col justify-center">
-        <div className="flex items-center gap-3 text-slate-400 mb-2">
+      <Card className="p-4 bg-surface border-border flex flex-col justify-center">
+        <div className="flex items-center gap-3 text-muted mb-2">
           <div className="p-2 bg-blue-500/10 text-blue-400 rounded-lg">
             <TrendingUp className="w-5 h-5" />
           </div>
@@ -43,9 +43,9 @@ export function ReceitasSummary({ receitas = [], isLoading }: ReceitasSummaryPro
         </div>
       </Card>
 
-      <Card className="p-4 bg-slate-900 border-slate-800 flex flex-col justify-center relative overflow-hidden">
+      <Card className="p-4 bg-surface border-border flex flex-col justify-center relative overflow-hidden">
         <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -mr-16 -mt-16 blur-2xl pointer-events-none" />
-        <div className="flex items-center gap-3 text-slate-400 mb-2">
+        <div className="flex items-center gap-3 text-muted mb-2">
           <div className="p-2 bg-primary/10 text-primary rounded-lg">
             <Wallet className="w-5 h-5" />
           </div>
@@ -56,8 +56,8 @@ export function ReceitasSummary({ receitas = [], isLoading }: ReceitasSummaryPro
         </div>
       </Card>
 
-      <Card className="p-4 bg-slate-900 border-slate-800 flex flex-col justify-center">
-        <div className="flex items-center gap-3 text-slate-400 mb-2">
+      <Card className="p-4 bg-surface border-border flex flex-col justify-center">
+        <div className="flex items-center gap-3 text-muted mb-2">
           <div className="p-2 bg-amber-500/10 text-amber-400 rounded-lg">
             <Clock className="w-5 h-5" />
           </div>

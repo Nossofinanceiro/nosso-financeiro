@@ -8,10 +8,10 @@ const statCardVariants = cva(
   {
     variants: {
       variant: {
-        positive: "bg-[#111827] border-primary/30 text-primary",
-        negative: "bg-[#111827] border-danger/30 text-danger",
-        neutral: "bg-[#111827] border-border/80 text-foreground",
-        highlight: "bg-emerald-950/40 border-primary/40 text-emerald-300 shadow-emerald-950/20",
+        positive: "bg-surface border-primary/30 text-primary",
+        negative: "bg-surface border-danger/30 text-danger",
+        neutral: "bg-surface border-border/80 text-foreground",
+        highlight: "bg-emerald-950/40 border-primary/40 text-primary shadow-emerald-950/20",
       },
     },
     defaultVariants: {

@@ -51,7 +51,7 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/icons/icon-192.png" />
       </head>
       <body
-        className="min-h-full flex flex-col bg-background text-foreground selection:bg-primary/30 selection:text-emerald-300"
+        className="min-h-full flex flex-col bg-background text-foreground selection:bg-primary/30 selection:text-primary"
         suppressHydrationWarning
       >
         <AppProviders>{children}</AppProviders>
