@@ -161,7 +161,7 @@ export function PeriodForecastSection() {
                   <ArrowRight className="w-5 h-5 text-muted hidden md:block opacity-50" />
                   <ArrowDown className="w-5 h-5 text-muted block md:hidden opacity-50" />
                   <div className="flex flex-col items-center">
-                    <p className="text-sm font-medium text-muted mb-1">Contas do período</p>
+                    <p className="text-sm font-medium text-muted mb-1">Despesas do período</p>
                     <p className="text-xl font-bold text-danger">-{formatCurrency(data.despesas_pendentes_no_periodo)}</p>
                   </div>
                   <ArrowRight className="w-5 h-5 text-muted hidden md:block opacity-50" />
@@ -268,7 +268,7 @@ export function PeriodForecastSection() {
                 <div className="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center">
                   <TrendingDown className="w-4 h-4" />
                 </div>
-                Ver todas as contas deste cálculo ({data.lancamentos_despesas.length})
+                Ver todas as despesas deste cálculo ({data.lancamentos_despesas.length})
               </div>
               <ChevronRight className="w-5 h-5 text-muted transition-transform group-open:rotate-90" />
             </summary>
