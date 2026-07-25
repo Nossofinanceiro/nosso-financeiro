@@ -164,7 +164,7 @@ export function PeriodForecastSection({ renderMobileMonthSelector }: { renderMob
         <div className="contents md:grid md:grid-cols-1 xl:grid-cols-3 md:gap-6">
           {/* Main Giant Card */}
           <div className="order-4 md:order-none xl:col-span-2 flex flex-col">
-            <Card className="bg-surface border-border overflow-hidden rounded-[2rem] p-4 md:p-12 shadow-xl flex-1 flex flex-col justify-center text-center relative transition-all duration-500">
+            <Card className="bg-surface border-border overflow-hidden rounded-[2rem] p-3 md:p-12 shadow-xl flex-1 flex flex-col justify-center text-center relative transition-all duration-500">
               <div className="relative z-10 flex flex-col justify-between items-center h-full">
                 
                 {/* Cabeçalho do Card */}
@@ -179,7 +179,7 @@ export function PeriodForecastSection({ renderMobileMonthSelector }: { renderMob
                   </div>
 
                   {/* Número Principal */}
-                  <p className={`text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter ${statusColor} transition-all duration-500 drop-shadow-sm`}>
+                  <p className={`text-3xl md:text-6xl lg:text-7xl font-black tracking-tighter ${statusColor} transition-all duration-500 drop-shadow-sm`}>
                     {isNegative ? formatCurrency(resultado) : formatCurrency(resultado)}
                   </p>
                   
@@ -187,11 +187,11 @@ export function PeriodForecastSection({ renderMobileMonthSelector }: { renderMob
                   <div className={`px-4 md:px-6 py-2 md:py-2.5 rounded-full text-xs md:text-sm font-medium transition-colors duration-500 ${statusBg}`}>
                     {assistantMessage}
                   </div>
-                </div>
+                  </div>
 
-                {/* Barra de Comprometimento */}
-                <div className="w-full max-w-lg mx-auto mt-6 md:mt-12 mb-4 md:mb-6">
-                  <div className="flex justify-between items-end mb-2">
+                  {/* Barra de Comprometimento */}
+                  <div className="w-full max-w-lg mx-auto mt-4 md:mt-12 mb-2 md:mb-6">
+                    <div className="flex justify-between items-end mb-1 md:mb-2">
                     <span className="text-xs md:text-sm font-semibold text-muted-foreground">Comprometimento</span>
                     <span className={`text-xs md:text-sm font-bold ${percentualComprometido > 100 ? "text-danger" : "text-foreground"}`}>
                       {percentualComprometido.toFixed(0)}%
@@ -203,10 +203,10 @@ export function PeriodForecastSection({ renderMobileMonthSelector }: { renderMob
                       style={{ width: `${Math.min(percentualComprometido, 100)}%` }}
                     />
                   </div>
-                </div>
+                  </div>
 
-                {/* Matemática Visual - Estilo Fórmula */}
-                <div className="mt-4 md:mt-8 flex flex-wrap justify-center items-center gap-1 md:gap-6 text-center bg-surface-secondary/40 rounded-[1.5rem] p-3 md:p-6 border border-border/50 w-full">
+                  {/* Matemática Visual - Estilo Fórmula */}
+                  <div className="mt-2 md:mt-8 flex flex-wrap justify-center items-center gap-1 md:gap-6 text-center bg-surface-secondary/40 rounded-[1.5rem] p-2 md:p-6 border border-border/50 w-full">
                   <div className="flex flex-col items-center flex-1 md:min-w-28">
                     <p className="text-[10px] md:text-xs font-semibold text-muted uppercase tracking-wider mb-1">Saldo disponível</p>
                     <p className="text-sm md:text-lg font-bold text-foreground">{formatCurrency(data.saldo_atual_familiar)}</p>
@@ -412,7 +412,7 @@ export function PeriodForecastSection({ renderMobileMonthSelector }: { renderMob
   };
 
   return (
-    <div className="mt-6 md:mt-8 mb-16 animate-in fade-in duration-500 flex flex-col gap-4 md:gap-0 md:block">
+    <div className="mt-0 md:mt-8 mb-16 animate-in fade-in duration-500 flex flex-col gap-2 md:gap-0 md:block">
       {/* Header Interativo */}
       <div className="order-2 md:order-none flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
         <div className="hidden md:block">
@@ -462,7 +462,7 @@ export function PeriodForecastSection({ renderMobileMonthSelector }: { renderMob
       </div>
 
       {/* Date Pickers & Mobile Month Selector */}
-      <div className="order-3 md:order-none flex flex-col gap-4 md:mt-6">
+      <div className="order-3 md:order-none flex flex-col gap-2 md:gap-4 md:mt-6">
         {mode === "personalizado" && (
           <div className="flex flex-col sm:flex-row items-center gap-2 md:gap-4 bg-surface border border-border p-2 md:p-4 rounded-xl animate-in slide-in-from-top-2 duration-300">
           <div className="flex items-center gap-2 w-full sm:w-auto">
