@@ -48,7 +48,8 @@ export default function LoginPage() {
       <div className="w-full max-w-md bg-surface/80 border border-border backdrop-blur-xl p-8 rounded-2xl shadow-2xl space-y-6">
         <div className="text-center space-y-2">
           <div className="mb-6 flex flex-col items-center justify-center">
-            <img src="/logo.png" alt="Nosso Financeiro" className="h-20 object-contain" />
+            <img src="/logo2.png" alt="Nosso Financeiro" className="h-20 object-contain dark:hidden" />
+            <img src="/logo.png" alt="Nosso Financeiro" className="h-20 object-contain hidden dark:block" />
           </div>
           <p className="text-sm text-muted">
             Entre com suas credenciais para acessar a plataforma

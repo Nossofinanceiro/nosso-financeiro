@@ -29,7 +29,8 @@ export function AppHeader({
           </button>
         )}
         <div className="flex items-center gap-2 overflow-hidden">
-          <img src="/logo.png" alt="Logo" className="h-8 object-contain shrink-0" />
+          <img src="/logo2.png" alt="Logo" className="h-8 object-contain shrink-0 dark:hidden" />
+          <img src="/logo.png" alt="Logo" className="h-8 object-contain shrink-0 hidden dark:block" />
           <h1 className="text-base font-semibold text-foreground tracking-tight sm:text-lg truncate">
             {title}
           </h1>

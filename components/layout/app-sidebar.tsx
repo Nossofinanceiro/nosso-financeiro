@@ -96,9 +96,15 @@ export function AppSidebar({
           onClick={onItemClick}
         >
           {!collapsed ? (
-            <img src="/logo.png" alt="Nosso Financeiro" className="h-12 object-contain" />
+            <>
+              <img src="/logo2.png" alt="Nosso Financeiro" className="h-12 object-contain dark:hidden" />
+              <img src="/logo.png" alt="Nosso Financeiro" className="h-12 object-contain hidden dark:block" />
+            </>
           ) : (
-            <img src="/logo.png" alt="NF" className="h-12 w-12 object-cover object-left" />
+            <>
+              <img src="/logo2.png" alt="NF" className="h-12 w-12 object-cover object-left dark:hidden" />
+              <img src="/logo.png" alt="NF" className="h-12 w-12 object-cover object-left hidden dark:block" />
+            </>
           )}
         </Link>
 
