@@ -1,0 +1,325 @@
+"use client";
+
+import * as React from "react";
+import { format } from "date-fns";
+import { ptBR } from "date-fns/locale";
+import { usePeriodForecast } from "@/hooks/use-period-forecast";
+import { PeriodForecastRequest } from "@/lib/schemas";
+import { formatCurrency } from "@/lib/utils";
+import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
+import {
+  CalendarDays,
+  CalendarCheck,
+  TrendingDown,
+  TrendingUp,
+  Wallet,
+  Calendar,
+  AlertCircle,
+  Tag
+} from "lucide-react";
+import * as Icons from "lucide-react";
+
+type Mode = PeriodForecastRequest["modo"];
+
+export function PeriodForecastSection() {
+  const [mode, setMode] = React.useState<Mode>(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("forecast-mode");
+      if (saved === "proximo_pagamento" || saved === "fim_mes" || saved === "personalizado") {
+        return saved;
+      }
+    }
+    return "proximo_pagamento";
+  });
+
+  const [dataInicial, setDataInicial] = React.useState<string>(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("forecast-start");
+      if (saved) return saved;
+    }
+    return format(new Date(), "yyyy-MM-dd");
+  });
+
+  const [dataFinal, setDataFinal] = React.useState<string>(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("forecast-end");
+      if (saved) return saved;
+    }
+    return format(new Date(), "yyyy-MM-dd");
+  });
+
+  React.useEffect(() => {
+    localStorage.setItem("forecast-mode", mode);
+    if (mode === "personalizado") {
+      localStorage.setItem("forecast-start", dataInicial);
+      localStorage.setItem("forecast-end", dataFinal);
+    }
+  }, [mode, dataInicial, dataFinal]);
+
+  const { data, isLoading, isError } = usePeriodForecast({
+    modo: mode,
+    dataInicial: mode === "personalizado" ? dataInicial : undefined,
+    dataFinal: mode === "personalizado" ? dataFinal : undefined,
+  });
+
+  const getDynamicIcon = (iconName?: string) => {
+    if (!iconName) return Tag;
+    const name = iconName.charAt(0).toUpperCase() + iconName.slice(1).replace(/-./g, (x: string) => x[1].toUpperCase());
+    const iconMap = Icons as unknown as Record<string, React.ElementType>;
+    return iconMap[name] || Tag;
+  };
+
+  return (
+    <div className="space-y-6 mt-12 mb-8 animate-in fade-in duration-200">
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        <div>
+          <h2 className="text-xl font-bold text-white flex items-center gap-2">
+            <CalendarDays className="w-5 h-5 text-emerald-400" />
+            Previsão do Período
+          </h2>
+          <p className="text-sm text-slate-400">Analise seu dinheiro disponível até uma data</p>
+        </div>
+        
+        <div className="flex bg-slate-900 border border-slate-800 p-1 rounded-xl">
+          <Button
+            variant={mode === "proximo_pagamento" ? "primary" : "ghost"}
+            size="sm"
+            onClick={() => setMode("proximo_pagamento")}
+            className={mode === "proximo_pagamento" ? "bg-emerald-600 text-white hover:bg-emerald-700" : "text-slate-400 hover:text-white hover:bg-slate-800"}
+          >
+            Próximo Pagamento
+          </Button>
+          <Button
+            variant={mode === "fim_mes" ? "primary" : "ghost"}
+            size="sm"
+            onClick={() => setMode("fim_mes")}
+            className={mode === "fim_mes" ? "bg-emerald-600 text-white hover:bg-emerald-700" : "text-slate-400 hover:text-white hover:bg-slate-800"}
+          >
+            Fim do Mês
+          </Button>
+          <Button
+            variant={mode === "personalizado" ? "primary" : "ghost"}
+            size="sm"
+            onClick={() => setMode("personalizado")}
+            className={mode === "personalizado" ? "bg-emerald-600 text-white hover:bg-emerald-700" : "text-slate-400 hover:text-white hover:bg-slate-800"}
+          >
+            Personalizado
+          </Button>
+        </div>
+      </div>
+
+      {mode === "personalizado" && (
+        <div className="flex items-center gap-4 bg-slate-900 border border-slate-800 p-4 rounded-xl w-max">
+          <div className="flex items-center gap-2">
+            <span className="text-sm text-slate-400">De:</span>
+            <input 
+              type="date" 
+              value={dataInicial} 
+              onChange={(e) => setDataInicial(e.target.value)}
+              className="bg-slate-800 border border-slate-700 rounded-lg px-3 py-1.5 text-sm text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+            />
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="text-sm text-slate-400">Até:</span>
+            <input 
+              type="date" 
+              value={dataFinal} 
+              onChange={(e) => {
+                if (e.target.value >= dataInicial) {
+                  setDataFinal(e.target.value);
+                }
+              }}
+              min={dataInicial}
+              className="bg-slate-800 border border-slate-700 rounded-lg px-3 py-1.5 text-sm text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+            />
+          </div>
+        </div>
+      )}
+
+      {isLoading ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <Skeleton className="h-28 rounded-xl bg-slate-900 border border-slate-800" />
+          <Skeleton className="h-28 rounded-xl bg-slate-900 border border-slate-800" />
+          <Skeleton className="h-28 rounded-xl bg-slate-900 border border-slate-800" />
+          <Skeleton className="h-28 rounded-xl bg-slate-900 border border-slate-800" />
+        </div>
+      ) : isError ? (
+        <div className="p-4 bg-red-500/10 border border-red-500/20 text-red-500 rounded-xl text-center">
+          Ocorreu um erro ao carregar a previsão.
+        </div>
+      ) : data ? (
+        <div className="space-y-6">
+          {mode === "proximo_pagamento" && !data.proximo_pagamento && (
+            <div className="p-4 bg-amber-500/10 border border-amber-500/20 rounded-xl flex items-center gap-3">
+              <AlertCircle className="w-5 h-5 text-amber-500" />
+              <p className="text-sm text-amber-500">Nenhum próximo pagamento cadastrado no sistema. O período analisado estendeu-se até o fim do mês.</p>
+            </div>
+          )}
+          
+          <div className="bg-slate-900/50 border border-slate-800/50 p-4 rounded-xl flex flex-wrap gap-x-8 gap-y-2">
+            <div className="text-sm">
+              <span className="text-slate-400">Período: </span>
+              <span className="text-white font-medium">
+                {format(new Date(data.data_inicial), "dd MMM", { locale: ptBR })} a {format(new Date(data.data_final), "dd MMM yyyy", { locale: ptBR })}
+              </span>
+            </div>
+            {data.proximo_pagamento && mode === "proximo_pagamento" && (
+              <div className="text-sm">
+                <span className="text-slate-400">Data do Pagamento: </span>
+                <span className="text-emerald-400 font-medium">
+                  {format(new Date(data.proximo_pagamento.data), "dd MMM yyyy", { locale: ptBR })}
+                </span>
+              </div>
+            )}
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <Card className="p-5 flex flex-col justify-between bg-slate-900 border-slate-800">
+              <div className="flex items-center gap-2 mb-2">
+                <Wallet className="w-4 h-4 text-emerald-400" />
+                <h3 className="text-sm font-medium text-slate-300">Saldo Atual</h3>
+              </div>
+              <p className="text-xl font-bold text-white">{formatCurrency(data.saldo_atual_familiar)}</p>
+            </Card>
+
+            <Card className="p-5 flex flex-col justify-between bg-slate-900 border-slate-800">
+              <div className="flex items-center gap-2 mb-2">
+                <TrendingDown className="w-4 h-4 text-red-400" />
+                <h3 className="text-sm font-medium text-slate-300">Despesas no Período</h3>
+              </div>
+              <p className="text-xl font-bold text-red-400">-{formatCurrency(data.despesas_pendentes_no_periodo)}</p>
+            </Card>
+
+            <Card className="p-5 flex flex-col justify-between bg-slate-900 border-emerald-500/30">
+              <div className="flex items-center gap-2 mb-2">
+                <CalendarCheck className="w-4 h-4 text-emerald-400" />
+                <h3 className="text-sm font-medium text-emerald-400">Disponível (Dinheiro Atual)</h3>
+              </div>
+              <p className="text-xl font-bold text-emerald-400">{formatCurrency(data.disponivel_com_dinheiro_atual)}</p>
+              <p className="text-xs text-slate-500 mt-1">Quanto sobra pagando apenas com o que já tem</p>
+            </Card>
+
+            {mode === "proximo_pagamento" && data.proximo_pagamento ? (
+              <Card className="p-5 flex flex-col justify-between bg-slate-900 border-slate-800 relative overflow-hidden">
+                <div className="absolute top-0 right-0 p-2 opacity-10">
+                  <TrendingUp className="w-16 h-16" />
+                </div>
+                <div className="flex items-center gap-2 mb-2">
+                  <TrendingUp className="w-4 h-4 text-amber-400" />
+                  <h3 className="text-sm font-medium text-slate-300">Pós Pagamento</h3>
+                </div>
+                <p className="text-xl font-bold text-white">
+                  {formatCurrency(data.disponivel_com_dinheiro_atual + data.proximo_pagamento.valor)}
+                </p>
+                <p className="text-xs text-slate-500 mt-1">Saldo após entrar {formatCurrency(data.proximo_pagamento.valor)}</p>
+              </Card>
+            ) : (
+              <Card className="p-5 flex flex-col justify-between bg-slate-900 border-slate-800">
+                <div className="flex items-center gap-2 mb-2">
+                  <Calendar className="w-4 h-4 text-amber-400" />
+                  <h3 className="text-sm font-medium text-slate-300">Previsto em {format(new Date(data.data_final), "dd/MM")}</h3>
+                </div>
+                <p className="text-xl font-bold text-white">{formatCurrency(data.saldo_previsto_na_data_final)}</p>
+                <p className="text-xs text-slate-500 mt-1">
+                  Inclui {formatCurrency(data.receitas_previstas_no_periodo)} de receitas no período
+                </p>
+              </Card>
+            )}
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+            <div className="space-y-3">
+              <h4 className="text-sm font-medium text-slate-300 flex items-center gap-2">
+                <TrendingDown className="w-4 h-4 text-red-400" />
+                Despesas consideradas no cálculo
+              </h4>
+              <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden divide-y divide-slate-800/50">
+                {data.lancamentos_despesas.length > 0 ? (
+                  data.lancamentos_despesas.map(d => {
+                    // @ts-expect-error - Joined property from Supabase
+                    const categoria = d.categorias;
+                    // @ts-expect-error - Joined property from Supabase
+                    const conta = d.contas;
+                    const Icon = getDynamicIcon(categoria?.icone);
+                    return (
+                      <div key={d.id} className="p-3 flex items-center justify-between hover:bg-slate-800/50 transition-colors">
+                        <div className="flex items-center gap-3">
+                          <div className="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center text-slate-400">
+                            <Icon className="w-4 h-4" />
+                          </div>
+                          <div>
+                            <p className="text-sm text-white font-medium">{d.descricao}</p>
+                            <p className="text-xs text-slate-400 flex items-center gap-2">
+                              <span>{conta?.nome || "Sem conta"}</span>
+                              <span>•</span>
+                              <span>{format(new Date(d.data_vencimento!), "dd MMM")}</span>
+                            </p>
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <p className="text-sm font-medium text-white">{formatCurrency(d.valor_pago || d.valor_previsto)}</p>
+                          {d.status === "atrasada" && (
+                            <Badge variant="neutral" className="bg-red-500/10 text-red-500 py-0 text-[9px]">Atrasada</Badge>
+                          )}
+                        </div>
+                      </div>
+                    )
+                  })
+                ) : (
+                  <div className="p-6 text-center text-sm text-slate-500">
+                    Nenhuma despesa pendente no período.
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <div className="space-y-3">
+              <h4 className="text-sm font-medium text-slate-300 flex items-center gap-2">
+                <TrendingUp className="w-4 h-4 text-emerald-400" />
+                Receitas previstas no período
+              </h4>
+              <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden divide-y divide-slate-800/50">
+                {data.lancamentos_receitas.length > 0 ? (
+                  data.lancamentos_receitas.map(r => {
+                    // @ts-expect-error - Joined property from Supabase
+                    const categoria = r.categorias;
+                    // @ts-expect-error - Joined property from Supabase
+                    const conta = r.contas;
+                    const Icon = getDynamicIcon(categoria?.icone);
+                    return (
+                      <div key={r.id} className="p-3 flex items-center justify-between hover:bg-slate-800/50 transition-colors">
+                        <div className="flex items-center gap-3">
+                          <div className="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center text-slate-400">
+                            <Icon className="w-4 h-4" />
+                          </div>
+                          <div>
+                            <p className="text-sm text-white font-medium">{r.descricao}</p>
+                            <p className="text-xs text-slate-400 flex items-center gap-2">
+                              <span>{conta?.nome || "Sem conta"}</span>
+                              <span>•</span>
+                              <span>{format(new Date(r.data_prevista!), "dd MMM")}</span>
+                            </p>
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <p className="text-sm font-medium text-white">{formatCurrency(r.valor_previsto)}</p>
+                        </div>
+                      </div>
+                    )
+                  })
+                ) : (
+                  <div className="p-6 text-center text-sm text-slate-500">
+                    Nenhuma receita extra no período.
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : null}
+    </div>
+  );
+}
